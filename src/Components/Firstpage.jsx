@@ -5,7 +5,22 @@ import staff from "../assets/staff.png"
 import pass from "../assets/pass.png"
 import about from "../assets/image.png"
 import contact from "../assets/contact.png"
+import { useNavigate } from "react-router-dom";
 const Firstpage = () => {
+
+  const usenav = useNavigate();
+
+  const ahandleLogin = () => {
+    usenav('/adminlog');
+  };
+
+  const shandleLogin = () => {
+    usenav('/stafflog');
+  };
+
+  const passsignup = ()=>{
+    usenav('/passenger');
+  };
   return (
     <>
     <section id="home">
@@ -52,7 +67,7 @@ const Firstpage = () => {
                 </div>
                <h3>For Admins</h3> 
                <p>Manage flights & operations</p>
-               <button className="rb admin">Admin Login</button>
+               <button className="rb admin" onClick={ahandleLogin}>Admin Login</button>
               </div>
               <div className="box2">
                 <div className="img1">
@@ -60,7 +75,7 @@ const Firstpage = () => {
                 </div>
                 <h3>For Staff</h3>
                 <p>Update flight Status & gate assign</p>
-                 <button className="rb staff">Staff Login</button>
+                 <button className="rb staff" onClick={shandleLogin}>Staff Login</button>
               </div>
               <div className="box3">
                 <div className="img1">
@@ -68,7 +83,7 @@ const Firstpage = () => {
                 </div>
                 <h3>For Passengers</h3>
                 <p>Check flight status & gate numbers</p>
-                 <button className="rb passenger">Passenger Login</button>
+                 <button className="rb passenger" onClick={passsignup}>Passenger Login</button>
               </div>
             </div>
           </div>

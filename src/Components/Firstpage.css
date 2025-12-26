@@ -318,6 +318,9 @@
   font-size: xx-larger;
 }
 
+#contact{
+  overflow-y: hidden;
+}
 .footer {
   width: 100%;
   padding: 18px 10px;
@@ -325,7 +328,7 @@
 
   background: linear-gradient(
     135deg,
-    rgba(30, 144, 255, 0.9),
+    rgba(30, 144, 255, 09),
     rgba(37, 99, 235, 0.9)
   );
 
