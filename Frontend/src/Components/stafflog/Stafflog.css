@@ -1,0 +1,148 @@
+.staff-log{
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   
+}
+section{
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.staff-log-img{
+    width: 50%;
+    height: 100%;
+}
+
+.staff-log-img > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+}
+
+.staff-log-input{
+    width: 50%;
+    height: 100%;
+}
+
+.staff-bg {
+  width: 100%;
+  height: 100vh;
+  /* background: linear-gradient(
+    135deg,
+    #0f172a,
+    #1e3a8a
+  ); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+.staff-back-home-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 18px;
+  border-radius: 25px;
+  border: 1px solid rgba(255,255,255,0.4);
+  /* background: rgba(255,255,255,0.15); */
+  background-color: #1e293b;
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+.staff-back-home-btn:hover {
+  background: #2563eb;
+  box-shadow: 0 6px 18px rgba(37,99,235,0.5);
+}
+
+
+.staff-login-card {
+  width: 360px;
+  padding: 35px 30px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 18px;
+  /* box-shadow: 0 20px 50px rgba(0,0,0,0.25); */
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  animation: fadeIn 0.8s ease;
+}
+
+
+.staff-login-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.staff-login-header i {
+  font-size: 40px;
+  color: #f97316;
+  margin-bottom: 10px;
+}
+
+.staff-login-header h2 {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.staff-login-header p {
+  font-size: 13px;
+  color: #64748b;
+}
+
+
+.staff-input-group {
+  display: flex;
+  align-items: center;
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+.staff-input-group i {
+  color: #64748b;
+  margin-right: 10px;
+}
+
+.staff-input-group input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 14px;
+}
+
+
+.staff-login-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.staff-login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(249,115,22,0.5);
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
