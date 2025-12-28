@@ -13,6 +13,7 @@ import Passforget from './Components/Passenger/Passforget.jsx'
 import Admindash from './Components/AdminDASH/Admindash.jsx'
 import Addflight from './Components/AdminDASH/Addflight.jsx'
 import Bulkupdate from './Components/AdminDASH/Bulkupdate.jsx'
+import Flightedit from './Components/AdminDASH/Flightedit.jsx'
 
 function App() {
   
@@ -30,10 +31,9 @@ function App() {
         <Route path='/adminlog/admin/:id' element={<Admindash/>}/>
         <Route path='/adminlog/admin/:id/addflight' element={<Addflight/>}/>
         <Route path='/adminlog/admin/:id/bulkflight' element={<Bulkupdate/>}/>
+        <Route path='/adminlog/admin/flightedit/:id/:sf' element={<Flightedit/>}/>
     </Routes>
-        {/* <Admindash/> */}
-        {/* <Addflight/> */}
-        {/* <Bulkupdate/> */}
+        
     </>
   )
 }

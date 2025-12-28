@@ -495,7 +495,7 @@ tr:hover td {
   color: #0369a1;
 }
 
-.badge.denied {
+.badge.cancelled {
   background: #fee2e2;
   color: #b91c1c;
 }

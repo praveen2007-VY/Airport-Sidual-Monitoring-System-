@@ -1,0 +1,268 @@
+[
+  {
+    "flight": "6E 101",
+    "airline": "IndiGo",
+    "aircraft": "A320 Neo",
+    "from": "Chennai",
+    "to": "Mumbai",
+    "status": "On Time",
+    "time": "06:00 AM",
+    "gate": "A1"
+  },
+  {
+    "flight": "AI 202",
+    "airline": "Air India",
+    "aircraft": "A321",
+    "from": "Delhi",
+    "to": "Chennai",
+    "status": "Delayed",
+    "time": "06:30 AM",
+    "gate": "B1"
+  },
+  {
+    "flight": "UK 303",
+    "airline": "Vistara",
+    "aircraft": "A320",
+    "from": "Mumbai",
+    "to": "Bangalore",
+    "status": "On Time",
+    "time": "07:00 AM",
+    "gate": "A2"
+  },
+  {
+    "flight": "QP 404",
+    "airline": "Akasa",
+    "aircraft": "B737",
+    "from": "Bangalore",
+    "to": "Hyderabad",
+    "status": "Cancelled",
+    "time": "07:15 AM",
+    "gate": "C1"
+  },
+
+  {
+    "flight": "6E 105",
+    "airline": "IndiGo",
+    "aircraft": "A321 Neo",
+    "from": "Hyderabad",
+    "to": "Delhi",
+    "status": "On Time",
+    "time": "07:45 AM",
+    "gate": "A3"
+  },
+  {
+    "flight": "AI 210",
+    "airline": "Air India",
+    "aircraft": "A320",
+    "from": "Kolkata",
+    "to": "Mumbai",
+    "status": "Delayed",
+    "time": "08:00 AM",
+    "gate": "B2"
+  },
+  {
+    "flight": "UK 311",
+    "airline": "Vistara",
+    "aircraft": "A321",
+    "from": "Pune",
+    "to": "Chennai",
+    "status": "On Time",
+    "time": "08:30 AM",
+    "gate": "A4"
+  },
+  {
+    "flight": "QP 415",
+    "airline": "Akasa",
+    "aircraft": "B737 Max",
+    "from": "Ahmedabad",
+    "to": "Delhi",
+    "status": "On Time",
+    "time": "08:45 AM",
+    "gate": "C2"
+  },
+
+  {
+    "flight": "6E 120",
+    "airline": "IndiGo",
+    "aircraft": "A320 Neo",
+    "from": "Trichy",
+    "to": "Bangalore",
+    "status": "Delayed",
+    "time": "09:00 AM",
+    "gate": "A5"
+  },
+  {
+    "flight": "AI 225",
+    "airline": "Air India",
+    "aircraft": "A321",
+    "from": "Goa",
+    "to": "Delhi",
+    "status": "On Time",
+    "time": "09:20 AM",
+    "gate": "B3"
+  },
+  {
+    "flight": "UK 325",
+    "airline": "Vistara",
+    "aircraft": "A320",
+    "from": "Jaipur",
+    "to": "Mumbai",
+    "status": "On Time",
+    "time": "09:45 AM",
+    "gate": "A6"
+  },
+  {
+    "flight": "QP 430",
+    "airline": "Akasa",
+    "aircraft": "B737",
+    "from": "Nagpur",
+    "to": "Pune",
+    "status": "Cancelled",
+    "time": "10:00 AM",
+    "gate": "C3"
+  },
+
+  {
+    "flight": "6E 150",
+    "airline": "IndiGo",
+    "aircraft": "A321 Neo",
+    "from": "Madurai",
+    "to": "Chennai",
+    "status": "On Time",
+    "time": "10:15 AM",
+    "gate": "A7"
+  },
+  {
+    "flight": "AI 240",
+    "airline": "Air India",
+    "aircraft": "A320",
+    "from": "Lucknow",
+    "to": "Bangalore",
+    "status": "Delayed",
+    "time": "10:45 AM",
+    "gate": "B4"
+  },
+  {
+    "flight": "UK 340",
+    "airline": "Vistara",
+    "aircraft": "A321",
+    "from": "Indore",
+    "to": "Delhi",
+    "status": "On Time",
+    "time": "11:00 AM",
+    "gate": "A8"
+  },
+  {
+    "flight": "QP 445",
+    "airline": "Akasa",
+    "aircraft": "B737 Max",
+    "from": "Surat",
+    "to": "Mumbai",
+    "status": "On Time",
+    "time": "11:20 AM",
+    "gate": "C4"
+  },
+
+  {
+    "flight": "6E 180",
+    "airline": "IndiGo",
+    "aircraft": "A320 Neo",
+    "from": "Vizag",
+    "to": "Hyderabad",
+    "status": "Delayed",
+    "time": "11:45 AM",
+    "gate": "A9"
+  },
+  {
+    "flight": "AI 260",
+    "airline": "Air India",
+    "aircraft": "A321",
+    "from": "Bhopal",
+    "to": "Delhi",
+    "status": "On Time",
+    "time": "12:00 PM",
+    "gate": "B5"
+  },
+  {
+    "flight": "UK 360",
+    "airline": "Vistara",
+    "aircraft": "A320",
+    "from": "Amritsar",
+    "to": "Mumbai",
+    "status": "On Time",
+    "time": "12:30 PM",
+    "gate": "A10"
+  },
+  {
+    "flight": "QP 470",
+    "airline": "Akasa",
+    "aircraft": "B737",
+    "from": "Patna",
+    "to": "Kolkata",
+    "status": "Cancelled",
+    "time": "12:45 PM",
+    "gate": "C5"
+  },
+
+  {
+    "flight": "6E 210",
+    "airline": "IndiGo",
+    "aircraft": "A321 Neo",
+    "from": "Ranchi",
+    "to": "Delhi",
+    "status": "On Time",
+    "time": "01:00 PM",
+    "gate": "A11"
+  },
+  {
+    "flight": "AI 280",
+    "airline": "Air India",
+    "aircraft": "A320",
+    "from": "Raipur",
+    "to": "Mumbai",
+    "status": "Delayed",
+    "time": "01:30 PM",
+    "gate": "B6"
+  },
+  {
+    "flight": "UK 380",
+    "airline": "Vistara",
+    "aircraft": "A321",
+    "from": "Udaipur",
+    "to": "Delhi",
+    "status": "On Time",
+    "time": "02:00 PM",
+    "gate": "A12"
+  },
+  {
+    "flight": "QP 495",
+    "airline": "Akasa",
+    "aircraft": "B737 Max",
+    "from": "Dehradun",
+    "to": "Bangalore",
+    "status": "On Time",
+    "time": "02:20 PM",
+    "gate": "C6"
+  },
+
+  {
+    "flight": "6E 250",
+    "airline": "IndiGo",
+    "aircraft": "A320 Neo",
+    "from": "Trivandrum",
+    "to": "Chennai",
+    "status": "Delayed",
+    "time": "02:45 PM",
+    "gate": "A13"
+  },
+  {
+    "flight": "AI 300",
+    "airline": "Air India",
+    "aircraft": "A321",
+    "from": "Srinagar",
+    "to": "Delhi",
+    "status": "On Time",
+    "time": "03:00 PM",
+    "gate": "B7"
+  }
+]

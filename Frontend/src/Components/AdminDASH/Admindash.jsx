@@ -23,16 +23,51 @@ const Admindash = () => {
     fetchdata();
    },[id])
    
+
+   const [flighttable,setflighttable] = useState([]);
+
+   useEffect(()=>{
+     const fetchflight = async()=>{
+       const res1 = await axios.get(`http://localhost:5000/flightdetail`);
+       setflighttable(res1.data);
+     }
+     fetchflight();
+   },[])
+
    const usenav = useNavigate();
 
    const handleaddflght=()=>{
-     usenav('/adminlog/admin/:id/addflight');
+     usenav(`/adminlog/admin/${id}/addflight`);
    }
 
    const handlebulkflight=()=>{
-     usenav('/adminlog/admin/:id/bulkflight');
+     usenav(`/adminlog/admin/${id}/bulkflight`);
    }
+   
 
+  const [totflight,setflight] = useState(0);
+  const [ontime,setontime] = useState(0);
+  const [delay,setdelay] = useState(0);
+  const [cancel,setcancel] = useState(0);
+
+useEffect(()=>{
+  const total = flighttable.length;
+  const ontime = flighttable.filter((n)=>n.status=="On Time").length;
+  const delay = flighttable.filter((n)=>n.status=="Delayed").length;
+  const cancel = flighttable.filter((n)=>n.status=="Cancelled").length;
+  setflight(total);
+  setontime(ontime);
+  setdelay(delay);
+  setcancel(cancel);
+},[flighttable])
+
+
+  
+
+ const handleedit=(sf)=>{
+    usenav(`/adminlog/admin/flightedit/${id}/${sf}`);
+  }
+  
   const [showModal, setShowModal] = useState(false);
   const [selectedRunway, setSelectedRunway] = useState(null);
   const [runways, setRunways] = useState([
@@ -97,7 +132,7 @@ const Admindash = () => {
             </div>
             <div className="stat-info">
               <h3>Total Flights</h3>
-              <p>120</p>
+              <p>{totflight}</p>
             </div>
           </div>
           <div className="stat-card green">
@@ -106,7 +141,7 @@ const Admindash = () => {
             </div>
             <div className="stat-info">
               <h3>On Time</h3>
-              <p>95</p>
+              <p>{ontime}</p>
             </div>
           </div>
           <div className="stat-card orange">
@@ -115,7 +150,7 @@ const Admindash = () => {
             </div>
             <div className="stat-info">
               <h3>Delayed</h3>
-              <p>18</p>
+              <p>{delay}</p>
             </div>
           </div>
           <div className="stat-card red">
@@ -124,7 +159,7 @@ const Admindash = () => {
             </div>
             <div className="stat-info">
               <h3>Cancelled</h3>
-              <p>7</p>
+              <p>{cancel}</p>
             </div>
           </div>
         </section>
@@ -140,8 +175,8 @@ const Admindash = () => {
               <button className="btn primary" onClick={handleaddflght} >
                 <i className="fa-solid fa-plus"></i> Add Flight
               </button>
-              <button className="btn secondary">
-                <i className="fa-solid fa-pen-to-square" onClick={handlebulkflight}></i> Bulk Update
+              <button className="btn secondary" onClick={handlebulkflight}>
+                <i className="fa-solid fa-pen-to-square" ></i> Bulk Update
               </button>
               <button className="btn outline">
                 <i className="fa-solid fa-rotate"></i> Refresh
@@ -163,6 +198,7 @@ const Admindash = () => {
                   <th>Airline</th>
                   <th>Aircraft</th>
                   <th>From</th>
+                  <th>To</th>
                   <th>Status</th>
                   <th>Time</th>
                   <th>Gate</th>
@@ -170,26 +206,21 @@ const Admindash = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>6E 487</td>
-                  <td>IndiGo</td>
-                  <td>A21N (VT-IMS)</td>
-                  <td>Chennai</td>
-                  <td><span className="badge on-time">On Time</span></td>
-                  <td>10:30 AM</td>
-                  <td>A3</td>
-                  <td><button className="table-btn">Edit</button></td>
+                {
+                  flighttable.map((n,i)=>(
+                <tr key={i}>
+                  <td>{n.flight}</td>
+                  <td>{n.airline}</td>
+                  <td>{n.aircraft}</td>
+                  <td>{n.from}</td>
+                  <td>{n.to}</td>
+                  <td><span className={`badge on-time ${n.status.toLowerCase().replace(" ", "-")}`}>{n.status}</span></td>
+                  <td>{n.time}</td>
+                  <td>{n.gate}</td>
+                  <td><button className="table-btn" onClick={()=>handleedit(n._id)} >Edit</button></td>
                 </tr>
-                <tr>
-                  <td>AI 220</td>
-                  <td>Air India</td>
-                  <td>A321 (VT-PPX)</td>
-                  <td>Coimbatore</td>
-                  <td><span className="badge delayed">Delayed</span></td>
-                  <td>11:15 AM</td>
-                  <td>B1</td>
-                  <td><button className="table-btn">Edit</button></td>
-                </tr>
+                  ))
+                }
                 {/* Placeholder for more rows to show scrolling if needed */}
               </tbody>
             </table>

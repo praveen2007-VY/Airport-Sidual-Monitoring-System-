@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 import "./Bulkupdate.css";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Bulkupdate = () => {
+
+    const usenav = useNavigate();
+
+
+    const { id } = useParams();
+
+    const handleadmindash = () => {
+        usenav(`/adminlog/admin/${id}`);
+    }
     // Sample Data matching the dashboard
     const [flights, setFlights] = useState([
         { id: 1, number: "6E 487", airline: "IndiGo", status: "On Time", gate: "A3", time: "10:30 AM" },
@@ -54,6 +64,9 @@ const Bulkupdate = () => {
                         </button>
                         <button className="btn-reset">
                             Reset
+                        </button>
+                        <button className="btn-cancel" onClick={handleadmindash}>
+                            Cancel
                         </button>
                     </div>
                 </div>

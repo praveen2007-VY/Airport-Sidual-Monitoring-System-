@@ -1,10 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Addflight.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
+import axios from "axios";
 const Addflight = () => {
     const usenav=useNavigate();
+
+    const {id} = useParams()
+
     const handleadmindash=()=>{
-        usenav('/adminlog/admin/:id');
+        usenav(`/adminlog/admin/${id}`);
+    }
+
+    const [flightno,setfno]= useState("");
+    const [airline,setair]= useState("");
+    const [aircraft,setairc]= useState("");
+    const [from,setfrom]= useState("");
+    const [status,setstatus]= useState("");
+    const [time,settime]= useState("");
+    const [gate,setgate]= useState("");
+    const [des,setdes]= useState("");
+    
+
+
+    const addflight = async()=>{
+
+        let details={
+            flight:flightno,
+            airline:airline,
+            aircraft:aircraft,
+            from:from,
+            to:des,
+            status:status,
+            time:time,
+            gate:gate,
+            des:des
+        };
+        const res = await axios.post("http://localhost:5000/flightdetail/add",details);
+        setair("");
+        setairc("");
+        setfno("");
+        setfrom("");
+        setstatus("");
+        settime("");
+        setgate("");
+        setdes("");
+        handleadmindash();
+        
     }
     return (
         <div className="add-flight-container">
@@ -20,7 +61,7 @@ const Addflight = () => {
                             <label>Flight Number</label>
                             <div className="input-icon">
                                 <i className="fa-solid fa-plane"></i>
-                                <input type="text" placeholder="e.g. AI 202" />
+                                <input type="text" placeholder="e.g. AI 202" onChange={(e)=>setfno(e.target.value)} value={flightno}/>
                             </div>
                         </div>
 
@@ -28,7 +69,7 @@ const Addflight = () => {
                             <label>Airline</label>
                             <div className="input-icon">
                                 <i className="fa-solid fa-building"></i>
-                                <select>
+                                <select onChange={(e)=>setair(e.target.value)} value={airline}>
                                     <option value="">Select Airline</option>
                                     <option value="Indigo">IndiGo</option>
                                     <option value="Air India">Air India</option>
@@ -44,7 +85,7 @@ const Addflight = () => {
                             <label>Aircraft Type</label>
                             <div className="input-icon">
                                 <i className="fa-solid fa-jet-fighter"></i>
-                                <input type="text" placeholder="e.g. A320 Neo" />
+                                <input type="text" placeholder="e.g. A320 Neo" onChange={(e)=>setairc(e.target.value)} value={aircraft} />
                             </div>
                         </div>
 
@@ -52,7 +93,7 @@ const Addflight = () => {
                             <label>Status</label>
                             <div className="input-icon">
                                 <i className="fa-solid fa-circle-info"></i>
-                                <select>
+                                <select onChange={(e)=>setstatus(e.target.value)} value={status}>
                                     <option value="On Time">On Time</option>
                                     <option value="Delayed">Delayed</option>
                                     <option value="Cancelled">Cancelled</option>
@@ -66,7 +107,7 @@ const Addflight = () => {
                             <label>From</label>
                             <div className="input-icon">
                                 <i className="fa-solid fa-plane-departure"></i>
-                                <input type="text" placeholder="Origin City" />
+                                <input type="text" placeholder="Origin City" onChange={(e)=>setfrom(e.target.value)}  value={from}/>
                             </div>
                         </div>
 
@@ -74,7 +115,7 @@ const Addflight = () => {
                             <label>To</label>
                             <div className="input-icon">
                                 <i className="fa-solid fa-plane-arrival"></i>
-                                <input type="text" placeholder="Destination City" />
+                                <input type="text" placeholder="Destination City" onChange={(e)=>setdes(e.target.value)} value={des}/>
                             </div>
                         </div>
                     </div>
@@ -84,7 +125,7 @@ const Addflight = () => {
                             <label>Departure Time</label>
                             <div className="input-icon">
                                 <i className="fa-regular fa-clock"></i>
-                                <input type="time" />
+                                <input type="time" onChange={(e)=>settime(e.target.value)} value={time}/>
                             </div>
                         </div>
 
@@ -92,7 +133,7 @@ const Addflight = () => {
                             <label>Gate Number</label>
                             <div className="input-icon">
                                 <i className="fa-solid fa-dungeon"></i>
-                                <input type="text" placeholder="e.g. A2" />
+                                <input type="text" placeholder="e.g. A2" onChange={(e)=>setgate(e.target.value)} value={gate} />
                             </div>
                         </div>
                     </div>
@@ -101,7 +142,7 @@ const Addflight = () => {
                         <button type="button" className="btn-cancel" onClick={handleadmindash}>
                             Cancel
                         </button>
-                        <button type="submit" className="btn-submit">
+                        <button type="button" className="btn-submit" onClick={addflight}>
                             <i className="fa-solid fa-plus"></i> Add Flight
                         </button>
                     </div>
