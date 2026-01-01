@@ -14,6 +14,8 @@ import Admindash from './Components/AdminDASH/Admindash.jsx'
 import Addflight from './Components/AdminDASH/Addflight.jsx'
 import Bulkupdate from './Components/AdminDASH/Bulkupdate.jsx'
 import Flightedit from './Components/AdminDASH/Flightedit.jsx'
+import Addshuttle from './Components/AdminDASH/Addshuttle.jsx'
+import Shuttleedit from './Components/AdminDASH/Shuttleedit.jsx'
 
 function App() {
   
@@ -32,6 +34,9 @@ function App() {
         <Route path='/adminlog/admin/:id/addflight' element={<Addflight/>}/>
         <Route path='/adminlog/admin/:id/bulkflight' element={<Bulkupdate/>}/>
         <Route path='/adminlog/admin/flightedit/:id/:sf' element={<Flightedit/>}/>
+        <Route path='/adminlog/admin/addshuttle' element={<Addshuttle/>}/>
+        <Route path='/adminlog/admin/:id/updateshuttle' element={<Shuttleedit/>}/>
+        
     </Routes>
         
     </>

@@ -1,0 +1,180 @@
+/* Edit Shuttle Container - Similar to Add Shuttle */
+.edit-shuttle-container {
+    min-height: 100vh;
+    background-color: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.form-card {
+    background: white;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.form-header {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    padding: 30px;
+    color: white;
+}
+
+.form-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.form-header p {
+    margin: 0;
+    font-size: 14px;
+    color: #bfdbfe;
+}
+
+.shuttle-form {
+    padding: 30px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.form-row.full-width {
+    grid-template-columns: 1fr;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.input-icon input,
+.input-icon select {
+    width: 100%;
+    padding: 12px 16px 12px 40px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1e293b;
+    background: #ffffff;
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+.input-icon input:focus,
+.input-icon select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input-icon input::placeholder {
+    color: #94a3b8;
+}
+
+/* Disabled Input Styling */
+.disabled-input {
+    background-color: #f1f5f9 !important;
+    color: #64748b !important;
+    cursor: not-allowed;
+    border-color: #e2e8f0;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+    margin-top: 10px;
+}
+
+.btn-cancel {
+    background: white;
+    border: 1px solid #cbd5e1;
+    color: #64748b;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+    background: #f8fafc;
+    color: #0f172a;
+    border-color: #94a3b8;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+    transition: all 0.2s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .edit-shuttle-container {
+        padding: 20px;
+    }
+}

@@ -1,81 +1,89 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Admindash.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const Admindash = () => {
- 
-  const [adminname,setname] = useState("");
-  const [adminemail,setemail] = useState("");
+  const [adminname, setname] = useState("");
+  const [adminemail, setemail] = useState("");
 
-   const {id} = useParams();
-   
-   useEffect(()=>{
-    const fetchdata = async()=>{
-      const res = await axios.get(`http://localhost:5000/adminpass/${id}`)
-      const user =  res.data.find((n)=>n._id==id);
-      if(user){
-      setname(user.name);
-      setemail(user.email);
-      console.log("Fetch Success")
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      const res = await axios.get(`http://localhost:5000/adminpass/${id}`);
+      const user = res.data.find((n) => n._id == id);
+      if (user) {
+        setname(user.name);
+        setemail(user.email);
+        console.log("Fetch Success");
       }
-    }
+    };
     fetchdata();
-   },[id])
-   
+  }, [id]);
 
-   const [flighttable,setflighttable] = useState([]);
+  const [flighttable, setflighttable] = useState([]);
+  const [internal, setinternal] = useState([]);
+  const [external, setexternal] = useState([]);
 
-   useEffect(()=>{
-     const fetchflight = async()=>{
-       const res1 = await axios.get(`http://localhost:5000/flightdetail`);
-       setflighttable(res1.data);
-     }
-     fetchflight();
-   },[])
+  useEffect(() => {
+    const fetchflight = async () => {
+      const res1 = await axios.get(`http://localhost:5000/flightdetail`);
+      setflighttable(res1.data);
+    };
+    const fetchinternal = async () => {
+      const res2 = await axios.get(`http://localhost:5000/internalshuttle`);
+      setinternal(res2.data);
+    };
+    const fetchexternal = async () => {
+      const res3 = await axios.get(`http://localhost:5000/externalshuttle`);
+      setexternal(res3.data);
+    };
 
-   const usenav = useNavigate();
+    fetchinternal();
+    fetchexternal();
+    fetchflight();
+  }, []);
 
-   const handleaddflght=()=>{
-     usenav(`/adminlog/admin/${id}/addflight`);
-   }
+  const usenav = useNavigate();
 
-   const handlebulkflight=()=>{
-     usenav(`/adminlog/admin/${id}/bulkflight`);
-   }
-   
+  const handleaddflght = () => {
+    usenav(`/adminlog/admin/${id}/addflight`);
+  };
 
-  const [totflight,setflight] = useState(0);
-  const [ontime,setontime] = useState(0);
-  const [delay,setdelay] = useState(0);
-  const [cancel,setcancel] = useState(0);
+  const handlebulkflight = (ids) => {
+    usenav(`/adminlog/admin/${ids}/bulkflight`);
+  };
 
-useEffect(()=>{
-  const total = flighttable.length;
-  const ontime = flighttable.filter((n)=>n.status=="On Time").length;
-  const delay = flighttable.filter((n)=>n.status=="Delayed").length;
-  const cancel = flighttable.filter((n)=>n.status=="Cancelled").length;
-  setflight(total);
-  setontime(ontime);
-  setdelay(delay);
-  setcancel(cancel);
-},[flighttable])
+  const [totflight, setflight] = useState(0);
+  const [ontime, setontime] = useState(0);
+  const [delay, setdelay] = useState(0);
+  const [cancel, setcancel] = useState(0);
 
+  useEffect(() => {
+    const total = flighttable.length;
+    const ontime = flighttable.filter((n) => n.status == "On Time").length;
+    const delay = flighttable.filter((n) => n.status == "Delayed").length;
+    const cancel = flighttable.filter((n) => n.status == "Cancelled").length;
+    setflight(total);
+    setontime(ontime);
+    setdelay(delay);
+    setcancel(cancel);
+  }, [flighttable]);
 
-  
-
- const handleedit=(sf)=>{
+  const handleedit = (sf) => {
     usenav(`/adminlog/admin/flightedit/${id}/${sf}`);
+  };
+      
+  const goshuedit = ()=>{
+    usenav(`/adminlog/admin/${id}/updateshuttle`);
   }
-  
   const [showModal, setShowModal] = useState(false);
   const [selectedRunway, setSelectedRunway] = useState(null);
   const [runways, setRunways] = useState([
-    { id: 1, name: "Runway 01L", status: "In Use" },
-    { id: 2, name: "Runway 01R", status: "In Use" },
-    { id: 3, name: "Runway 02L", status: "Available" },
     { id: 4, name: "Runway 02R", status: "Maintenance" },
   ]);
+
   return (
     <div className="admin-container">
       {/* Top Navigation */}
@@ -90,7 +98,11 @@ useEffect(()=>{
         <div className="profile-container">
           <div className="profile-trigger" tabIndex="0">
             <div className="avatar">
-              {adminname && adminname.split(" ").map(n => n[0]).join("")}
+              {adminname &&
+                adminname
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
             </div>
             <div className="profile-info">
               <span className="admin-name">{adminname}</span>
@@ -117,11 +129,13 @@ useEffect(()=>{
 
       {/* Main Content */}
       <main className="dashboard-content">
-
         {/* Welcome Section */}
         <section className="welcome-section">
           <h1>Welcome, Admin</h1>
-          <p>Monitor flights, manage runways, and control airport operations in real time.</p>
+          <p>
+            Monitor flights, manage runways, and control airport operations in
+            real time.
+          </p>
         </section>
 
         {/* Stats Cards */}
@@ -172,11 +186,11 @@ useEffect(()=>{
               <p>Manage and control flight operations efficiently.</p>
             </div>
             <div className="action-buttons">
-              <button className="btn primary" onClick={handleaddflght} >
+              <button className="btn primary" onClick={handleaddflght}>
                 <i className="fa-solid fa-plus"></i> Add Flight
               </button>
               <button className="btn secondary" onClick={handlebulkflight}>
-                <i className="fa-solid fa-pen-to-square" ></i> Bulk Update
+                <i className="fa-solid fa-pen-to-square"></i> Bulk Update
               </button>
               <button className="btn outline">
                 <i className="fa-solid fa-rotate"></i> Refresh
@@ -206,24 +220,148 @@ useEffect(()=>{
                 </tr>
               </thead>
               <tbody>
-                {
-                  flighttable.map((n,i)=>(
-                <tr key={i}>
-                  <td>{n.flight}</td>
-                  <td>{n.airline}</td>
-                  <td>{n.aircraft}</td>
-                  <td>{n.from}</td>
-                  <td>{n.to}</td>
-                  <td><span className={`badge on-time ${n.status.toLowerCase().replace(" ", "-")}`}>{n.status}</span></td>
-                  <td>{n.time}</td>
-                  <td>{n.gate}</td>
-                  <td><button className="table-btn" onClick={()=>handleedit(n._id)} >Edit</button></td>
-                </tr>
-                  ))
-                }
+                {flighttable.map((n, i) => (
+                  <tr key={i}>
+                    <td>{n.flight}</td>
+                    <td>{n.airline}</td>
+                    <td>{n.aircraft}</td>
+                    <td>{n.from}</td>
+                    <td>{n.to}</td>
+                    <td>
+                      <span
+                        className={`badge on-time ${n.status
+                          .toLowerCase()
+                          .replace(" ", "-")}`}
+                      >
+                        {n.status}
+                      </span>
+                    </td>
+                    <td>{n.time}</td>
+                    <td>{n.gate}</td>
+                    <td>
+                      <button
+                        className="table-btn"
+                        onClick={() => handleedit(n._id)}
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                ))}
                 {/* Placeholder for more rows to show scrolling if needed */}
               </tbody>
             </table>
+          </div>
+        </section>
+
+        {/* Airport Shuttle Management Section */}
+        <section className="table-section shuttle-section">
+          <div className="section-header shuttle-header">
+            <div>
+              <h3>Airport Shuttle Management</h3>
+              <p>Manage internal and external airport shuttle services</p>
+            </div>
+            <button
+              className="btn primary"
+              onClick={() => usenav("/adminlog/admin/addshuttle")}
+            >
+              <i className="fa-solid fa-plus"></i> Add Shuttle Bus
+            </button>
+          </div>
+
+          {/* Internal Shuttles Subsection */}
+          <div className="shuttle-subsection">
+            <h4 className="subsection-title">
+              <i className="fa-solid fa-bus"></i> Internal Airport Shuttle Buses
+            </h4>
+            <div className="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Shuttle ID</th>
+                    <th>Flight No.</th>
+                    <th>Type</th>
+                    <th>Route</th>
+                    <th>Pickup</th>
+                    <th>Drop</th>
+                    <th>Schedule</th>
+                    <th>Status</th>
+                    <th>Staff</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {internal.map((n, i) => (
+                    <tr key={i}>
+                      <td>{n.shuttleid}</td>
+                      <td>{n.flightno}</td>
+                      <td>{n.type}</td>
+                      <td>
+                        {n.routefrom} To {n.routeto}
+                      </td>
+                      <td>{n.pickup}</td>
+                      <td>{n.drop}</td>
+                      <td>{n.schedule}</td>
+                     <td><span className={`badge ${(n.status || "unknown").toLowerCase().replace(" ", "-")}`}>{n.status || "Unknown"}</span></td>
+                      <td>{n.staff}</td>
+                      <td>
+                        <button className="table-btn" onClick={()=>goshuedit(n._id)}>Edit</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* External Shuttles Subsection */}
+          <div className="shuttle-subsection">
+            <h4 className="subsection-title">
+              <i className="fa-solid fa-city"></i> External Airport Shuttle
+              Buses
+            </h4>
+            <div className="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Shuttle ID</th>
+                    <th>Type</th>
+                    <th>Route</th>
+                    <th>Pickup</th>
+                    <th>Drop</th>
+                    <th>Schedule</th>
+                    <th>Status</th>
+                    <th>Driver</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {external.map((n, i) => (
+                    <tr key={i}>
+                      <td>{n.shuttleid}</td>
+                      <td>{n.type}</td>
+                      <td>{`${n.routefrom} <-> ${n.routeto} `}</td>
+                      <td>{n.pickup}</td>
+                      <td>{n.drop}</td>
+                      <td>{n.schedule}</td>
+                      <td>
+                        <span
+                          className={`badge ${n.status
+                            .toLowerCase()
+                            .replace(" ", "-")}`}
+                        >
+                          {n.status}
+                        </span>
+                      </td>
+                      <td>{n.staff}</td>
+                      <td>
+                        <button className="table-btn">Edit</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
 
@@ -254,9 +392,15 @@ useEffect(()=>{
                   <td>Gate Manager</td>
                   <td>Operations</td>
                   <td>Morning</td>
-                  <td><span className="badge active">Active</span></td>
-                  <td><span className="badge allowed">Allowed</span></td>
-                  <td><button className="btn-deny">Deny</button></td>
+                  <td>
+                    <span className="badge active">Active</span>
+                  </td>
+                  <td>
+                    <span className="badge allowed">Allowed</span>
+                  </td>
+                  <td>
+                    <button className="btn-deny">Deny</button>
+                  </td>
                 </tr>
                 <tr>
                   <td>STF002</td>
@@ -264,9 +408,15 @@ useEffect(()=>{
                   <td>Flight Coordinator</td>
                   <td>Control Room</td>
                   <td>Evening</td>
-                  <td><span className="badge active">Active</span></td>
-                  <td><span className="badge denied">Denied</span></td>
-                  <td><button className="btn-allow">Allow</button></td>
+                  <td>
+                    <span className="badge active">Active</span>
+                  </td>
+                  <td>
+                    <span className="badge denied">Denied</span>
+                  </td>
+                  <td>
+                    <button className="btn-allow">Allow</button>
+                  </td>
                 </tr>
                 <tr>
                   <td>STF003</td>
@@ -274,9 +424,15 @@ useEffect(()=>{
                   <td>Ground Staff</td>
                   <td>Runway</td>
                   <td>Night</td>
-                  <td><span className="badge inactive">Inactive</span></td>
-                  <td><span className="badge denied">Denied</span></td>
-                  <td><button className="btn-allow">Allow</button></td>
+                  <td>
+                    <span className="badge inactive">Inactive</span>
+                  </td>
+                  <td>
+                    <span className="badge denied">Denied</span>
+                  </td>
+                  <td>
+                    <button className="btn-allow">Allow</button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -291,7 +447,14 @@ useEffect(()=>{
           </div>
           <div className="runway-grid">
             {runways.map((runway) => (
-              <div key={runway.id} className={`runway-card ${runway.status.toLowerCase().replace(" ", "-") === 'in-use' ? 'active' : runway.status.toLowerCase()}`}>
+              <div
+                key={runway.id}
+                className={`runway-card ${
+                  runway.status.toLowerCase().replace(" ", "-") === "in-use"
+                    ? "active"
+                    : runway.status.toLowerCase()
+                }`}
+              >
                 <div className="runway-info">
                   <h4>{runway.name}</h4>
                   <span className="status-indicator">{runway.status}</span>
@@ -316,22 +479,32 @@ useEffect(()=>{
             <div className="modal-content">
               <div className="modal-header">
                 <h3>Edit Runway Status</h3>
-                <button className="close-modal" onClick={() => setShowModal(false)}>
+                <button
+                  className="close-modal"
+                  onClick={() => setShowModal(false)}
+                >
                   <i className="fa-solid fa-xmark"></i>
                 </button>
               </div>
               <div className="modal-body">
-                <p><strong>Runway:</strong> {selectedRunway.name}</p>
+                <p>
+                  <strong>Runway:</strong> {selectedRunway.name}
+                </p>
                 <div className="form-group">
                   <label>Current Status</label>
                   <select
                     value={selectedRunway.status}
                     onChange={(e) => {
-                      const updatedRunways = runways.map(r =>
-                        r.id === selectedRunway.id ? { ...r, status: e.target.value } : r
+                      const updatedRunways = runways.map((r) =>
+                        r.id === selectedRunway.id
+                          ? { ...r, status: e.target.value }
+                          : r
                       );
                       setRunways(updatedRunways);
-                      setSelectedRunway({ ...selectedRunway, status: e.target.value });
+                      setSelectedRunway({
+                        ...selectedRunway,
+                        status: e.target.value,
+                      });
                     }}
                   >
                     <option value="In Use">In Use</option>
@@ -341,13 +514,22 @@ useEffect(()=>{
                 </div>
               </div>
               <div className="modal-footer">
-                <button className="btn outline" onClick={() => setShowModal(false)}>Cancel</button>
-                <button className="btn primary" onClick={() => setShowModal(false)}>Save Changes</button>
+                <button
+                  className="btn outline"
+                  onClick={() => setShowModal(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn primary"
+                  onClick={() => setShowModal(false)}
+                >
+                  Save Changes
+                </button>
               </div>
             </div>
           </div>
         )}
-
       </main>
     </div>
   );

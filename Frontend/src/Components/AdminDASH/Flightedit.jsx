@@ -4,16 +4,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const Flightedit = () => {
-
-  const {id,sf} = useParams();
+  const { id, sf } = useParams();
 
   const usenav = useNavigate();
 
-  const returnadmin = ()=>{
+  const returnadmin = () => {
     usenav(`/adminlog/admin/${id}`);
-  }
- 
-  const [flightno,setfno] = useState("");
+  };
+
+  const [flightno, setfno] = useState("");
   const [airline, setAirline] = useState("");
   const [aircraft, setAircraft] = useState("");
   const [from, setFrom] = useState("");
@@ -21,25 +20,42 @@ const Flightedit = () => {
   const [status, setStatus] = useState("");
   const [time, setTime] = useState("");
   const [gate, setGate] = useState("");
-  
-  useEffect(()=>{
-    const fetchdata = async()=>{
-        const res = await axios.get(`http://localhost:5000/flightdetail/${sf}`)
-        console.log(res.data);
-        setfno(res.data.flight);
-        setAirline(res.data.airline);
-        setAircraft(res.data.aircraft);
-        setFrom(res.data.from);
-        setTo(res.data.to);
-        setStatus(res.data.status);
-        setTime(res.data.time);
-        setGate(res.data.gate);
-        console.log("Fetch data successfull")
-    }
-    fetchdata();
-  },[sf])
 
-  
+  useEffect(() => {
+    const fetchdata = async () => {
+      const res = await axios.get(`http://localhost:5000/flightdetail/${sf}`);
+      console.log(res.data);
+      setfno(res.data.flight);
+      setAirline(res.data.airline);
+      setAircraft(res.data.aircraft);
+      setFrom(res.data.from);
+      setTo(res.data.to);
+      setStatus(res.data.status);
+      setGate(res.data.gate);
+      // TIME
+    };
+    fetchdata();
+  }, [sf]);
+
+ 
+  const handleupdate = async () => {
+    const res = await axios.put(`http://localhost:5000/adminpass/updatedetail/${sf}`,
+      {
+        flight: flightno,
+        airline,
+        aircraft,
+        from,
+        to,
+        status,
+        time, 
+        gate,
+      }
+    );
+
+    console.log(res.data);
+    usenav(`/adminlog/admin/${id}`);
+  };
+
   return (
     <div className="edit-flight-container">
       <div className="form-card">
@@ -72,7 +88,7 @@ const Flightedit = () => {
                   onChange={(e) => setAirline(e.target.value)}
                 >
                   <option value="">Select Airline</option>
-                  <option value="Indigo">IndiGo</option>
+                  <option value="IndiGo">IndiGo</option>
                   <option value="Air India">Air India</option>
                   <option value="Vistara">Vistara</option>
                   <option value="Akasa">Akasa</option>
@@ -147,6 +163,7 @@ const Flightedit = () => {
                 <input
                   type="time"
                   value={time}
+                  disabled={status === "Cancelled"}
                   onChange={(e) => setTime(e.target.value)}
                 />
               </div>
@@ -158,8 +175,11 @@ const Flightedit = () => {
                 <i className="fa-solid fa-dungeon"></i>
                 <input
                   type="text"
-                  placeholder="e.g. A2"
+                  placeholder={
+                    status === "Cancelled" ? "Not applicable" : "e.g. A2"
+                  }
                   value={gate}
+                  disabled={status === "Cancelled"}
                   onChange={(e) => setGate(e.target.value)}
                 />
               </div>
@@ -167,16 +187,13 @@ const Flightedit = () => {
           </div>
 
           <div className="form-actions">
-            <button
-              type="button"
-              className="btn-cancel"
-              onClick={returnadmin}
-            >
+            <button type="button" className="btn-cancel" onClick={returnadmin}>
               Cancel
             </button>
             <button
               type="button"
-              className="btn-update">
+              className="btn-update"
+              onClick={() => (handleupdate())}>
               <i className="fa-solid fa-check"></i> Update Flight
             </button>
           </div>
