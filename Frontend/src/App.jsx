@@ -34,8 +34,8 @@ function App() {
         <Route path='/adminlog/admin/:id/addflight' element={<Addflight/>}/>
         <Route path='/adminlog/admin/:id/bulkflight' element={<Bulkupdate/>}/>
         <Route path='/adminlog/admin/flightedit/:id/:sf' element={<Flightedit/>}/>
-        <Route path='/adminlog/admin/addshuttle' element={<Addshuttle/>}/>
-        <Route path='/adminlog/admin/:id/updateshuttle' element={<Shuttleedit/>}/>
+        <Route path='/adminlog/admin/addshuttle/:id' element={<Addshuttle/>}/>
+        <Route path='/adminlog/admin/updateshuttle/:type/:id' element={<Shuttleedit/>}/>
         
     </Routes>
         

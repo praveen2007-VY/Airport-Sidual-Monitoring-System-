@@ -14,7 +14,7 @@ const Addshuttle = () => {
   const [shud, setshud] = useState("");
   const [shusch, setshusch] = useState("");
   const [shustaff, setshustaff] = useState("");
-  const [shustatus, setstatus] = useState("");
+  const [shustatus, setstatus] = useState("Running");
 
   const [flightNo, setFlightNo] = useState("");
   const [gateNo, setGateNo] = useState("");
@@ -42,6 +42,7 @@ const Addshuttle = () => {
     navigate(-1);
   };
 
+  const [flighttable, setflighttable] = useState([]);
   const handleinter = async () => {
     const data1 = {
       shuttleid,
@@ -69,11 +70,20 @@ const Addshuttle = () => {
     };
 
     if (shutype == "Internal") {
+      //   const fetchflight = async () => {
+      //   const res1 = await axios.get(`http://localhost:5000/flightdetail`);
+      //   setflighttable(res1.data);
+      // };
+      //   fetchflight();
+      //   const idd = flighttable.find((n) => { if(n.flight === flightNo){return n._id}})
       const res1 = await axios.post(
         "http://localhost:5000/internalshuttle",
         data1
       );
       console.log(res1.data);
+      await axios.put(`http://localhost:5000/flightdetail/fli/${flightNo}`, {
+        completed: false,
+      });
     } else {
       const res2 = await axios.post(
         "http://localhost:5000/externalshuttle",
@@ -81,6 +91,7 @@ const Addshuttle = () => {
       );
       console.log(res2.data);
     }
+
     navigate(-1);
   };
 
@@ -155,7 +166,7 @@ const Addshuttle = () => {
                   >
                     <option value="">Select Flight</option>
                     {filid.map((n) => (
-                      <option key={n._id} value={n.flight}>
+                      <option key={n._id} value={n._id}>
                         {n.flight}
                       </option>
                     ))}

@@ -74,10 +74,17 @@ const Admindash = () => {
   const handleedit = (sf) => {
     usenav(`/adminlog/admin/flightedit/${id}/${sf}`);
   };
-      
-  const goshuedit = ()=>{
-    usenav(`/adminlog/admin/${id}/updateshuttle`);
-  }
+
+  // const [typee,settypee]=useState("");
+
+  // const handleinter = (ii) => {
+  //   usenav(`/adminlog/admin/updateshuttle/${typee}/${ii}`);
+  // };
+
+  // const handleexter = (ii)=>{
+  //   usenav(`/adminlog/admin/updateshuttle/${typee}/${ii}`);
+  // }
+
   const [showModal, setShowModal] = useState(false);
   const [selectedRunway, setSelectedRunway] = useState(null);
   const [runways, setRunways] = useState([
@@ -263,7 +270,7 @@ const Admindash = () => {
             </div>
             <button
               className="btn primary"
-              onClick={() => usenav("/adminlog/admin/addshuttle")}
+              onClick={() => usenav(`/adminlog/admin/addshuttle/${id}`)}
             >
               <i className="fa-solid fa-plus"></i> Add Shuttle Bus
             </button>
@@ -302,10 +309,27 @@ const Admindash = () => {
                       <td>{n.pickup}</td>
                       <td>{n.drop}</td>
                       <td>{n.schedule}</td>
-                     <td><span className={`badge ${(n.status || "unknown").toLowerCase().replace(" ", "-")}`}>{n.status || "Unknown"}</span></td>
+                      <td>
+                        <span
+                          className={`badge ${(n.status || "unknown")
+                            .toLowerCase()
+                            .replace(" ", "-")}`}
+                        >
+                          {n.status || "Unknown"}
+                        </span>
+                      </td>
                       <td>{n.staff}</td>
                       <td>
-                        <button className="table-btn" onClick={()=>goshuedit(n._id)}>Edit</button>
+                        <button
+                          className="table-btn"
+                          onClick={() =>
+                            usenav(
+                              `/adminlog/admin/updateshuttle/Internal/${n._id}`
+                            )
+                          }
+                        >
+                          Edit
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -355,7 +379,16 @@ const Admindash = () => {
                       </td>
                       <td>{n.staff}</td>
                       <td>
-                        <button className="table-btn">Edit</button>
+                        <button
+                          className="table-btn"
+                          onClick={() =>
+                            usenav(
+                              `/adminlog/admin/updateshuttle/External/${n._id}`
+                            )
+                          }
+                        >
+                          Edit
+                        </button>
                       </td>
                     </tr>
                   ))}

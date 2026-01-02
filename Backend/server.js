@@ -94,8 +94,24 @@ app.get('/flightdetail/:id',async(req, res)=>{
     res.status(200).send("Data Fetched Successfully");
 })
 
+
+
+app.get('/internalshuttle/:id',async(req, res)=>{
+    let {id}= req.params;
+    let data = await internal.findById(id);
+    res.json(data);
+    res.status(200).send("Data Fetched Successfully");
+})
+
 app.get('/internalshuttle',async(req, res)=>{
     let data = await internal.find();
+    res.json(data);
+    res.status(200).send("Data Fetched Successfully");
+})
+
+app.get('/externalshuttle/:id',async(req, res)=>{
+    let {id}= req.params;
+    let data = await external.findById(id);
     res.json(data);
     res.status(200).send("Data Fetched Successfully");
 })
@@ -152,6 +168,35 @@ app.put('/adminpass/updatedetail/:id', async(req, res)=>{
     await flight.findByIdAndUpdate(id, data, {new:true});
     res.send("Data Updated Successfully");
 })
+
+app.put('/internalshuttle/:id', async(req, res)=>{
+    const id=  req.params.id;
+    const data=req.body;
+    console.log(data);
+    await internal.findByIdAndUpdate(id, data, {new:true});
+    res.send("Data Updated Successfully");
+})  
+
+app.put('/externalshuttle/:id', async(req, res)=>{
+    const id=  req.params.id;
+    const data=req.body;
+    console.log(data);
+    await external.findByIdAndUpdate(id, data, {new:true});
+    res.send("Data Updated Successfully");
+})  
+
+// /flightdetail/fli/${flightNo}
+
+app.put('/flightdetail/fli/:id', async(req, res)=>{
+    const id=  req.params.id;
+    const data=req.body;
+    console.log(data);
+    await flight.findByIdAndUpdate(id, data, {new:true});
+    res.send("Data Updated Successfully");
+})
+
+
+
 // app.put('/todo/:id', async(req,res)=>{
 //     const id=  req.params.id;
 //     const data=req.body;
