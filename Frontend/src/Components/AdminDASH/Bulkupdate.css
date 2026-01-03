@@ -18,6 +18,10 @@
     border: 1px solid #e2e8f0;
     overflow: hidden;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    /* restrict height for scrolling */
 }
 
 /* Header & Controls */
@@ -27,9 +31,11 @@
     border-bottom: 1px solid #e2e8f0;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    /* changed to flex-start for better alignment with warning */
     flex-wrap: wrap;
     gap: 20px;
+    flex-shrink: 0;
 }
 
 .header-text h2 {
@@ -41,37 +47,30 @@
 .header-text p {
     font-size: 14px;
     color: #64748b;
-    margin: 0;
+    margin: 0 0 8px 0;
+}
+
+.warning-text {
+    font-size: 13px;
+    color: #dc2626;
+    /* Red-600 */
+    background: #fef2f2;
+    /* Red-50 */
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #fecaca;
+    display: inline-block;
 }
 
 .bulk-controls {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
-.control-select,
-.control-input {
-    padding: 10px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 14px;
-    color: #334155;
-    background: white;
-}
-
-.control-select:focus,
-.control-input:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.control-input {
-    width: 80px;
-}
-
-.btn-apply {
-    background: #2563eb;
+/* Buttons */
+.btn-delete {
+    background: #dc2626;
     color: white;
     border: none;
     padding: 10px 16px;
@@ -82,13 +81,14 @@
     transition: all 0.2s;
 }
 
-.btn-apply:hover:not(:disabled) {
-    background: #1d4ed8;
+.btn-delete:hover:not(:disabled) {
+    background: #b91c1c;
 }
 
-.btn-apply:disabled {
-    background: #cbd5e1;
+.btn-delete:disabled {
+    background: #fca5a5;
     cursor: not-allowed;
+    opacity: 0.7;
 }
 
 .btn-reset {
@@ -100,11 +100,17 @@
     cursor: pointer;
     font-weight: 600;
     font-size: 13px;
+    transition: all 0.2s;
 }
 
-.btn-reset:hover {
+.btn-reset:hover:not(:disabled) {
     background: #f1f5f9;
     color: #475569;
+}
+
+.btn-reset:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .btn-cancel {
@@ -123,9 +129,30 @@
     background: #eff6ff;
 }
 
+/* Scrollable Content Area */
+.bulk-content-scroll {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding: 0;
+}
+
+.section-container {
+    padding: 24px 30px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #334155;
+    margin: 0 0 16px 0;
+}
+
 /* Table Styles */
 .bulk-table-wrapper {
     overflow-x: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
 }
 
 .bulk-table {
@@ -135,7 +162,7 @@
 
 .bulk-table th {
     background: #f8fafc;
-    padding: 16px 24px;
+    padding: 12px 24px;
     text-align: left;
     font-size: 12px;
     font-weight: 600;
@@ -143,15 +170,17 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border-bottom: 1px solid #e2e8f0;
-    position: sticky;
-    top: 0;
 }
 
 .bulk-table td {
-    padding: 16px 24px;
+    padding: 12px 24px;
     border-bottom: 1px solid #f1f5f9;
     font-size: 14px;
     color: #334155;
+}
+
+.bulk-table tr:last-child td {
+    border-bottom: none;
 }
 
 .bulk-table tr:hover td {
@@ -174,9 +203,16 @@ input[type="checkbox"] {
     accent-color: #2563eb;
 }
 
+.empty-state {
+    text-align: center;
+    color: #94a3b8;
+    padding: 30px !important;
+    font-style: italic;
+}
+
 /* Status Badges */
 .status-badge {
-    padding: 6px 12px;
+    padding: 4px 10px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 600;
@@ -184,6 +220,11 @@ input[type="checkbox"] {
 }
 
 .status-badge.on-time {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-badge.running {
     background: #dcfce7;
     color: #166534;
 }
@@ -198,6 +239,33 @@ input[type="checkbox"] {
     color: #b91c1c;
 }
 
+.status-badge.maintenance {
+    background: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+}
+
+/* Type Badges */
+.type-badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.type-badge.internal {
+    background: #e0e7ff;
+    color: #4338ca;
+}
+
+.type-badge.external {
+    background: #ffedd5;
+    color: #c2410c;
+}
+
+/* Footer */
 .bulk-footer {
     padding: 16px 30px;
     background: #f8fafc;
@@ -205,4 +273,13 @@ input[type="checkbox"] {
     font-size: 13px;
     color: #64748b;
     font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.selection-count {
+    font-weight: 600;
+    color: #334155;
 }

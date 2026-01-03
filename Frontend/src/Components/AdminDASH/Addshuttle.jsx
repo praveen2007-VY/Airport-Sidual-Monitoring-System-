@@ -15,7 +15,8 @@ const Addshuttle = () => {
   const [shusch, setshusch] = useState("");
   const [shustaff, setshustaff] = useState("");
   const [shustatus, setstatus] = useState("Running");
-
+  
+  const [flightId, setFlightId] = useState("");
   const [flightNo, setFlightNo] = useState("");
   const [gateNo, setGateNo] = useState("");
 
@@ -42,8 +43,25 @@ const Addshuttle = () => {
     navigate(-1);
   };
 
-  const [flighttable, setflighttable] = useState([]);
+  const [fid, setf] = useState([]);
   const handleinter = async () => {
+    // Validation
+    if (!shuttleid) {
+      alert("Shuttle ID is required!");
+      return;
+    }
+
+    if (shutype === "Internal") {
+      if (!flightNo) {
+        alert("Flight Number is required for Internal Shuttle!");
+        return;
+      }
+      if (!gateNo) {
+        alert("Gate Number is required for Internal Shuttle!");
+        return;
+      }
+    }
+
     const data1 = {
       shuttleid,
       flightno: flightNo,
@@ -69,27 +87,28 @@ const Addshuttle = () => {
       staff: shustaff,
     };
 
-    if (shutype == "Internal") {
-      //   const fetchflight = async () => {
-      //   const res1 = await axios.get(`http://localhost:5000/flightdetail`);
-      //   setflighttable(res1.data);
-      // };
-      //   fetchflight();
-      //   const idd = flighttable.find((n) => { if(n.flight === flightNo){return n._id}})
-      const res1 = await axios.post(
-        "http://localhost:5000/internalshuttle",
-        data1
-      );
-      console.log(res1.data);
-      await axios.put(`http://localhost:5000/flightdetail/fli/${flightNo}`, {
-        completed: false,
-      });
+    if (shutype === "Internal") {
+      try {
+        // Save internal shuttle
+        await axios.post("http://localhost:5000/internalshuttle", data1);
+
+        // Update flight using MongoDB _id (already in flightNo)
+        await axios.put(`http://localhost:5000/flightdetail/fli/${flightId}`, {
+          completed: false,
+        });
+      } catch (err) {
+        console.error(
+          "Internal Shuttle Error:",
+          err.response?.data || err.message
+        );
+        return;
+      }
     } else {
-      const res2 = await axios.post(
+      const res3 = await axios.post(
         "http://localhost:5000/externalshuttle",
         data2
       );
-      console.log(res2.data);
+      console.log(res3.data);
     }
 
     navigate(-1);
@@ -162,11 +181,16 @@ const Addshuttle = () => {
                   <i className="fa-solid fa-plane"></i>
                   <select
                     value={flightNo}
-                    onChange={(e) => setFlightNo(e.target.value)}
+                    onChange={(e) => {
+                      setFlightNo(e.target.value);
+
+                      const selectedOption = e.target.selectedOptions[0];
+                      setFlightId(selectedOption.getAttribute("data-id"));
+                    }}
                   >
                     <option value="">Select Flight</option>
                     {filid.map((n) => (
-                      <option key={n._id} value={n._id}>
+                      <option key={n._id} value={n.flight} data-id={n._id}>
                         {n.flight}
                       </option>
                     ))}

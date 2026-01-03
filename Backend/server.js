@@ -8,12 +8,12 @@ app.use(cors());
 app.use(express.json());
 
 mongoose.connect("mongodb://127.0.0.1:27017/CRUD")
-.then(()=>{
-    console.log("Connected to DB")
-})
-.catch((err)=>{
-    console.log(err)    
-})
+    .then(() => {
+        console.log("Connected to DB")
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 
 
 const userSchema1 = new mongoose.Schema({
@@ -23,15 +23,15 @@ const userSchema1 = new mongoose.Schema({
 });
 
 const userSchema2 = new mongoose.Schema({
-    flight : String,
-    airline : String,
-    aircraft : String,
-    from : String,
-    to:String,
-    status : String,
-    time : String,
-    gate : String,
-    completed : Boolean
+    flight: String,
+    airline: String,
+    aircraft: String,
+    from: String,
+    to: String,
+    status: String,
+    time: String,
+    gate: String,
+    completed: Boolean
 });
 
 const internalshuttle = new mongoose.Schema({
@@ -44,7 +44,7 @@ const internalshuttle = new mongoose.Schema({
     pickup: String,
     drop: String,
     schedule: String,
-    status: { type: String, enum: ["Running","Delayed","Maintenance"] },
+    status: { type: String, enum: ["Running", "Delayed", "Maintenance"] },
     staff: String
 });
 
@@ -56,7 +56,7 @@ const externalshuttle = new mongoose.Schema({
     pickup: String,
     drop: String,
     schedule: String,
-    status: { type: String, enum: ["Running","Delayed","Maintenance"] },
+    status: { type: String, enum: ["Running", "Delayed", "Maintenance"] },
     staff: String
 });
 
@@ -64,31 +64,31 @@ const externalshuttle = new mongoose.Schema({
 
 const admin = mongoose.model('admin', userSchema1);
 
-const flight = mongoose.model('flight',userSchema2);
+const flight = mongoose.model('flight', userSchema2);
 
 const internal = mongoose.model('internal', internalshuttle);
 const external = mongoose.model('external', externalshuttle);
 
-app.get('/adminpass', async(req,res)=>{
+app.get('/adminpass', async (req, res) => {
     let data = await admin.find();
     res.json(data);
     res.status(200).send("Data Fetched Successfully");
 })
 
-app.get('/adminpass/:id', async(req,res)=>{
+app.get('/adminpass/:id', async (req, res) => {
     let data = await admin.find();
     res.json(data);
     res.status(200).send("Data Fetched Successfully");
 })
 
-app.get('/flightdetail',async(req,res)=>{
+app.get('/flightdetail', async (req, res) => {
     let data = await flight.find();
     res.json(data);
     res.status(200).send("Data Fetched Successfully");
 })
 
-app.get('/flightdetail/:id',async(req, res)=>{
-    let {id}= req.params;
+app.get('/flightdetail/:id', async (req, res) => {
+    let { id } = req.params;
     let data = await flight.findById(id);
     res.json(data);
     res.status(200).send("Data Fetched Successfully");
@@ -96,64 +96,87 @@ app.get('/flightdetail/:id',async(req, res)=>{
 
 
 
-app.get('/internalshuttle/:id',async(req, res)=>{
-    let {id}= req.params;
+app.get('/internalshuttle/:id', async (req, res) => {
+    let { id } = req.params;
     let data = await internal.findById(id);
     res.json(data);
     res.status(200).send("Data Fetched Successfully");
 })
 
-app.get('/internalshuttle',async(req, res)=>{
+app.get('/internalshuttle', async (req, res) => {
     let data = await internal.find();
     res.json(data);
     res.status(200).send("Data Fetched Successfully");
 })
 
-app.get('/externalshuttle/:id',async(req, res)=>{
-    let {id}= req.params;
+app.get('/externalshuttle/:id', async (req, res) => {
+    let { id } = req.params;
     let data = await external.findById(id);
     res.json(data);
     res.status(200).send("Data Fetched Successfully");
 })
 
-app.get('/externalshuttle',async(req, res)=>{
+app.get('/externalshuttle', async (req, res) => {
     let data = await external.find();
     res.json(data);
     res.status(200).send("Data Fetched Successfully");
 })
 
-app.post('/internalshuttle',async(req, res)=>{
-    if(!req.body){
-        req.status(400).send("Give the Proper Details")
+app.post('/internalshuttle', async (req, res) => {
+    try {
+        if (!req.body || Object.keys(req.body).length === 0) {
+            return res.status(400).json({ error: "Request body is empty" });
+        }
+
+        const { shuttleid, flightno, gate, type } = req.body;
+
+        // Custom validation for Logic
+        if (!shuttleid) {
+            return res.status(400).json({ error: "Shuttle ID is required" });
+        }
+
+        if (type === "Internal") {
+            if (!flightno || !gate) {
+                return res.status(400).json({ error: "Flight Number and Gate Number are required for Internal Shuttles" });
+            }
+        }
+
+        const data = new internal(req.body);
+        await data.save();
+        res.status(201).json({ message: "Data Saved Successfully" });
+
+    } catch (err) {
+        console.error("Error saving internal shuttle:", err);
+        if (err.name === 'ValidationError') {
+            return res.status(400).json({ error: err.message });
+        }
+        res.status(500).json({ error: "Internal Server Error" });
     }
-    const data = new internal(req.body);
-    await data.save();
-    res.status(201).send("Data Saved Successfully");
 })
 
-app.post('/externalshuttle',async(req, res)=>{
-    if(!req.body){
-        req.status(400).send("Give the Proper Details")
+app.post('/externalshuttle', async (req, res) => {
+    if (!req.body) {
+        return req.status(400).send("Give the Proper Details")
     }
     const data = new external(req.body);
     await data.save();
     res.status(201).send("Data Saved Successfully");
 })
 
-app.post('/adminpass/update', async(req,res)=>{
-   if(!req.body){
-    req.status(400).send("Give the Proper Details")
-   }
-    const data= new  admin(req.body);
+app.post('/adminpass/update', async (req, res) => {
+    if (!req.body) {
+        return req.status(400).send("Give the Proper Details")
+    }
+    const data = new admin(req.body);
     await data.save();
 
     res.status(201).send("Data Saved Successfully");
 
 })
 
-app.post('/flightdetail/add', async(req,res)=>{
-    if(!req.body){
-         req.status(400).send("Give the Proper Details")
+app.post('/flightdetail/add', async (req, res) => {
+    if (!req.body) {
+        return req.status(400).send("Give the Proper Details")
     }
     const data = new flight(req.body);
     await data.save();
@@ -161,37 +184,37 @@ app.post('/flightdetail/add', async(req,res)=>{
 })
 
 
-app.put('/adminpass/updatedetail/:id', async(req, res)=>{
-    const id=  req.params.id;
-    const data=req.body;
+app.put('/adminpass/updatedetail/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
     console.log(data);
-    await flight.findByIdAndUpdate(id, data, {new:true});
+    await flight.findByIdAndUpdate(id, data, { new: true });
     res.send("Data Updated Successfully");
 })
 
-app.put('/internalshuttle/:id', async(req, res)=>{
-    const id=  req.params.id;
-    const data=req.body;
+app.put('/internalshuttle/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
     console.log(data);
-    await internal.findByIdAndUpdate(id, data, {new:true});
+    await internal.findByIdAndUpdate(id, data, { new: true });
     res.send("Data Updated Successfully");
-})  
+})
 
-app.put('/externalshuttle/:id', async(req, res)=>{
-    const id=  req.params.id;
-    const data=req.body;
+app.put('/externalshuttle/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
     console.log(data);
-    await external.findByIdAndUpdate(id, data, {new:true});
+    await external.findByIdAndUpdate(id, data, { new: true });
     res.send("Data Updated Successfully");
-})  
+})
 
 // /flightdetail/fli/${flightNo}
 
-app.put('/flightdetail/fli/:id', async(req, res)=>{
-    const id=  req.params.id;
-    const data=req.body;
+app.put('/flightdetail/fli/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
     console.log(data);
-    await flight.findByIdAndUpdate(id, data, {new:true});
+    await flight.findByIdAndUpdate(id, data, { new: true });
     res.send("Data Updated Successfully");
 })
 
@@ -213,6 +236,6 @@ app.put('/flightdetail/fli/:id', async(req, res)=>{
 
 
 
-app.listen(5000,()=>{
+app.listen(5000, () => {
     console.log("Server is running on port 5000")
 })
