@@ -531,7 +531,7 @@ tr:hover td {
   background: #dc2626;
 }
 
-.btn-allow{
+.btn-allow {
   background: #22c55e;
   color: white;
   border: none;
@@ -812,9 +812,10 @@ tr:hover td {
 }
 
 .route-icon {
-  color: #1f2937; 
+  color: #1f2937;
   font-size: 14px;
 }
+
 /* 
 .denied {
   background: linear-gradient(135deg, #ef4444, #dc2626);
@@ -831,5 +832,3 @@ tr:hover td {
 }
 
 /* Hover */
-
-

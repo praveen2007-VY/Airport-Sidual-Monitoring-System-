@@ -16,6 +16,8 @@ import Bulkupdate from './Components/AdminDASH/Bulkupdate.jsx'
 import Flightedit from './Components/AdminDASH/Flightedit.jsx'
 import Addshuttle from './Components/AdminDASH/Addshuttle.jsx'
 import Shuttleedit from './Components/AdminDASH/Shuttleedit.jsx'
+import Staffreg from './Components/AdminDASH/Staffreg.jsx'
+import Staffdash from './Components/stafflog/Staffdash.jsx'
 
 function App() {
   
@@ -32,11 +34,12 @@ function App() {
         <Route path='/passenger/login/forgot' element={<Passforget/>}/>
         <Route path='/adminlog/admin/:id' element={<Admindash/>}/>
         <Route path='/adminlog/admin/:id/addflight' element={<Addflight/>}/>
-        <Route path='/adminlog/admin/:id/bulkflight' element={<Bulkupdate/>}/>
+        <Route path='/adminlog/admin/bulkflight' element={<Bulkupdate/>}/>
         <Route path='/adminlog/admin/flightedit/:id/:sf' element={<Flightedit/>}/>
         <Route path='/adminlog/admin/addshuttle/:id' element={<Addshuttle/>}/>
         <Route path='/adminlog/admin/updateshuttle/:type/:id' element={<Shuttleedit/>}/>
-        
+        <Route path='/adminlog/admin/staffreg' element={<Staffreg/>}/>
+        <Route path='/stafflog/staff/:id' element={<Staffdash/>}/>
     </Routes>
         
     </>

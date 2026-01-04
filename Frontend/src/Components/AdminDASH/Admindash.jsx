@@ -3,6 +3,7 @@ import "./Admindash.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import RunwayStatus from "./RunwayStatus";
 const Admindash = () => {
   const [adminname, setname] = useState("");
   const [adminemail, setemail] = useState("");
@@ -25,6 +26,7 @@ const Admindash = () => {
   const [flighttable, setflighttable] = useState([]);
   const [internal, setinternal] = useState([]);
   const [external, setexternal] = useState([]);
+  const [staff, setstaff] = useState([]);
 
   useEffect(() => {
     const fetchflight = async () => {
@@ -39,11 +41,21 @@ const Admindash = () => {
       const res3 = await axios.get(`http://localhost:5000/externalshuttle`);
       setexternal(res3.data);
     };
+    const fetchstaff = async () => {
+      const res4 = await axios.get(`http://localhost:5000/staff`);
+      setstaff(res4.data);
+    };
 
     fetchinternal();
     fetchexternal();
     fetchflight();
+    fetchstaff();
   }, []);
+
+  const fetchstaff = async () => {
+    const res4 = await axios.get(`http://localhost:5000/staff`);
+    setstaff(res4.data);
+  };
 
   const usenav = useNavigate();
 
@@ -52,7 +64,7 @@ const Admindash = () => {
   };
 
   const handlebulkflight = (ids) => {
-    usenav(`/adminlog/admin/${ids}/bulkflight`);
+    usenav(`/adminlog/admin/bulkflight`);
   };
 
   const [totflight, setflight] = useState(0);
@@ -85,11 +97,25 @@ const Admindash = () => {
   //   usenav(`/adminlog/admin/updateshuttle/${typee}/${ii}`);
   // }
 
-  const [showModal, setShowModal] = useState(false);
-  const [selectedRunway, setSelectedRunway] = useState(null);
-  const [runways, setRunways] = useState([
-    { id: 4, name: "Runway 02R", status: "Maintenance" },
-  ]);
+  const goadminlogin = () => {
+    usenav(`/adminlog`);
+  };
+
+  const handlestaffedit = async (id, currentAccess) => {
+    try {
+      const data = {
+        access: currentAccess === "Allowed" ? "Denied" : "Allowed",
+        action: currentAccess === "Allowed" ? "Allow" : "Deny",
+      };
+
+      const res = await axios.put(`http://localhost:5000/staff/${id}`, data);
+
+      fetchstaff(); // ✅ refresh AFTER update
+      console.log("Updated successfully", res.data);
+    } catch (error) {
+      console.error("Update failed", error);
+    }
+  };
 
   return (
     <div className="admin-container">
@@ -126,7 +152,10 @@ const Admindash = () => {
               <button className="dropdown-item">
                 <i className="fa-solid fa-key"></i> Change Password
               </button>
-              <button className="dropdown-item logout-danger">
+              <button
+                className="dropdown-item logout-danger"
+                onClick={goadminlogin}
+              >
                 <i className="fa-solid fa-right-from-bracket"></i> Logout
               </button>
             </div>
@@ -400,9 +429,17 @@ const Admindash = () => {
 
         {/* Staff Management Section */}
         <section className="staff-section">
-          <div className="section-header">
-            <h3>Staff Management</h3>
-            <p>Manage staff access and permissions</p>
+          <div className="section-header shuttle-header">
+            <div>
+              <h3>Staff Management</h3>
+              <p>Manage staff access and permissions</p>
+            </div>
+            <button
+              className="btn primary"
+              onClick={() => usenav(`/adminlog/admin/staffreg`)}
+            >
+              <i className="fa-solid fa-user-plus"></i> Assign Staff
+            </button>
           </div>
           <div className="table-wrapper">
             <table>
@@ -419,150 +456,48 @@ const Admindash = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>STF001</td>
-                  <td>Arjun Kumar</td>
-                  <td>Gate Manager</td>
-                  <td>Operations</td>
-                  <td>Morning</td>
-                  <td>
-                    <span className="badge active">Active</span>
-                  </td>
-                  <td>
-                    <span className="badge allowed">Allowed</span>
-                  </td>
-                  <td>
-                    <button className="btn-deny">Deny</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>STF002</td>
-                  <td>Priya Sharma</td>
-                  <td>Flight Coordinator</td>
-                  <td>Control Room</td>
-                  <td>Evening</td>
-                  <td>
-                    <span className="badge active">Active</span>
-                  </td>
-                  <td>
-                    <span className="badge denied">Denied</span>
-                  </td>
-                  <td>
-                    <button className="btn-allow">Allow</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>STF003</td>
-                  <td>Rahul Mehta</td>
-                  <td>Ground Staff</td>
-                  <td>Runway</td>
-                  <td>Night</td>
-                  <td>
-                    <span className="badge inactive">Inactive</span>
-                  </td>
-                  <td>
-                    <span className="badge denied">Denied</span>
-                  </td>
-                  <td>
-                    <button className="btn-allow">Allow</button>
-                  </td>
-                </tr>
+                {staff.map((n, i) => (
+                  <tr key={i}>
+                    <td>{n.staffid}</td>
+                    <td>{n.name}</td>
+                    <td>{n.role}</td>
+                    <td>{n.dept}</td>
+                    <td>{n.shift}</td>
+                    <td>
+                      <span
+                        className={`badge ${n.status
+                          .toLowerCase()
+                          .replace(" ", "-")}`}
+                      >
+                        {n.status}
+                      </span>
+                    </td>
+                    <td>
+                      <span
+                        className={`badge ${n.access
+                          .toLowerCase()
+                          .replace(" ", "-")}`}
+                      >
+                        {n.access}
+                      </span>
+                    </td>
+                    <td>
+                      {/* <button className={`btn-${n.action.toLowerCase().replace(" ", "-")}`} onClick={()=>(
+                                  handlestaffedit(n._id,n.action))} >{n.action}</button> */}
+                      <button
+                        className={`btn-${n.action.toLowerCase()}`}
+                        onClick={() => handlestaffedit(n._id, n.access)}
+                      >
+                        {n.action}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </section>
-
-        {/* Runway Status Section */}
-        {/* Runway Status Section */}
-        <section className="runway-section">
-          <div className="section-header">
-            <h3>Runway Status</h3>
-          </div>
-          <div className="runway-grid">
-            {runways.map((runway) => (
-              <div
-                key={runway.id}
-                className={`runway-card ${
-                  runway.status.toLowerCase().replace(" ", "-") === "in-use"
-                    ? "active"
-                    : runway.status.toLowerCase()
-                }`}
-              >
-                <div className="runway-info">
-                  <h4>{runway.name}</h4>
-                  <span className="status-indicator">{runway.status}</span>
-                </div>
-                <button
-                  className="edit-runway-btn"
-                  onClick={() => {
-                    setSelectedRunway(runway);
-                    setShowModal(true);
-                  }}
-                >
-                  <i className="fa-solid fa-pen"></i>
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Runway Edit Modal */}
-        {showModal && selectedRunway && (
-          <div className="modal-overlay">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h3>Edit Runway Status</h3>
-                <button
-                  className="close-modal"
-                  onClick={() => setShowModal(false)}
-                >
-                  <i className="fa-solid fa-xmark"></i>
-                </button>
-              </div>
-              <div className="modal-body">
-                <p>
-                  <strong>Runway:</strong> {selectedRunway.name}
-                </p>
-                <div className="form-group">
-                  <label>Current Status</label>
-                  <select
-                    value={selectedRunway.status}
-                    onChange={(e) => {
-                      const updatedRunways = runways.map((r) =>
-                        r.id === selectedRunway.id
-                          ? { ...r, status: e.target.value }
-                          : r
-                      );
-                      setRunways(updatedRunways);
-                      setSelectedRunway({
-                        ...selectedRunway,
-                        status: e.target.value,
-                      });
-                    }}
-                  >
-                    <option value="In Use">In Use</option>
-                    <option value="Available">Available</option>
-                    <option value="Maintenance">Maintenance</option>
-                  </select>
-                </div>
-              </div>
-              <div className="modal-footer">
-                <button
-                  className="btn outline"
-                  onClick={() => setShowModal(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="btn primary"
-                  onClick={() => setShowModal(false)}
-                >
-                  Save Changes
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        <RunwayStatus />
       </main>
     </div>
   );

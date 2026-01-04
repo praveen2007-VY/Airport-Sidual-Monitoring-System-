@@ -48,6 +48,12 @@ const internalshuttle = new mongoose.Schema({
     staff: String
 });
 
+const runwaySchema = new mongoose.Schema({
+    gate: String,        // "Gate A1"
+    runwayCode: String,  // "02L"
+    status: String
+});
+
 const externalshuttle = new mongoose.Schema({
     shuttleid: { type: String, required: true },
     type: { type: String, enum: ["External"], required: true },
@@ -60,7 +66,18 @@ const externalshuttle = new mongoose.Schema({
     staff: String
 });
 
-
+const staff = new mongoose.Schema({
+    staffid:String,
+    name: String,
+    email: String,
+    password: String,
+    role: String,
+    dept: String,
+    shift: String,
+    status: String,
+    access:String,
+    action : String
+});
 
 const admin = mongoose.model('admin', userSchema1);
 
@@ -68,6 +85,10 @@ const flight = mongoose.model('flight', userSchema2);
 
 const internal = mongoose.model('internal', internalshuttle);
 const external = mongoose.model('external', externalshuttle);
+
+const runwaystatus = mongoose.model('runway', runwaySchema);
+
+const staffmodel = mongoose.model('staff', staff);
 
 app.get('/adminpass', async (req, res) => {
     let data = await admin.find();
@@ -120,6 +141,31 @@ app.get('/externalshuttle', async (req, res) => {
     let data = await external.find();
     res.json(data);
     res.status(200).send("Data Fetched Successfully");
+})
+
+app.get('/runway', async (req, res) => {
+    let data = await runwaystatus.find();
+    res.json(data);
+    res.status(200).send("Data Fetched Successfully");
+})
+
+app.get('/staff', async (req, res) => {
+    let data = await staffmodel.find();
+    res.json(data);
+    res.status(200).send("Data Fetched Successfully");
+})
+
+app.get('/staff/:id', async (req, res) => {
+    let { id } = req.params;
+    let data = await staffmodel.findById(id);
+    res.json(data);
+    res.status(200).send("Data Fetched Successfully");
+})
+
+app.post('/staffpost',(req,res)=>{
+    let data = new staffmodel(req.body);
+    data.save();
+    res.status(201).send("Data Saved Successfully");
 })
 
 app.post('/internalshuttle', async (req, res) => {
@@ -218,15 +264,32 @@ app.put('/flightdetail/fli/:id', async (req, res) => {
     res.send("Data Updated Successfully");
 })
 
+app.put('/staff/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+    console.log(data);
+    await staffmodel.findByIdAndUpdate(id, data, { new: true });
+    res.send("Data Updated Successfully");
+})
 
 
-// app.put('/todo/:id', async(req,res)=>{
-//     const id=  req.params.id;
-//     const data=req.body;
-//     console.log(data);
-//     await Tasks.findByIdAndUpdate(id, data,{new:true});
-//     res.send("Data Updated Successfully");
-// })
+app.delete('/internalshuttle/:id', async (req, res) => {
+    const id = req.params.id;
+    await internal.findByIdAndDelete(id);
+    res.send("Data Deleted Successfully");
+})
+
+app.delete('/externalshuttle/:id', async (req, res) => {
+    const id = req.params.id;
+    await external.findByIdAndDelete(id);
+    res.send("Data Deleted Successfully");
+})
+
+app.delete('/flightdetail/:id', async (req, res) => {
+    const id = req.params.id;
+    await flight.findByIdAndDelete(id);
+    res.send("Data Deleted Successfully");
+})
 
 // app.delete('/todo/:id',async (req,res)=>{
 //     const id = req.params.id;
@@ -235,6 +298,51 @@ app.put('/flightdetail/fli/:id', async (req, res) => {
 // })
 
 
+
+
+app.get('/runwaystatus', async (req, res) => {
+    try {
+        let data = await runwaystatus.find();
+        if (data.length === 0) {
+            // Seed initial data if empty
+            const seedData = [
+                { gate: "Gate A1", runwayCode: "02L", status: "Available" },
+                { gate: "Gate B3", runwayCode: "02R", status: "In Use" }
+            ];
+            data = await runwaystatus.insertMany(seedData);
+        }
+        res.json(data);
+    } catch (err) {
+        console.error("Error fetching runway status:", err);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+app.put('/runwaystatus/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+
+        if (!["Available", "In Use", "Maintenance"].includes(status)) {
+            return res.status(400).json({ error: "Invalid status value" });
+        }
+
+        const updatedRunway = await runwaystatus.findByIdAndUpdate(
+            id,
+            { status },
+            { new: true }
+        );
+
+        if (!updatedRunway) {
+            return res.status(404).json({ error: "Runway not found" });
+        }
+
+        res.json(updatedRunway);
+    } catch (err) {
+        console.error("Error updating runway status:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 app.listen(5000, () => {
     console.log("Server is running on port 5000")

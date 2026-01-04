@@ -1,7 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Stafflog.css";
 import staff from "../../assets/staff.png";
+import axios from 'axios';
+
+
 const Stafflog = () => {
 
     const usenav = useNavigate();
@@ -9,6 +12,30 @@ const Stafflog = () => {
     const handleho = () => {
         usenav('/#login');
     }
+
+    const [staffe,setstaffe]=useState([]);
+
+    useEffect(()=>{
+        const fetchstaff = async () => {
+            const res4 = await axios.get(`http://localhost:5000/staff`);
+            setstaffe(res4.data);
+          };
+          fetchstaff();
+    },[]);
+   
+  const [email, setemail] = useState("");
+  const [pass, setpass] = useState("");
+
+  const handlesub=()=>{
+      
+      staffe.map((n)=>{
+        if(n.email==email && n.password==pass){
+            alert("Login Successful");
+            usenav(`/stafflog/staff/${n._id}`);
+        }
+      })
+      
+  }
   return (
     <>
       <section>
@@ -32,17 +59,19 @@ const Stafflog = () => {
                     <i class="fa-solid fa-user"></i>
                     <input
                       type="text"
-                      placeholder="Staff ID / Username"
+                      placeholder="Staff ID / Email"
                       required
+                      onChange={(e)=>setemail(e.target.value)}
+                      value={email}
                     />
                   </div>
 
                   <div class="staff-input-group">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Password" required />
+                    <input type="password" placeholder="Password" required onChange={(e)=>setpass(e.target.value)} value={pass}/>
                   </div>
 
-                  <button type="submit" class="staff-login-btn">
+                  <button type="button" class="staff-login-btn" onClick={handlesub}>
                     Login
                   </button>
                 </form>

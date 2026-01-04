@@ -1,0 +1,172 @@
+/* Runway Status Module CSS */
+:root {
+    /* Colors - Easy Configuration */
+    --runway-bg: #ffffff;
+    --runway-border: #e2e8f0;
+    --runway-text-primary: #1e293b;
+    --runway-text-secondary: #64748b;
+    --runway-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+
+    /* Status Colors */
+    --status-available-bg: #dcfce7;
+    --status-available-text: #166534;
+
+    --status-in-use-bg: #ffedd5;
+    --status-in-use-text: #9a3412;
+
+    --status-maintenance-bg: #fee2e2;
+    --status-maintenance-text: #b91c1c;
+
+    /* Button Colors */
+    --btn-hover-bg: #f1f5f9;
+}
+
+/* Container */
+.runway-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: wrap;
+    /* Stack on small screens */
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+/* Card Component */
+.runway-card {
+    background: var(--runway-bg);
+    border: 1px solid var(--runway-border);
+    border-radius: 16px;
+    /* 3rd Requirement: Rounded corners */
+    padding: 24px;
+    box-shadow: var(--runway-shadow);
+    /* 3rd Requirement: Soft shadow */
+    flex: 1;
+    min-width: 300px;
+    /* Ensure decent width before wrapping */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.runway-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+/* Status-based Card Styles */
+.runway-card--available {
+    background-color: #F0FFF4;
+    border-left: 4px solid var(--status-available-text);
+}
+
+.runway-card--in-use {
+    background-color: #FFF7ED;
+    border-left: 4px solid var(--status-in-use-text);
+}
+
+.runway-card--maintenance {
+    background-color: #FEF2F2;
+    border-left: 4px solid var(--status-maintenance-text);
+}
+
+/* Header Section */
+.runway-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.runway-card__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--runway-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Status Badges */
+.runway-status {
+    padding: 6px 12px;
+    border-radius: 9999px;
+    /* Pill shape */
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.runway-status--available {
+    background-color: var(--status-available-bg);
+    color: var(--status-available-text);
+}
+
+.runway-status--in-use {
+    background-color: var(--status-in-use-bg);
+    color: var(--status-in-use-text);
+}
+
+.runway-status--maintenance {
+    background-color: var(--status-maintenance-bg);
+    color: var(--status-maintenance-text);
+}
+
+/* Body Section - Center */
+.runway-card__body {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.runway-card__id {
+    font-size: 48px;
+    /* Large bold identifier */
+    font-weight: 800;
+    color: var(--runway-text-primary);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.runway-card__sublabel {
+    font-size: 13px;
+    color: var(--runway-text-secondary);
+    font-weight: 500;
+}
+
+/* Footer Section */
+.runway-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.runway-card__updated {
+    font-size: 12px;
+    color: var(--runway-text-secondary);
+}
+
+/* Edit Button */
+.runway-card__edit-btn {
+    background: transparent;
+    border: 1px solid var(--runway-border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--runway-text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.2s;
+}
+
+.runway-card__edit-btn:hover {
+    background-color: var(--btn-hover-bg);
+}
+
+.edit-icon {
+    font-size: 14px;
+}
