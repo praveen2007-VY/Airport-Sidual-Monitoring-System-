@@ -18,13 +18,16 @@ import Addshuttle from './Components/AdminDASH/Addshuttle.jsx'
 import Shuttleedit from './Components/AdminDASH/Shuttleedit.jsx'
 import Staffreg from './Components/AdminDASH/Staffreg.jsx'
 import Staffdash from './Components/stafflog/Staffdash.jsx'
+import { toast, ToastContainer } from 'react-toastify'
 
 function App() {
-  
+ 
+
   return (
    <>
+    <ToastContainer autoClose={1000} position='top-center' />
     <Routes>
-       
+         
         <Route path='/' element={<Firstpage/>}/>
         <Route path='/adminlog' element={<Adminlog/>}/>
         <Route path='/adminforget' element={<Adminforget/>}/>

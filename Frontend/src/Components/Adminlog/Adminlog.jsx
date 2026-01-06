@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import "./Adminlog.css";
 import adminphoto from "../../assets/admin.png";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Adminlog = () => {
   const usenav = useNavigate();
@@ -20,29 +21,29 @@ const Adminlog = () => {
 
   const [admin, checkadmin] = useState([]);
 
-  
   const fetchtodo = async () => {
     const res = await axios.get("http://localhost:5000/adminpass");
     checkadmin(res.data);
   };
 
   const handleLogin = (e) => {
-     e.preventDefault();
-    const user = admin.find((n) => {
-      return n.email === email && n.password === pass;
+    e.preventDefault();
+    const user = admin.find((n) => n.email === email);
+    if (!user) {
+      toast.info("Email does not exist");
+      return;
     }
-    );
-    if (user) {
-      usenav(`admin/${user._id}`);
-    } else {
-      alert("Invalid Credentials");
+    if (user.password !== pass) {
+      toast.error("Password does not match");
+      return;
     }
+    toast.success("Login Successfully");
+    usenav(`admin/${user._id}`);
   };
 
   useEffect(() => {
     fetchtodo();
   }, []);
-
 
   return (
     <>
@@ -86,7 +87,9 @@ const Adminlog = () => {
                   <p onClick={handleForget}>Forgot password?</p>
                 </div>
 
-                <button class="alogin-btn" onClick={handleLogin}>Admin Login</button>
+                <button class="alogin-btn" onClick={handleLogin}>
+                  Admin Login
+                </button>
 
                 <p class="note">🔑 Admin access only</p>
               </div>
