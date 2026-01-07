@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Shuttleedit.css";
+import "./GlobalForms.css";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 const Shuttleedit = () => {
   const navigate = useNavigate();
-  const { type , id } = useParams();
+  const { type, id } = useParams();
   // Mock initial state to simulate pre-filled data
   const [shuttleId, setShuttleId] = useState("");
   const [shuttleType, setShuttleType] = useState("");
@@ -21,85 +22,85 @@ const Shuttleedit = () => {
   const handleCancel = () => {
     navigate(-1);
   };
-  
-  
+
+
   useEffect(() => {
     const fetchdata = async () => {
-     
-      if(type === "Internal"){
-          const user = await axios.get(`http://localhost:5000/internalshuttle/${id}`
-      );
-      setShuttleId(user.data.shuttleid);
-      setShuttleType(user.data.type);
-      setFlightNo(user.data.flightno);
-      setGateNo(user.data.gate);
-      setRouteFrom(user.data.routefrom);
-      setRouteTo(user.data.routeto);
-      setPickup(user.data.pickup);
-      setDrop(user.data.drop);
-      setSchedule(user.data.schedule);
-      setStaff(user.data.staff);
-      setStatus(user.data.status);
-      console.log(flightNo);
-    }
 
-    
-    else{
-      const user = await axios.get(`http://localhost:5000/externalshuttle/${id}`);
-      setShuttleId(user.data.shuttleid);
-      setShuttleType(user.data.type);
-      setFlightNo(user.data.flightno);
-      setGateNo(user.data.gate);
-      setRouteFrom(user.data.routefrom);
-      setRouteTo(user.data.routeto);
-      setPickup(user.data.pickup);
-      setDrop(user.data.drop);
-      setSchedule(user.data.schedule);
-      setStaff(user.data.staff);
-      setStatus(user.data.status);
-      console.log(flightNo);
+      if (type === "Internal") {
+        const user = await axios.get(`http://localhost:5000/internalshuttle/${id}`
+        );
+        setShuttleId(user.data.shuttleid);
+        setShuttleType(user.data.type);
+        setFlightNo(user.data.flightno);
+        setGateNo(user.data.gate);
+        setRouteFrom(user.data.routefrom);
+        setRouteTo(user.data.routeto);
+        setPickup(user.data.pickup);
+        setDrop(user.data.drop);
+        setSchedule(user.data.schedule);
+        setStaff(user.data.staff);
+        setStatus(user.data.status);
+        console.log(flightNo);
+      }
+
+
+      else {
+        const user = await axios.get(`http://localhost:5000/externalshuttle/${id}`);
+        setShuttleId(user.data.shuttleid);
+        setShuttleType(user.data.type);
+        setFlightNo(user.data.flightno);
+        setGateNo(user.data.gate);
+        setRouteFrom(user.data.routefrom);
+        setRouteTo(user.data.routeto);
+        setPickup(user.data.pickup);
+        setDrop(user.data.drop);
+        setSchedule(user.data.schedule);
+        setStaff(user.data.staff);
+        setStatus(user.data.status);
+        console.log(flightNo);
+      }
     }
-}
     fetchdata();
   }, [id]);
-    
 
-   
 
-  const handleup = async ()=>{
-       if(shuttleType === "Internal"){
-        const data = {
-          shuttleid: shuttleId,
-          type: shuttleType,
-          flightno: flightNo,
-          gate: gateNo,
-          routefrom: routeFrom,
-          routeto: routeTo,
-          pickup: pickup,
-          drop: drop,
-          schedule: schedule,
-          staff: staff,
-          status: status,
-        };
-        const res = await axios.put(`http://localhost:5000/internalshuttle/${id}`, data)
-        console.log(res.data);
-          navigate(-1);
+
+
+  const handleup = async () => {
+    if (shuttleType === "Internal") {
+      const data = {
+        shuttleid: shuttleId,
+        type: shuttleType,
+        flightno: flightNo,
+        gate: gateNo,
+        routefrom: routeFrom,
+        routeto: routeTo,
+        pickup: pickup,
+        drop: drop,
+        schedule: schedule,
+        staff: staff,
+        status: status,
+      };
+      const res = await axios.put(`http://localhost:5000/internalshuttle/${id}`, data)
+      console.log(res.data);
+      navigate(-1);
     }
-    else{
-        const data = {
-          shuttleid: shuttleId,
-          type: shuttleType,
-          routefrom: routeFrom,
-          routeto: routeTo,
-          pickup: pickup,
-          drop: drop,
-          schedule: schedule,
-          staff: staff,
-          status: status,
-        };
-        const res = await axios.put(`http://localhost:5000/externalshuttle/${id}`, data)
-        console.log(res.data);
-          navigate(-1);
+    else {
+      const data = {
+        shuttleid: shuttleId,
+        type: shuttleType,
+        routefrom: routeFrom,
+        routeto: routeTo,
+        pickup: pickup,
+        drop: drop,
+        schedule: schedule,
+        staff: staff,
+        status: status,
+      };
+      const res = await axios.put(`http://localhost:5000/externalshuttle/${id}`, data)
+      console.log(res.data);
+      navigate(-1);
     }
   }
 
@@ -116,7 +117,7 @@ const Shuttleedit = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Shuttle ID</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-bus"></i>
                 <input
                   type="text"
@@ -129,7 +130,7 @@ const Shuttleedit = () => {
 
             <div className="form-group">
               <label>Shuttle Type</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-layer-group"></i>
                 <select
                   value={shuttleType}
@@ -148,7 +149,7 @@ const Shuttleedit = () => {
             <div className="form-row">
               <div className="form-group">
                 <label>Flight Number</label>
-                <div className="input-icon">
+                <div className="input-wrapper">
                   <i className="fa-solid fa-plane"></i>
                   <select
                     value={flightNo}
@@ -163,7 +164,7 @@ const Shuttleedit = () => {
 
               <div className="form-group">
                 <label>Gate Number</label>
-                <div className="input-icon">
+                <div className="input-wrapper">
                   <i className="fa-solid fa-dungeon"></i>
                   <input
                     type="text"
@@ -179,7 +180,7 @@ const Shuttleedit = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Route From</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-map-pin"></i>
                 <input
                   type="text"
@@ -191,7 +192,7 @@ const Shuttleedit = () => {
 
             <div className="form-group">
               <label>Route To</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-location-dot"></i>
                 <input
                   type="text"
@@ -206,7 +207,7 @@ const Shuttleedit = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Pickup Location</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-street-view"></i>
                 <input
                   type="text"
@@ -218,7 +219,7 @@ const Shuttleedit = () => {
 
             <div className="form-group">
               <label>Drop Location</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-flag-checkered"></i>
                 <input
                   type="text"
@@ -233,7 +234,7 @@ const Shuttleedit = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Schedule / Frequency</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-regular fa-clock"></i>
                 <input
                   type="text"
@@ -245,7 +246,7 @@ const Shuttleedit = () => {
 
             <div className="form-group">
               <label>Assigned Staff / Driver</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-id-card"></i>
                 <input
                   type="text"
@@ -260,7 +261,7 @@ const Shuttleedit = () => {
           <div className="form-row full-width">
             <div className="form-group">
               <label>Status</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-circle-info"></i>
                 <select
                   value={status}

@@ -833,3 +833,13 @@ tr:hover td {
 /* Hover */
 
 
+/* Refresh button icon */
+.refresh-btn i {
+  transition: transform 0.4s ease;
+}
+
+/* Rotate on click */
+.refresh-btn:active i {
+  transform: rotate(320deg);
+  
+}

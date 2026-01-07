@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Staffreg.css";
+import "./GlobalForms.css";
 import axios from "axios";
 
 
@@ -37,7 +38,7 @@ const Staffreg = () => {
   const [staffshift, setstaffshift] = useState("");
   const [staffsta, setstaffsta] = useState("Active");
   const [staffaccess, setstaffaccess] = useState("Allowed");
-  const [staffaction,setaction]=useState("Deny")
+  const [staffaction, setaction] = useState("Deny")
 
   const handlesub = async () => {
     console.log(staffid);
@@ -63,9 +64,9 @@ const Staffreg = () => {
       shift: staffshift,
       status: staffsta,
       access: staffaccess,
-      action:staffaction
+      action: staffaction
     };
-    const res = await axios.post("http://localhost:5000/staffpost",data)
+    const res = await axios.post("http://localhost:5000/staffpost", data)
       .then((response) => {
         console.log(response);
         navigate(-1);
@@ -73,7 +74,7 @@ const Staffreg = () => {
       .catch((error) => {
         console.log(error);
       });
-      
+
   };
 
   return (
@@ -89,7 +90,7 @@ const Staffreg = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Staff ID</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-id-badge"></i>
                 <input
                   type="text"
@@ -109,7 +110,7 @@ const Staffreg = () => {
 
             <div className="form-group">
               <label>Full Name</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-user"></i>
                 <input
                   type="text"
@@ -126,7 +127,7 @@ const Staffreg = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Email Address</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-envelope"></i>
                 <input
                   type="email"
@@ -140,7 +141,7 @@ const Staffreg = () => {
 
             <div className="form-group">
               <label>Password</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-lock"></i>
                 <input
                   type="password"
@@ -157,7 +158,7 @@ const Staffreg = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Confirm Password</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-lock"></i>
                 <input
                   type="password"
@@ -171,7 +172,7 @@ const Staffreg = () => {
 
             <div className="form-group">
               <label>Role</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-briefcase"></i>
                 <select
                   required
@@ -193,7 +194,7 @@ const Staffreg = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Department</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-building-user"></i>
                 <select
                   required
@@ -211,7 +212,7 @@ const Staffreg = () => {
 
             <div className="form-group">
               <label>Shift</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-clock"></i>
                 <select
                   required

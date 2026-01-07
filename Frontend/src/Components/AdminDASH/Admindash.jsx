@@ -230,7 +230,7 @@ const Admindash = () => {
               <button className="btn secondary" onClick={handlebulkflight}>
                 <i className="fa-solid fa-pen-to-square"></i> Bulk Update
               </button>
-              <button className="btn outline">
+              <button className="btn outline  refresh-btn" >
                 <i className="fa-solid fa-rotate"></i> Refresh
               </button>
             </div>

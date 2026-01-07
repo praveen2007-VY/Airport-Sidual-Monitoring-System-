@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Addshuttle.css";
+import "./GlobalForms.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Addshuttle = () => {
   const navigate = useNavigate();
@@ -15,7 +17,7 @@ const Addshuttle = () => {
   const [shusch, setshusch] = useState("");
   const [shustaff, setshustaff] = useState("");
   const [shustatus, setstatus] = useState("Running");
-  
+
   const [flightId, setFlightId] = useState("");
   const [flightNo, setFlightNo] = useState("");
   const [gateNo, setGateNo] = useState("");
@@ -47,19 +49,20 @@ const Addshuttle = () => {
   const handleinter = async () => {
     // Validation
     if (!shuttleid) {
-      alert("Shuttle ID is required!");
+      toast.error("Shuttle ID is required!");
       return;
     }
 
     if (shutype === "Internal") {
       if (!flightNo) {
-        alert("Flight Number is required for Internal Shuttle!");
+        toast.error("Flight Number is required for Internal Shuttle!")
         return;
       }
       if (!gateNo) {
-        alert("Gate Number is required for Internal Shuttle!");
+        toast.error("Gate Number is required for Internal Shuttle!")
         return;
       }
+      toast.success("Shuttle Added successfully");
     }
 
     const data1 = {
@@ -146,7 +149,7 @@ const Addshuttle = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Shuttle ID</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-bus"></i>
                 <input
                   type="text"
@@ -159,7 +162,7 @@ const Addshuttle = () => {
 
             <div className="form-group">
               <label>Shuttle Type</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-layer-group"></i>
                 <select
                   value={shutype}
@@ -177,7 +180,7 @@ const Addshuttle = () => {
             <div className="form-row">
               <div className="form-group">
                 <label>Flight Number (Internal Only)</label>
-                <div className="input-icon">
+                <div className="input-wrapper">
                   <i className="fa-solid fa-plane"></i>
                   <select
                     value={flightNo}
@@ -207,7 +210,7 @@ const Addshuttle = () => {
 
               <div className="form-group">
                 <label>Gate Number (Internal Only)</label>
-                <div className="input-icon">
+                <div className="input-wrapper">
                   <i className="fa-solid fa-dungeon"></i>
                   <input
                     type="text"
@@ -224,7 +227,7 @@ const Addshuttle = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Route From</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-map-pin"></i>
                 <input
                   type="text"
@@ -237,7 +240,7 @@ const Addshuttle = () => {
 
             <div className="form-group">
               <label>Route To</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-location-dot"></i>
                 <input
                   type="text"
@@ -253,7 +256,7 @@ const Addshuttle = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Pickup Location</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-street-view"></i>
                 <input
                   type="text"
@@ -266,7 +269,7 @@ const Addshuttle = () => {
 
             <div className="form-group">
               <label>Drop Location</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-flag-checkered"></i>
                 <input
                   type="text"
@@ -282,7 +285,7 @@ const Addshuttle = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Schedule / Frequency</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-regular fa-clock"></i>
                 <input
                   type="text"
@@ -295,7 +298,7 @@ const Addshuttle = () => {
 
             <div className="form-group">
               <label>Assigned Staff / Driver</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-id-card"></i>
                 <input
                   type="text"
@@ -311,7 +314,7 @@ const Addshuttle = () => {
           <div className="form-row full-width">
             <div className="form-group">
               <label>Status</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-circle-info"></i>
                 <select
                   value={shustatus}

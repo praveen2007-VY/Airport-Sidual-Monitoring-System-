@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Flightedit.css";
+import "./GlobalForms.css";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -37,7 +38,7 @@ const Flightedit = () => {
     fetchdata();
   }, [sf]);
 
- 
+
   const handleupdate = async () => {
     const res = await axios.put(`http://localhost:5000/adminpass/updatedetail/${sf}`,
       {
@@ -47,7 +48,7 @@ const Flightedit = () => {
         from,
         to,
         status,
-        time, 
+        time,
         gate,
       }
     );
@@ -68,7 +69,7 @@ const Flightedit = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Flight Number</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-plane"></i>
                 <input
                   type="text"
@@ -81,7 +82,7 @@ const Flightedit = () => {
 
             <div className="form-group">
               <label>Airline</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-building"></i>
                 <select
                   value={airline}
@@ -100,7 +101,7 @@ const Flightedit = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Aircraft Type</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-jet-fighter"></i>
                 <input
                   type="text"
@@ -113,7 +114,7 @@ const Flightedit = () => {
 
             <div className="form-group">
               <label>Status</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-circle-info"></i>
                 <select
                   value={status}
@@ -130,7 +131,7 @@ const Flightedit = () => {
           <div className="form-row">
             <div className="form-group">
               <label>From</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-plane-departure"></i>
                 <input
                   type="text"
@@ -143,7 +144,7 @@ const Flightedit = () => {
 
             <div className="form-group">
               <label>To</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-plane-arrival"></i>
                 <input
                   type="text"
@@ -158,7 +159,7 @@ const Flightedit = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Departure Time</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-regular fa-clock"></i>
                 <input
                   type="time"
@@ -171,7 +172,7 @@ const Flightedit = () => {
 
             <div className="form-group">
               <label>Gate Number</label>
-              <div className="input-icon">
+              <div className="input-wrapper">
                 <i className="fa-solid fa-dungeon"></i>
                 <input
                   type="text"
