@@ -167,14 +167,14 @@
         padding: 20px;
     }
 }
-input::placeholder{
+/* input::placeholder{
     text-align: center;
 }
 select {
   text-align: center;
   text-align-last: center; /* IMPORTANT */
-}
+/* }
 
 #addfs{
     margin-right: 10px;
-}
+} */ 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Bulkupdate.css";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Bulkupdate = () => {
   const usenav = useNavigate();
@@ -11,15 +12,14 @@ const Bulkupdate = () => {
     usenav(-1);
   };
 
-  // --- State Management ---
+  
   const [flights, setFlights] = useState([]);
   const [shuttles, setShuttles] = useState([]);
 
-  // Selection States (Stores MongoDB _ids)
+
   const [selectedFlights, setSelectedFlights] = useState([]);
   const [selectedShuttles, setSelectedShuttles] = useState([]);
 
-  // --- Data Fetching ---
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,7 +31,7 @@ const Bulkupdate = () => {
 
         setFlights(flightRes.data);
 
-        // Process and Merge Shuttles
+       
         const internal = internalRes.data.map(item => ({ ...item, shuttleType: "internal", type: "Internal" }));
         const external = externalRes.data.map(item => ({ ...item, shuttleType: "external", type: "External" }));
         setShuttles([...internal, ...external]);
@@ -44,7 +44,6 @@ const Bulkupdate = () => {
     fetchData();
   }, []);
 
-  // --- Selection Logic: Flights ---
   const handleCheckboxFlight = (flightId) => {
     if (selectedFlights.includes(flightId)) {
       setSelectedFlights(selectedFlights.filter(id => id !== flightId));
@@ -61,7 +60,7 @@ const Bulkupdate = () => {
     }
   };
 
-  // --- Selection Logic: Shuttles ---
+ 
   const handleCheckboxShuttle = (shuttleId) => {
     if (selectedShuttles.includes(shuttleId)) {
       setSelectedShuttles(selectedShuttles.filter(id => id !== shuttleId));
@@ -78,7 +77,7 @@ const Bulkupdate = () => {
     }
   };
 
-  // --- Action Handlers ---
+ 
   const handleReset = () => {
     setSelectedFlights([]);
     setSelectedShuttles([]);
@@ -95,12 +94,12 @@ const Bulkupdate = () => {
     try {
       const deletePromises = [];
 
-      // Create promises for Flight Deletion
+      
       selectedFlights.forEach(flightId => {
         deletePromises.push(axios.delete(`http://localhost:5000/flightdetail/${flightId}`));
       });
 
-      // Create promises for Shuttle Deletion
+    
       selectedShuttles.forEach(shuttleId => {
         const shuttle = shuttles.find(s => s._id === shuttleId);
         if (shuttle) {
@@ -109,19 +108,20 @@ const Bulkupdate = () => {
         }
       });
 
-      // Execute all deletions
+    
       await Promise.all(deletePromises);
 
-      // --- Update UI Locally ---
+      -
       setFlights(prev => prev.filter(f => !selectedFlights.includes(f._id)));
       setShuttles(prev => prev.filter(s => !selectedShuttles.includes(s._id)));
 
       handleReset();
-      alert("Selected items deleted successfully");
+      toast.success("Selected items deleted successfully")
+      
 
     } catch (error) {
       console.error("Error deleting items:", error);
-      alert("An error occurred while deleting items. Some items may not have been deleted.");
+      toast.error("An error occurred while deleting items. Some items may not have been deleted.")
     }
   };
 

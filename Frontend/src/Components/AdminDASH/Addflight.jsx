@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Addflight.css";
 import { useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 const Addflight = () => {
     const usenav=useNavigate();
 
@@ -35,6 +36,11 @@ const Addflight = () => {
             gate:gate,
             des:des
         };
+
+        if(flightno==="" || airline==="" || aircraft==="" || from==="" || des==="" || status==="" || time==="" || gate===""){
+            toast.error("Please fill all the fields");
+            return;
+        }
         const res = await axios.post("http://localhost:5000/flightdetail/add",details);
         setair("");
         setairc("");
@@ -45,6 +51,8 @@ const Addflight = () => {
         setgate("");
         setdes("");
         handleadmindash();
+        toast.success("Flight added successfully");
+        
         
     }
     return (

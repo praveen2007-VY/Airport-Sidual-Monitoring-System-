@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import RunwayStatus from "./RunwayStatus";
+import { toast } from "react-toastify";
 const Admindash = () => {
   const [adminname, setname] = useState("");
   const [adminemail, setemail] = useState("");
@@ -98,6 +99,7 @@ const Admindash = () => {
   // }
 
   const goadminlogin = () => {
+    toast.success("Logout Successful")
     usenav(`/adminlog`);
   };
 
@@ -167,7 +169,7 @@ const Admindash = () => {
       <main className="dashboard-content">
         {/* Welcome Section */}
         <section className="welcome-section">
-          <h1>Welcome, Admin</h1>
+          <h1>Welcome, {adminname}</h1>
           <p>
             Monitor flights, manage runways, and control airport operations in
             real time.
