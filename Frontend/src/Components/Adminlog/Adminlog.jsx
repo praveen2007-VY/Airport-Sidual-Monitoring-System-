@@ -29,6 +29,7 @@ const Adminlog = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     const user = admin.find((n) => n.email === email);
+    console.log(user)
     if (!user) {
       toast.info("Email does not exist");
       return;

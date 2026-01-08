@@ -79,6 +79,12 @@ const staff = new mongoose.Schema({
     action : String
 });
 
+const passcenger = new mongoose.Schema({
+    name: String,
+    email: String,
+    password: String
+});
+
 const admin = mongoose.model('admin', userSchema1);
 
 const flight = mongoose.model('flight', userSchema2);
@@ -89,6 +95,8 @@ const external = mongoose.model('external', externalshuttle);
 const runwaystatus = mongoose.model('runway', runwaySchema);
 
 const staffmodel = mongoose.model('staff', staff);
+
+const passenger = mongoose.model('passenger', passcenger);
 
 app.get('/adminpass', async (req, res) => {
     let data = await admin.find();
@@ -229,6 +237,14 @@ app.post('/flightdetail/add', async (req, res) => {
     res.status(201).send("Data Saved Successfully");
 })
 
+app.post('/addpassenger', async (req, res) => {
+    if (!req.body) {
+        return req.status(400).send("Give the Proper Details")
+    }
+    const data = new passenger(req.body);
+    await data.save();
+    res.status(201).send("Data Saved Successfully");
+})
 
 app.put('/adminpass/updatedetail/:id', async (req, res) => {
     const id = req.params.id;

@@ -8,6 +8,16 @@
   position: relative;
 }
 
+#home{
+  overflow-y: hidden;
+}
+
+.home-page {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+
 .bb{
   margin-right: 10px;
 }
@@ -19,7 +29,9 @@
   z-index: 1;
 }
 
-
+.sec0{
+   overflow-y: hidden;
+}
 .nav {
   height: 70px;
   padding: 0 40px;
@@ -152,8 +164,9 @@
 }
 .main2{
   width: 100vw;
-  height: 50vh;
+  height: 100vh;
   position: relative;
+
 }
 
 .main21{
@@ -248,7 +261,7 @@
 
 .main3{
   width: 100vw;
-  height: 60vh;
+  height: 100vh;
   display: flex;
   
 }
@@ -285,7 +298,7 @@
 
 .main4{
   width: 100vw;
-  height: 60vh;
+  height: 90vh;
   display: flex;
 }
 .con{
