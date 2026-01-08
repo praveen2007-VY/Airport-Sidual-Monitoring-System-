@@ -19,6 +19,8 @@ import Shuttleedit from './Components/AdminDASH/Shuttleedit.jsx'
 import Staffreg from './Components/AdminDASH/Staffreg.jsx'
 import Staffdash from './Components/stafflog/Staffdash.jsx'
 import { toast, ToastContainer } from 'react-toastify'
+import PassengerRegister from './Components/Passenger/PassengerRegister.jsx'
+import PassengerLogin from './Components/Passenger/PassengerLogin.jsx'
 
 function App() {
  
@@ -32,8 +34,8 @@ function App() {
         <Route path='/adminlog' element={<Adminlog/>}/>
         <Route path='/adminforget' element={<Adminforget/>}/>
         <Route path='/stafflog' element={<Stafflog/>}/>
-        <Route path='/passenger' element={<Passenger/>}/>
-        <Route path='/passenger/login' element={<Passlogin/>}/>
+        <Route path='/passenger' element={<PassengerRegister/>}/>
+        <Route path='/passenger/login' element={<PassengerLogin/>}/>
         <Route path='/passenger/login/forgot' element={<Passforget/>}/>
         <Route path='/adminlog/admin/:id' element={<Admindash/>}/>
         <Route path='/adminlog/admin/:id/addflight' element={<Addflight/>}/>

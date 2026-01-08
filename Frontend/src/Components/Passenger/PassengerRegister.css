@@ -1,0 +1,277 @@
+/* Modern Color Palette */
+:root {
+  --airport-teal: #008080;
+  --airport-teal-dark: #006666;
+  --airport-teal-light: #e0f2f1;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --text-primary: #1a202c;
+  --text-secondary: #718096;
+  --error-color: #e53e3e;
+  --success-color: #38a169;
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.passenger-register {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f7fafc;
+  overflow: hidden;
+}
+
+/* --- Left Section: Illustration --- */
+.passenger-register__illustration-container {
+  flex: 1;
+  position: relative;
+  background-color: var(--airport-teal-light);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.passenger-register__illustration {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.passenger-register__illustration-container:hover .passenger-register__illustration {
+  transform: scale(1.03);
+}
+
+.passenger-register__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 128, 128, 0.2), rgba(0, 0, 0, 0.1));
+}
+
+/* --- Right Section: Form --- */
+.passenger-register__form-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  padding: 2rem;
+}
+
+.passenger-register__back-btn {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.passenger-register__back-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--airport-teal);
+  transform: translateX(-3px);
+}
+
+/* --- Registration Card --- */
+.passenger-register__card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-soft);
+  animation: slideUpFade 0.6s ease-out forwards;
+}
+
+.passenger-register__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.passenger-register__subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* --- Input Groups --- */
+.passenger-register__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.passenger-register__input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passenger-register__icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+  transition: color 0.3s ease;
+}
+
+.passenger-register__input {
+  width: 100%;
+  padding: 14px 14px 14px 44px; /* Left padding for icon */
+  font-size: 1rem;
+  color: var(--text-primary);
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.passenger-register__input::placeholder {
+  color: #a0aec0;
+}
+
+/* Focus States */
+.passenger-register__input:focus {
+  border-color: var(--airport-teal);
+  box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.15);
+}
+
+.passenger-register__input:focus + .passenger-register__focus-ring + .passenger-register__icon,
+.passenger-register__input:focus ~ .passenger-register__icon { 
+  /* Selecting previous sibling not possible in CSS, so logic handled by input:focus selecting sibling if icon is after input, or strict ordering. 
+     My HTML has icon BEFORE input. I need to change CSS or HTML to color icon on focus.
+     Actually, standard way is check input focus within group. :focus-within on group.
+  */
+}
+
+.passenger-register__input-group:focus-within .passenger-register__icon {
+  color: var(--airport-teal);
+}
+
+/* --- Submit Button --- */
+.passenger-register__submit-btn {
+  margin-top: 1rem;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, var(--airport-teal) 0%, var(--airport-teal-dark) 100%);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 128, 128, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.passenger-register__submit-btn:hover:not(.passenger-register__submit-btn--disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 128, 128, 0.4);
+  filter: brightness(110%);
+}
+
+.passenger-register__submit-btn:active:not(.passenger-register__submit-btn--disabled) {
+  transform: translateY(0);
+}
+
+/* Disabled State */
+.passenger-register__submit-btn--disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+/* --- Footer --- */
+.passenger-register__footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.passenger-register__footer a {
+  color: var(--airport-teal);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.passenger-register__footer a:hover {
+  color: var(--airport-teal-dark);
+  text-decoration: underline;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 900px) {
+  .passenger-register {
+    flex-direction: column;
+  }
+
+  .passenger-register__illustration-container {
+    display: none; /* Hidden on mobile as per requirements */
+  }
+
+  .passenger-register__form-container {
+    padding: 1rem;
+    background: #f7fafc; /* Simpler background for mobile */
+  }
+
+  .passenger-register__card {
+    box-shadow: none;
+    background: transparent;
+    border: none;
+    backdrop-filter: none;
+    padding: 1rem;
+  }
+  
+  .passenger-register__back-btn {
+    top: 1rem;
+    left: 1rem;
+  }
+}
+
+/* --- Keyframe Animations --- */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
