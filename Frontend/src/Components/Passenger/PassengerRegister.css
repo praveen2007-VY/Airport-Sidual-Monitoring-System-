@@ -1,4 +1,41 @@
-/* Modern Color Palette */
+
+
+
+
+.createpass{
+  padding: 10px;
+  border-radius: 30px;
+  background-color: #38a169;
+  color: #f7fafc;
+  font: bold;
+  font-weight: bolder;
+  font-size: large;
+
+}
+
+.createpass:active{
+   transform: scale(1.05);
+}
+
+.createpass:hover{
+  cursor: pointer;
+  background-color: #1eac60;
+ 
+  transition: all 0.5s ease-in-out;
+}
+
+.passlogin{
+  color: #1eac60;
+  font: bolder;
+  
+}
+.passlogin:hover{
+  cursor: pointer;
+}
+
+.boxsho{
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
 :root {
   --airport-teal: #008080;
   --airport-teal-dark: #006666;
@@ -23,8 +60,8 @@
   height: 100vh;
   margin: 0;
   padding: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #f7fafc;
+  /* font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; */
+  /* background: #f7fafc; */
   overflow: hidden;
 }
 
@@ -32,7 +69,7 @@
 .passenger-register__illustration-container {
   flex: 1;
   position: relative;
-  background-color: var(--airport-teal-light);
+  /* background-color: var(--airport-teal-light); */
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -56,7 +93,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0, 128, 128, 0.2), rgba(0, 0, 0, 0.1));
+  /* background: linear-gradient(135deg, rgba(0, 128, 128, 0.2), rgba(0, 0, 0, 0.1)); */
 }
 
 /* --- Right Section: Form --- */
@@ -68,6 +105,7 @@
   align-items: center;
   position: relative;
   background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
   padding: 2rem;
 }
 
@@ -188,6 +226,7 @@
   font-weight: 600;
   color: white;
   background: linear-gradient(135deg, var(--airport-teal) 0%, var(--airport-teal-dark) 100%);
+  /* background-color: #1eac60; */
   border: none;
   border-radius: 50px;
   cursor: pointer;

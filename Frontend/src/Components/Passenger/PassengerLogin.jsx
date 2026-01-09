@@ -4,26 +4,16 @@ import passengerLoginImg from '../../assets/passlogin.png';
 import { useNavigate } from 'react-router-dom';
 
 const PassengerLogin = () => {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-        rememberMe: false,
-    });
+   
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value,
-        }));
+    const usenav = useNavigate();
+    const handlesignup = () => {
+        usenav('/passenger/');
     };
-
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
-
-    const isFormValid = formData.email && formData.password;
 
     return (
         <div className="passenger-login">
@@ -39,7 +29,7 @@ const PassengerLogin = () => {
 
             {/* Right Section: Login Form */}
             <div className="passenger-login__form-container">
-                <button className="passenger-login__back-btn" aria-label="Go back">
+                <button className="passenger-login__back-btn" aria-label="Go back" onClick={handlesignup}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -86,8 +76,8 @@ const PassengerLogin = () => {
                                 name="email"
                                 className="passenger-login__input"
                                 placeholder="Email Address"
-                                value={formData.email}
-                                onChange={handleChange}
+                                // value={formData.email}
+                                // onChange={handleChange}
                             />
                             <div className="passenger-login__focus-ring"></div>
                         </div>
@@ -115,8 +105,8 @@ const PassengerLogin = () => {
                                 name="password"
                                 className="passenger-login__input"
                                 placeholder="Password"
-                                value={formData.password}
-                                onChange={handleChange}
+                                // value={formData.password}
+                                // onChange={handleChange}
                             />
                             <button
                                 type="button"
@@ -165,8 +155,8 @@ const PassengerLogin = () => {
                                 <input
                                     type="checkbox"
                                     name="rememberMe"
-                                    checked={formData.rememberMe}
-                                    onChange={handleChange}
+                                    // checked={formData.rememberMe}
+                                    // onChange={handleChange}
                                     className="passenger-login__checkbox"
                                 />
                                 Remember Me
@@ -178,12 +168,14 @@ const PassengerLogin = () => {
 
                         <button
                             type="submit"
-                            className={`passenger-login__submit-btn ${!isFormValid ? 'passenger-login__submit-btn--disabled' : ''
-                                }`}
-                            disabled={!isFormValid}
-                            onClick={()=>(
-                                useNavigate("/passenger/login")
-                            )}
+                            // className={`passenger-login__submit-btn ${!isFormValid ? 'passenger-login__submit-btn--disabled' : ''
+                            //     }`}
+                            className="passenger-login__submit-btn"
+                            
+                            // disabled={!isFormValid}
+                            // onClick={()=>(
+                            //     useNavigate("/passenger/login")
+                            // )}
                         >
                             Login
                         </button>
