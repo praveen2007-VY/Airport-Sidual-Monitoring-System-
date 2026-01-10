@@ -18,7 +18,6 @@ const Adminlog = () => {
 
   const [email, setemail] = useState();
   const [pass, setpass] = useState();
-
   const [admin, checkadmin] = useState([]);
 
   const fetchtodo = async () => {

@@ -7,7 +7,6 @@ import Adminlog from './Components/Adminlog/Adminlog'
 import Adminforget from './Components/Adminlog/Adminforget'
 import { Route ,Routes } from 'react-router-dom'
 import Stafflog from './Components/stafflog/Stafflog'
-import Passenger from './Components/Passenger/Passenger'
 import Passlogin from './Components/Passenger/Passlogin'
 import Passforget from './Components/Passenger/Passforget.jsx'
 import Admindash from './Components/AdminDASH/Admindash.jsx'
@@ -21,6 +20,7 @@ import Staffdash from './Components/stafflog/Staffdash.jsx'
 import { toast, ToastContainer } from 'react-toastify'
 import PassengerRegister from './Components/Passenger/PassengerRegister.jsx'
 import PassengerLogin from './Components/Passenger/PassengerLogin.jsx'
+import PassengerDash from './Components/Passenger/PassengerDash.jsx'
 
 function App() {
  
@@ -28,7 +28,7 @@ function App() {
   return (
    <>
     <ToastContainer autoClose={1000} position='top-center' />
-    <Routes>
+    {/* <Routes>
          
         <Route path='/' element={<Firstpage/>}/>
         <Route path='/adminlog' element={<Adminlog/>}/>
@@ -45,8 +45,9 @@ function App() {
         <Route path='/adminlog/admin/updateshuttle/:type/:id' element={<Shuttleedit/>}/>
         <Route path='/adminlog/admin/staffreg' element={<Staffreg/>}/>
         <Route path='/stafflog/staff/:id' element={<Staffdash/>}/>
-    </Routes>
-        
+    </Routes> */}
+    <PassengerDash/>
+     
     </>
   )
 }

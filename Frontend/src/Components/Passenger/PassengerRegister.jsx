@@ -45,6 +45,7 @@ const PassengerRegister = () => {
     setemail("");
     setname("");
     setpass("");
+    usenav("/passenger/login");
 
   };
 

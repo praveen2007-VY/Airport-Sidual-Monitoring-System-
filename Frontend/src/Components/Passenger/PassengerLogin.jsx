@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import './PassengerLogin.css';
 import passengerLoginImg from '../../assets/passlogin.png';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const PassengerLogin = () => {
    
@@ -14,7 +16,39 @@ const PassengerLogin = () => {
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+    
+    const [email,setemail] = useState("");
+    const [pass,setpass] = useState("");
+    const [passenger,setpassenger] = useState([]);
 
+    useEffect(() => {
+        getdata();
+    },[])
+    const getdata = async () => {
+        if (passenger.length === 0) {
+        let res = await axios.get("http://localhost:5000/passenger");
+        console.log(res);
+        setpassenger(res.data);
+       
+        }
+    }
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const user = passenger.find((n) => n.email === email);
+        console.log(user)
+        if (!user) {
+          toast.info("Email does not exist");
+          return;
+        }
+        if (user.password !== pass) {
+          toast.error("Password does not match");
+          return;
+        }
+        toast.success("Login Successfully");
+        // usenav(`admin/${user._id}`);
+      };
+    
     return (
         <div className="passenger-login">
             {/* Left Section: Illustration */}
@@ -76,6 +110,8 @@ const PassengerLogin = () => {
                                 name="email"
                                 className="passenger-login__input"
                                 placeholder="Email Address"
+                                onChange={(e)=>setemail(e.target.value)}
+                                value={email}
                                 // value={formData.email}
                                 // onChange={handleChange}
                             />
@@ -105,6 +141,8 @@ const PassengerLogin = () => {
                                 name="password"
                                 className="passenger-login__input"
                                 placeholder="Password"
+                                onChange={(e)=>setpass(e.target.value)}
+                                value={pass}
                                 // value={formData.password}
                                 // onChange={handleChange}
                             />
@@ -176,13 +214,16 @@ const PassengerLogin = () => {
                             // onClick={()=>(
                             //     useNavigate("/passenger/login")
                             // )}
-                        >
+                           
+                            onClick={(e) =>{
+                                handleLogin(e)
+                            }} >
                             Login
                         </button>
                     </form>
 
                     <p className="passenger-login__footer">
-                        Don’t have an account? <a href="/register">Sign Up</a>
+                        Don’t have an account? <a href='/passenger'>Sign Up</a>
                     </p>
                 </div>
             </div>

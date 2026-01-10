@@ -176,6 +176,12 @@ app.post('/staffpost',(req,res)=>{
     res.status(201).send("Data Saved Successfully");
 })
 
+app.get('/passenger', async (req, res) => {
+    let data = await passenger.find();
+    res.json(data);
+    res.status(200).send("Data Fetched Successfully");
+})
+
 app.post('/internalshuttle', async (req, res) => {
     try {
         if (!req.body || Object.keys(req.body).length === 0) {

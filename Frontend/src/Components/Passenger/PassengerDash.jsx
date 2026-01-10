@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './Passenger.css';
+import './PassengerDash.css';
 
-const Passenger = () => {
+const PassengerDash = () => {
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -197,4 +197,4 @@ const Passenger = () => {
   );
 };
 
-export default Passenger;
+export default PassengerDash;
