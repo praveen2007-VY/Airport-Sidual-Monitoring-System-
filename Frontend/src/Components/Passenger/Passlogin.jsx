@@ -1,17 +1,28 @@
-import React from "react";
+import { useEffect, useState } from 'react';
 import "./Passenger.css";
 import pass from "../../assets/pass.png";
 import { useNavigate } from "react-router-dom";
 const Passlogin = () => {
 
     const usenav = useNavigate();
-
+    const [userd,setuserd] = useState([]);
     const hanglesignup = ()=>{
         usenav('/passenger');
     }
     const handleforgot=()=>{
         usenav('/passenger/login/forgot');
     };
+
+    useEffect(()=>{
+      const checkuser = async()=>{
+          const res = await axios.get('http://localhost:5000/passenger');
+          userd(res.data);
+      }
+      checkuser();
+    },[]);
+    const passlogin =()=>{
+      usenav('/passenger/login/');
+    }
 
   return (
     <>

@@ -1,0 +1,754 @@
+/* PassDash.css - Passenger Dashboard Styles */
+
+:root {
+  --pass-primary: #3b82f6;
+  --pass-secondary: #6366f1;
+  --pass-bg: #f8fafc;
+  --pass-card-bg: #ffffff;
+  --pass-text-main: #1e293b;
+  --pass-text-muted: #64748b;
+  --pass-border: #e2e8f0;
+  --pass-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --pass-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --pass-radius-lg: 12px;
+  --pass-radius-md: 8px;
+  --pass-green: #10b981;
+  --pass-orange: #f59e0b;
+  --pass-red: #ef4444;
+}
+
+.pass-flight-section2 {
+  background: var(--pass-card-bg);
+  border-radius: var(--pass-radius-lg);
+  box-shadow: var(--pass-shadow-sm);
+  padding: 1.5rem;
+  overflow-x: hidden;
+  height: 80%;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+
+}
+
+#passexter {
+  height: 100vh;
+  width: 100vw;
+}
+
+.passexternal1 {
+  height: 60vh;
+  width: 100vw;
+}
+
+.passexternal {
+  height: 100%;
+  width: 100%;
+
+
+}
+
+.pass1 {
+  padding: 10px 95px;
+}
+
+.passmain1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.hhh {
+  margin-right: 10px;
+}
+
+body {
+  background-color: var(--pass-bg);
+}
+
+.pass-container {
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--pass-text-main);
+  background-color: var(--pass-bg);
+}
+
+/* --- Header Section --- */
+.pass-header {
+  background: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--pass-shadow-sm);
+  border-bottom: 1px solid var(--pass-border);
+}
+
+.pass-brand h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--pass-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.pass-icon-mr {
+  margin-right: 10px;
+}
+
+/* Profile Section */
+.pass-profile-container {
+  display: flex;
+  align-items: center;
+}
+
+.pass-profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.pass-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: var(--pass-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.pass-admin-name {
+  font-weight: 600;
+  color: var(--pass-text-main);
+}
+
+.pass-dropdown-arrow {
+  color: var(--pass-text-muted);
+}
+
+/* Dropdown (Keeping simple structure from original) */
+.pass-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  box-shadow: var(--pass-shadow-md);
+  border-radius: var(--pass-radius-md);
+  width: 200px;
+  padding: 10px;
+  z-index: 100;
+  border: 1px solid var(--pass-border);
+}
+
+.pass-profile-trigger:focus .pass-dropdown-menu,
+.pass-profile-trigger:hover .pass-dropdown-menu {
+  display: block;
+}
+
+.pass-dropdown-item {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: var(--pass-text-main);
+}
+
+.pass-dropdown-item:hover {
+  background-color: #f1f5f9;
+}
+
+/* --- Dashboard Content --- */
+.pass-dashboard-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Welcome Section */
+.pass-welcome-section {
+  margin-bottom: 2rem;
+}
+
+.pass-welcome-section h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.pass-welcome-section p {
+  color: var(--pass-text-muted);
+}
+
+/* Stats Grid */
+.pass-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.pass-stat-card {
+  background: var(--pass-card-bg);
+  padding: 1.5rem;
+  border-radius: var(--pass-radius-lg);
+  box-shadow: var(--pass-shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-left: 5px solid transparent;
+  transition: transform 0.2s ease;
+}
+
+.pass-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--pass-shadow-md);
+}
+
+.pass-stat-card.pass-blue {
+  border-left-color: var(--pass-primary);
+}
+
+.pass-stat-card.pass-green {
+  border-left-color: var(--pass-green);
+}
+
+.pass-stat-card.pass-orange {
+  border-left-color: var(--pass-orange);
+}
+
+.pass-stat-card.pass-red {
+  border-left-color: var(--pass-red);
+}
+
+.pass-stat-info h3 {
+  font-size: 0.9rem;
+  color: var(--pass-text-muted);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.pass-stat-info p {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 5px 0 0 0;
+  color: var(--pass-text-main);
+}
+
+.pass-icon-box {
+  font-size: 1.5rem;
+  color: var(--pass-text-muted);
+  opacity: 0.5;
+}
+
+/* Search Bar */
+.pass-search-section {
+  margin-bottom: 2rem;
+}
+
+.pass-search-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.pass-search-bar input {
+  flex: 1;
+  padding: 12px 20px;
+  border: 1px solid var(--pass-border);
+  border-radius: var(--pass-radius-md);
+  font-size: 1rem;
+}
+
+.pass-search-bar button {
+  padding: 12px 24px;
+  background: var(--pass-primary);
+  color: white;
+  border: none;
+  border-radius: var(--pass-radius-md);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* --- Layout Grid (Table + Shuttle) --- */
+.pass-content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.pass-section-title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--pass-text-main);
+  border-left: 4px solid var(--pass-primary);
+  padding-left: 10px;
+}
+
+/* --- Flight Table Styling --- */
+.pass-flight-section {
+  background: var(--pass-card-bg);
+  border-radius: var(--pass-radius-lg);
+  box-shadow: var(--pass-shadow-sm);
+  padding: 1.5rem;
+  overflow-x: hidden;
+
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+}
+
+.pass11 {
+  padding: 10px;
+
+}
+
+.pass-table-wrapper {
+  overflow-x: auto;
+}
+
+.pass-table-st {
+  border: 2px solid black;
+}
+
+.pass-table {
+  width: 100%;
+  height: 81.5vh;
+  border-collapse: separate;
+  border-spacing: 0;
+
+
+}
+
+.pass-table th {
+  background-color: #f1f5f9;
+  color: var(--pass-text-muted);
+  font-weight: 600;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--pass-border);
+}
+
+.pass-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: var(--pass-text-main);
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+}
+
+.pass-table-row:last-child td {
+  border-bottom: none;
+}
+
+.pass-table-row:hover {
+  background-color: #f8fafc;
+}
+
+/* --- Shuttle Cards Section --- */
+.pass-shuttle-section {
+  background: #f1f5f9;
+  /* Slightly darker container for contrast */
+  border-radius: var(--pass-radius-lg);
+  padding: 1.5rem;
+
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.pass-shuttle-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 600px;
+
+  padding-right: 5px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+}
+
+/* Custom Scrollbar for shuttle container */
+.pass-shuttle-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pass-shuttle-container::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 4px;
+}
+
+.pass-shuttle-card {
+  background: white;
+  border-radius: var(--pass-radius-md);
+  padding: 1rem;
+  box-shadow: var(--pass-shadow-sm);
+  transition: transform 0.2s;
+}
+
+.pass-shuttle-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--pass-shadow-md);
+  cursor: pointer;
+}
+
+.pass-shuttle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--pass-border);
+  padding-bottom: 0.5rem;
+}
+
+.pass-shuttle-id-label {
+  font-size: 0.85rem;
+  color: var(--pass-text-muted);
+}
+
+.pass-shuttle-id-value {
+  font-weight: 700;
+  color: var(--pass-primary);
+}
+
+.pass-shuttle-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.pass-shuttle-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pass-shuttle-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- Status Badges --- */
+.pass-status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.pass-status-badge.on-time,
+.pass-status-badge.active {
+  background-color: #d1fae5;
+  color: var(--pass-green);
+}
+
+.pass-status-badge.delayed,
+.pass-status-badge.maintenance {
+  background-color: #fef3c7;
+  color: var(--pass-orange);
+}
+
+.pass-status-badge.cancelled,
+.pass-status-badge.inactive {
+  background-color: #fee2e2;
+  color: var(--pass-red);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .pass-content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================= */
+/*       PASSENGER CHATBOT UI STYLES         */
+/* ========================================= */
+
+/* --- 1. Floating Action Button (FAB) --- */
+.passchat-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.passchat-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+}
+
+.passchat-fab-active {
+  transform: rotate(90deg);
+}
+
+/* --- 2. Chat Window --- */
+.passchat-window {
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  width: 340px;
+  height: 500px;
+  max-height: 80vh;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  animation: passchatSlideUp 0.4s ease forwards;
+  border: 1px solid #e2e8f0;
+}
+
+@keyframes passchatSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- 3. Chat Header --- */
+.passchat-header {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  padding: 16px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.passchat-header-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.passchat-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.passchat-status {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.9;
+}
+
+.passchat-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+  /* Green */
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(16, 185, 129, 0.8);
+}
+
+.passchat-close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.passchat-close-btn:hover {
+  opacity: 1;
+}
+
+/* --- 4. Chat Body --- */
+.passchat-body {
+  flex: 1;
+  background-color: #f8fafc;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Scrollbar styles for chat body */
+.passchat-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.passchat-body::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 3px;
+}
+
+/* Messages */
+.passchat-message {
+  display: flex;
+  max-width: 85%;
+}
+
+.passchat-user {
+  align-self: flex-end;
+}
+
+.passchat-bot {
+  align-self: flex-start;
+}
+
+.passchat-bubble {
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  position: relative;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* User Bubble Style */
+.passchat-user .passchat-bubble {
+  background-color: #3b82f6;
+  color: white;
+  border-top-right-radius: 2px;
+}
+
+/* Bot Bubble Style */
+.passchat-bot .passchat-bubble {
+  background-color: white;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  border-top-left-radius: 2px;
+}
+
+.passchat-file-bubble {
+  margin-top: 5px;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.passchat-bot .passchat-file-bubble {
+  background: #f1f5f9;
+}
+
+/* --- 5. Input Area --- */
+.passchat-input-area {
+  padding: 12px;
+  background-color: white;
+  border-top: 1px solid #e2e8f0;
+}
+
+.passchat-file-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f1f5f9;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  color: #3b82f6;
+}
+
+.passchat-remove-file {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.passchat-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.passchat-upload-btn {
+  color: #64748b;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 4px;
+}
+
+.passchat-upload-btn:hover {
+  color: #3b82f6;
+}
+
+.passchat-input-area input[type="text"] {
+  flex: 1;
+  border: none;
+  background-color: #f1f5f9;
+  padding: 10px 14px;
+  border-radius: 20px;
+  outline: none;
+  font-size: 0.95rem;
+  color: #1e293b;
+}
+
+.passchat-input-area input[type="text"]::placeholder {
+  color: #94a3b8;
+}
+
+.passchat-send-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.9rem;
+  padding-left: 3px;
+  /* visual optic adjustment for plane icon */
+}
+
+.passchat-send-btn:hover {
+  background-color: #2563eb;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 480px) {
+  .passchat-window {
+    width: 92vw;
+    right: 4vw;
+    bottom: 90px;
+    height: 60vh;
+  }
+}

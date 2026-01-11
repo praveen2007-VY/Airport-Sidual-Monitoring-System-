@@ -20,7 +20,8 @@ import Staffdash from './Components/stafflog/Staffdash.jsx'
 import { toast, ToastContainer } from 'react-toastify'
 import PassengerRegister from './Components/Passenger/PassengerRegister.jsx'
 import PassengerLogin from './Components/Passenger/PassengerLogin.jsx'
-import PassengerDash from './Components/Passenger/PassengerDash.jsx'
+
+import PassDash from './Components/Passenger/PassDash.jsx'
 
 function App() {
  
@@ -28,7 +29,7 @@ function App() {
   return (
    <>
     <ToastContainer autoClose={1000} position='top-center' />
-    {/* <Routes>
+    <Routes>
          
         <Route path='/' element={<Firstpage/>}/>
         <Route path='/adminlog' element={<Adminlog/>}/>
@@ -45,8 +46,10 @@ function App() {
         <Route path='/adminlog/admin/updateshuttle/:type/:id' element={<Shuttleedit/>}/>
         <Route path='/adminlog/admin/staffreg' element={<Staffreg/>}/>
         <Route path='/stafflog/staff/:id' element={<Staffdash/>}/>
-    </Routes> */}
-    <PassengerDash/>
+        <Route path='/passenger/login/:id' element={<PassDash/>}/>
+    </Routes> 
+  
+  
      
     </>
   )
