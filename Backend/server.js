@@ -181,6 +181,12 @@ app.get('/passenger', async (req, res) => {
     res.json(data);
     res.status(200).send("Data Fetched Successfully");
 })
+app.get('/passcenger/:id', async (req, res) => {
+    let { id } = req.params;
+    let data = await passenger.findById(id);
+    res.json(data);
+    res.status(200).send("Data Fetched Successfully");
+})
 
 app.post('/internalshuttle', async (req, res) => {
     try {

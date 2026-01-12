@@ -46,7 +46,8 @@ const PassengerLogin = () => {
           return;
         }
         toast.success("Login Successfully");
-        // usenav(`admin/${user._id}`);
+       usenav(`/passenger/dashboard/${user._id}`);
+        
       };
     
     return (

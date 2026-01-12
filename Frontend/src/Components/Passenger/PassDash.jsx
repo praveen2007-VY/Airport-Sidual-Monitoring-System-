@@ -2,12 +2,18 @@ import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./PassDash.css";
+import { toast } from "react-toastify";
 
 const PassDash = () => {
-  const adminname = "Praveen";
-  const adminemail = "praveen@gmail.com";
+  const [passname,setpassname]= useState("");
+  const [passemail,setpassemail]= useState("");
   const { id } = useParams();
 
+  const logout = ()=>{
+
+    toast.success("Logout Successfull");
+    usenav("/passenger/login")
+  }
   useEffect(() => {
     const fetchdata = async () => {
       const res = await axios.get(`http://localhost:5000/adminpass/${id}`);
@@ -43,7 +49,16 @@ const PassDash = () => {
       const res4 = await axios.get(`http://localhost:5000/staff`);
       setstaff(res4.data);
     };
-
+    const fetchdata = async()=>{
+      const res = await axios.get(`http://localhost:5000/passcenger/${id}`);
+      const user = res.data;
+      if (user) {
+        setpassname(user.name);
+        setpassemail(user.email);
+        console.log("Fetch Success");
+      }
+    }
+    fetchdata();
     fetchinternal();
     fetchexternal();
     fetchflight();
@@ -57,13 +72,6 @@ const PassDash = () => {
 
   const usenav = useNavigate();
 
-  const handleaddflght = () => {
-    usenav(`/adminlog/admin/${id}/addflight`);
-  };
-
-  const handlebulkflight = (ids) => {
-    usenav(`/adminlog/admin/bulkflight`);
-  };
 
   const [totflight, setflight] = useState(0);
   const [ontime, setontime] = useState(0);
@@ -151,91 +159,7 @@ const PassDash = () => {
   return (
     <>
       <div className="pass-container">
-        {/* <header className="pass-header">
-          <div className="pass-brand">
-            <h2>
-              <i className="fa-solid fa-plane-departure pass-icon-mr"></i> Welcome
-              Passenger
-            </h2>
-          </div>
-
-          <div className="pass-profile-container">
-            <div className="pass-profile-trigger" tabIndex="0">
-              <div className="pass-avatar">
-                {adminname &&
-                  adminname
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
-              </div>
-              <div className="pass-profile-info">
-                <span className="pass-admin-name">{adminname}</span>
-              </div>
-              <i className="fa-solid fa-chevron-down pass-dropdown-arrow"></i>
-
-           
-              <div className="pass-dropdown-menu">
-                <div className="pass-dropdown-header">
-                  <span className="pass-dd-name">{adminname}</span>
-                  <span className="pass-dd-email">{adminemail}</span>
-                </div>
-                <div className="pass-dropdown-divider"></div>
-                <button className="pass-dropdown-item">
-                  <i className="fa-solid fa-key"></i> Change Password
-                </button>
-                <button className="pass-dropdown-item pass-logout-danger">
-                  <i className="fa-solid fa-right-from-bracket"></i> Logout
-                </button>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        <main className="pass-dashboard-content">
-
-          <section className="pass-welcome-section">
-            <h1>Welcome, {adminname}</h1>
-            <p>Track your flight and airport updates in real time</p>
-          </section>
-
-          <section className="pass-stats-grid">
-            <div className="pass-stat-card pass-blue">
-              <div className="pass-icon-box">
-                <i className="fa-solid fa-plane-up"></i>
-              </div>
-              <div className="pass-stat-info">
-                <h3>Total Flights</h3>
-                <p>{totflight}</p>
-              </div>
-            </div>
-            <div className="pass-stat-card pass-green">
-              <div className="pass-icon-box">
-                <i className="fa-regular fa-clock"></i>
-              </div>
-              <div className="pass-stat-info">
-                <h3>On Time</h3>
-                <p>{ontime}</p>
-              </div>
-            </div>
-            <div className="pass-stat-card pass-orange">
-              <div className="pass-icon-box">
-                <i className="fa-solid fa-triangle-exclamation"></i>
-              </div>
-              <div className="pass-stat-info">
-                <h3>Delayed</h3>
-                <p>{delay}</p>
-              </div>
-            </div>
-            <div className="pass-stat-card pass-red">
-              <div className="pass-icon-box">
-                <i className="fa-solid fa-ban"></i>
-              </div>
-              <div className="pass-stat-info">
-                <h3>Cancelled</h3>
-                <p>{cancel}</p>
-              </div>
-            </div> */}
-
+       
         <header className="topbar">
           <div className="brand1">
             <h2>
@@ -247,26 +171,26 @@ const PassDash = () => {
           <div className="profile-container">
             <div className="profile-trigger" tabIndex="0">
               <div className="avatar">
-                {adminname &&
-                  adminname
+                {passname &&
+                  passname
                     .split(" ")
                     .map((n) => n[0])
                     .join("")}
               </div>
               <div className="profile-info">
-                <span className="admin-name">{adminname}</span>
+                <span className="admin-name">{passname}</span>
               </div>
               <i className="fa-solid fa-chevron-down dropdown-arrow"></i>
               <div className="dropdown-menu">
                 <div className="dropdown-header">
-                  <span className="dd-name">{adminname}</span>
-                  <span className="dd-email">{adminemail}</span>
+                  <span className="dd-name">{passname}</span>
+                  <span className="dd-email">{passemail}</span>
                 </div>
                 <div className="dropdown-divider"></div>
                 <button className="dropdown-item">
                   <i className="fa-solid fa-key"></i> Change Password
                 </button>
-                <button className="dropdown-item logout-danger">
+                <button className="dropdown-item logout-danger" onClick={logout}>
                   <i className="fa-solid fa-right-from-bracket"></i> Logout
                 </button>
               </div>
@@ -276,7 +200,7 @@ const PassDash = () => {
 
         <main className="dashboard-content">
           <section className="welcome-section">
-            <h1>Welcome, {adminname}</h1>
+            <h1>Welcome, {passname}</h1>
             <p>Track your flight and airport updates in real time</p>
           </section>
 

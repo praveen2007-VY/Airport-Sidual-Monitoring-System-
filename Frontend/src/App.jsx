@@ -7,7 +7,6 @@ import Adminlog from './Components/Adminlog/Adminlog'
 import Adminforget from './Components/Adminlog/Adminforget'
 import { Route ,Routes } from 'react-router-dom'
 import Stafflog from './Components/stafflog/Stafflog'
-import Passlogin from './Components/Passenger/Passlogin'
 import Passforget from './Components/Passenger/Passforget.jsx'
 import Admindash from './Components/AdminDASH/Admindash.jsx'
 import Addflight from './Components/AdminDASH/Addflight.jsx'
@@ -46,7 +45,7 @@ function App() {
         <Route path='/adminlog/admin/updateshuttle/:type/:id' element={<Shuttleedit/>}/>
         <Route path='/adminlog/admin/staffreg' element={<Staffreg/>}/>
         <Route path='/stafflog/staff/:id' element={<Staffdash/>}/>
-        <Route path='/passenger/login/:id' element={<PassDash/>}/>
+        <Route path='/passenger/dashboard/:id' element={<PassDash/>}/>
     </Routes> 
   
   
