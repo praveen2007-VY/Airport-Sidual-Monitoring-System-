@@ -33,7 +33,7 @@ const Firstpage = () => {
       <nav className="nav">
         <h2 className="brandhome">
           <i className="fa-solid fa-plane-departure flight"></i>
-          Airport Schedule Monitoring System
+          Airport Shuttle Monitoring System
         </h2>
         <div className="navc">
           <a href="#home">Home</a>
