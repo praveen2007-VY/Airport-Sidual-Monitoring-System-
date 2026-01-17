@@ -752,3 +752,73 @@ body {
     height: 60vh;
   }
 }
+
+/* .passchat-reset{
+
+  padding: 5px;
+  border-radius: 20px;
+ 
+
+  color: white;
+  background-color: rgb(255, 34, 0);
+  border: none;
+  margin-left: 10px;
+} */
+
+/* Reset Button */
+.passchat-reset{
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  padding: 7px 14px;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .2px;
+
+  color: #fff;
+  background: linear-gradient(135deg, #ff4d4d, #ff2f6d);
+
+  box-shadow: 0 10px 20px rgba(255, 47, 109, 0.25),
+              0 4px 10px rgba(0, 0, 0, 0.12);
+
+  transition: transform .18s ease,
+              box-shadow .18s ease,
+              filter .18s ease;
+}
+
+/* Hover effect */
+.passchat-reset:hover{
+  transform: translateY(-1px) scale(1.03);
+  filter: brightness(1.05);
+
+  box-shadow: 0 14px 28px rgba(255, 47, 109, 0.30),
+              0 6px 14px rgba(0, 0, 0, 0.14);
+}
+
+/* Click effect */
+.passchat-reset:active{
+  transform: translateY(0px) scale(0.98);
+  filter: brightness(0.98);
+}
+
+/* Focus (accessibility) */
+.passchat-reset:focus-visible{
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.65),
+              0 0 0 6px rgba(255, 47, 109, 0.45);
+}
+
+/* Disabled (if ever used) */
+.passchat-reset:disabled{
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.passspan-h{
+   padding: 10px;
+}

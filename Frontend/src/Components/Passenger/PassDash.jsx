@@ -5,15 +5,14 @@ import "./PassDash.css";
 import { toast } from "react-toastify";
 
 const PassDash = () => {
-  const [passname,setpassname]= useState("");
-  const [passemail,setpassemail]= useState("");
+  const [passname, setpassname] = useState("");
+  const [passemail, setpassemail] = useState("");
   const { id } = useParams();
 
-  const logout = ()=>{
-
+  const logout = () => {
     toast.success("Logout Successfull");
-    usenav("/passenger/login")
-  }
+    usenav("/passenger/login");
+  };
   useEffect(() => {
     const fetchdata = async () => {
       const res = await axios.get(`http://localhost:5000/adminpass/${id}`);
@@ -49,7 +48,7 @@ const PassDash = () => {
       const res4 = await axios.get(`http://localhost:5000/staff`);
       setstaff(res4.data);
     };
-    const fetchdata = async()=>{
+    const fetchdata = async () => {
       const res = await axios.get(`http://localhost:5000/passcenger/${id}`);
       const user = res.data;
       if (user) {
@@ -57,7 +56,7 @@ const PassDash = () => {
         setpassemail(user.email);
         console.log("Fetch Success");
       }
-    }
+    };
     fetchdata();
     fetchinternal();
     fetchexternal();
@@ -71,7 +70,6 @@ const PassDash = () => {
   };
 
   const usenav = useNavigate();
-
 
   const [totflight, setflight] = useState(0);
   const [ontime, setontime] = useState(0);
@@ -124,14 +122,23 @@ const PassDash = () => {
     }
   };
 
-  const handleChatSend = () => {
+  const WEBHOOK_URL =
+    "https://local.workflow-praveen.xyz/webhook-test/a60281b7-02f7-4db5-a6c2-2b5552a13cdf";
+
+  // const WEBHOOK_URL =
+  //   "https://local.workflow-praveen.xyz/webhook-test/a60281b7-02f7-4db5-a6c2-2b5552a13cdf";
+
+  const handleChatSend = async () => {
     if (!chatInput.trim() && !chatFile) return;
 
-    // 1. Add User Message
+    // 1) Store user input locally (before clearing)
+    const userText = chatInput;
+
+    // 2) Add user message to UI
     const userMsg = {
       id: Date.now(),
       sender: "user",
-      text: chatInput,
+      text: userText,
       file: chatFile ? chatFile.name : null,
     };
 
@@ -139,15 +146,45 @@ const PassDash = () => {
     setChatInput("");
     setChatFile(null);
 
-    // 2. Fake Bot Reply after 600ms
-    setTimeout(() => {
-      const botMsg = {
-        id: Date.now() + 1,
-        sender: "bot",
-        text: "✅ Thanks! I received your message. (UI demo only)",
-      };
-      setChatMessages((prev) => [...prev, botMsg]);
-    }, 600);
+    // 3) Add "typing..." bot message (optional but nice)
+    const typingMsgId = Date.now() + 1;
+    const typingMsg = {
+      id: typingMsgId,
+      sender: "bot",
+      text: "Typing...",
+    };
+    setChatMessages((prev) => [...prev, typingMsg]);
+
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: userText,
+          sessionId: id,
+          username: passname,
+          useremail: passemail,
+        }),
+      });
+
+      const botReplyText = await res.text(); // ✅ IMPORTANT (text response)
+
+      setChatMessages((prev) =>
+        prev.map((m) =>
+          m.id === typingMsgId ? { ...m, text: botReplyText } : m,
+        ),
+      );
+    } catch (error) {
+      setChatMessages((prev) =>
+        prev.map((m) =>
+          m.id === typingMsgId
+            ? { ...m, text: "❌ Error: Could not connect to chatbot server" }
+            : m,
+        ),
+      );
+    }
   };
 
   const handleChatKeyPress = (e) => {
@@ -155,11 +192,33 @@ const PassDash = () => {
       handleChatSend();
     }
   };
+  const deletewebhook =
+    "https://local.workflow-praveen.xyz/webhook/8fe2f1b9-e117-4281-b40f-219a382f58e7";
+
+  const deletepostsql = async () => {
+    try {
+      const res = await fetch(deletewebhook, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionId: id,
+        }),
+      });
+
+      const data = await res.json();
+      console.log("✅ Deleted chat memory:", data);
+
+    } catch (error) {
+      console.error("❌ Delete error:", error);
+    }
+  };
+  
 
   return (
     <>
       <div className="pass-container">
-       
         <header className="topbar">
           <div className="brand1">
             <h2>
@@ -190,7 +249,10 @@ const PassDash = () => {
                 <button className="dropdown-item">
                   <i className="fa-solid fa-key"></i> Change Password
                 </button>
-                <button className="dropdown-item logout-danger" onClick={logout}>
+                <button
+                  className="dropdown-item logout-danger"
+                  onClick={logout}
+                >
                   <i className="fa-solid fa-right-from-bracket"></i> Logout
                 </button>
               </div>
@@ -249,8 +311,8 @@ const PassDash = () => {
               <input
                 type="text"
                 placeholder="Enter Flight Number (ex: AI220)"
-              //   value={searchQuery}
-              //   onChange={(e) => setSearchQuery(e.target.value)}
+                //   value={searchQuery}
+                //   onChange={(e) => setSearchQuery(e.target.value)}
               />
               <button>Search</button>
             </div>
@@ -308,7 +370,9 @@ const PassDash = () => {
                   {internal.map((shuttle) => (
                     <div key={shuttle._id} className="pass-shuttle-card">
                       <div className="pass-shuttle-header">
-                        <span className="pass-shuttle-id-label">Shuttle ID:</span>
+                        <span className="pass-shuttle-id-label">
+                          Shuttle ID:
+                        </span>
                         <span className="pass-shuttle-id-value">
                           {shuttle.shuttleid}
                         </span>
@@ -389,7 +453,10 @@ const PassDash = () => {
       {/* 1. Floating Action Button (FAB) */}
       <div
         className={`passchat-fab ${isChatOpen ? "passchat-fab-active" : ""}`}
-        onClick={toggleChat}
+        onClick={ () => {
+
+          toggleChat(); // ✅ toggle only once
+        }}
       >
         {isChatOpen ? (
           <i className="fa-solid fa-xmark"></i>
@@ -399,80 +466,96 @@ const PassDash = () => {
       </div>
 
       {/* 2. Chat Popup Window */}
-      {
-        isChatOpen && (
-          <div className="passchat-window">
-            {/* Header */}
-            <div className="passchat-header">
-              <div className="passchat-header-info">
-                <span className="passchat-title">Airport Assistant</span>
-                <span className="passchat-status">
-                  <span className="passchat-dot"></span> Online
-                </span>
-              </div>
-              <button className="passchat-close-btn" onClick={toggleChat}>
-                <i className="fa-solid fa-xmark"></i>
-              </button>
-            </div>
-
-            {/* Body (Messages) */}
-            <div className="passchat-body" ref={chatBodyRef}>
-              {chatMessages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={`passchat-message ${msg.sender === "user" ? "passchat-user" : "passchat-bot"
-                    }`}
-                >
-                  <div className="passchat-bubble">
-                    {msg.text && <p>{msg.text}</p>}
-                    {msg.file && (
-                      <div className="passchat-file-bubble">
-                        <i className="fa-solid fa-paperclip"></i> {msg.file}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Input Area */}
-            <div className="passchat-input-area">
-              {chatFile && (
-                <div className="passchat-file-preview">
-                  <span>📎 {chatFile.name}</span>
+      {isChatOpen && (
+        <div className="passchat-window">
+          {/* Header */}
+          <div className="passchat-header">
+            <div className="passchat-header-info">
+              <span className="passchat-title">Airport Assistant</span>
+              <span className="passchat-status">
+                <span className="passchat-dot"></span> Online
+                <span className="passspan-h">
                   <button
-                    onClick={() => setChatFile(null)}
-                    className="passchat-remove-file"
+                    className="passchat-reset"
+                    onClick={async () => {
+                      await deletepostsql(); // ✅ clear DB when opening chat
+                      setChatMessages([
+                        {
+                          id: 1,
+                          sender: "bot",
+                          text: "Hi 👋 I’m Airport Assistant. You can ask about flights, gates, or shuttle services.",
+                        },
+                      ]); // ✅ clear frontend messages also
+                    }}
                   >
-                    <i className="fa-solid fa-xmark"></i>
+                    Reset
                   </button>
+                </span>
+              </span>
+            </div>
+            <button className="passchat-close-btn" onClick={toggleChat}>
+              <i className="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          {/* Body (Messages) */}
+          <div className="passchat-body" ref={chatBodyRef}>
+            {chatMessages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`passchat-message ${
+                  msg.sender === "user" ? "passchat-user" : "passchat-bot"
+                }`}
+              >
+                <div className="passchat-bubble">
+                  {msg.text && <p>{msg.text}</p>}
+                  {msg.file && (
+                    <div className="passchat-file-bubble">
+                      <i className="fa-solid fa-paperclip"></i> {msg.file}
+                    </div>
+                  )}
                 </div>
-              )}
-              <div className="passchat-input-row">
-                <label htmlFor="chat-file-upload" className="passchat-upload-btn">
-                  <i className="fa-solid fa-paperclip"></i>
-                </label>
-                <input
-                  id="chat-file-upload"
-                  type="file"
-                  style={{ display: "none" }}
-                  onChange={handleChatFile}
-                />
-                <input
-                  type="text"
-                  placeholder="Type a message..."
-                  value={chatInput}
-                  onChange={handleChatInput}
-                  onKeyDown={handleChatKeyPress}
-                />
-                <button className="passchat-send-btn" onClick={handleChatSend}>
-                  <i className="fa-solid fa-paper-plane"></i>
+              </div>
+            ))}
+          </div>
+
+          {/* Input Area */}
+          <div className="passchat-input-area">
+            {chatFile && (
+              <div className="passchat-file-preview">
+                <span>📎 {chatFile.name}</span>
+                <button
+                  onClick={() => setChatFile(null)}
+                  className="passchat-remove-file"
+                >
+                  <i className="fa-solid fa-xmark"></i>
                 </button>
               </div>
+            )}
+            <div className="passchat-input-row">
+              <label htmlFor="chat-file-upload" className="passchat-upload-btn">
+                <i className="fa-solid fa-paperclip"></i>
+              </label>
+              <input
+                id="chat-file-upload"
+                type="file"
+                style={{ display: "none" }}
+                onChange={handleChatFile}
+              />
+              <input
+                type="text"
+                placeholder="Type a message..."
+                value={chatInput}
+                onChange={handleChatInput}
+                onKeyDown={handleChatKeyPress}
+              />
+              <button className="passchat-send-btn" onClick={handleChatSend}>
+                <i className="fa-solid fa-paper-plane"></i>
+              </button>
             </div>
           </div>
-        )
-      }
+        </div>
+      )}
     </>
   );
 };

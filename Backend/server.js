@@ -1,19 +1,28 @@
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose";
-
+import dotenv from "dotenv";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/CRUD")
-    .then(() => {
-        console.log("Connected to DB")
-    })
-    .catch((err) => {
-        console.log(err)
-    })
+// mongoose.connect("mongodb://127.0.0.1:27017/CRUD")
+//     .then(() => {
+//         console.log("Connected to DB")
+//     })
+//     .catch((err) => {
+//         console.log(err)
+//     })
+dotenv.config();
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected ✅"))
+  .catch((err) => console.log("MongoDB Error ❌", err));
+
+app.listen(5000, () => {
+  console.log("Server is running on port 5000");
+});
 
 
 const userSchema1 = new mongoose.Schema({
@@ -258,6 +267,26 @@ app.post('/addpassenger', async (req, res) => {
     res.status(201).send("Data Saved Successfully");
 })
 
+// app.post("/clear-chat/:id", async (req, res) => {
+//   try {
+//     const response = await fetch(
+//       "https://local.workflow-praveen.xyz/webhook/clear-chat",
+//       {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ session_id: req.params.id }),
+//       }
+//     );
+
+//     const text = await response.text();
+//     res.send(text);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send("Clear chat failed");
+//   }
+// });
+
+
 app.put('/adminpass/updatedetail/:id', async (req, res) => {
     const id = req.params.id;
     const data = req.body;
@@ -371,6 +400,8 @@ app.put('/runwaystatus/:id', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+
 
 app.listen(5000, () => {
     console.log("Server is running on port 5000")
