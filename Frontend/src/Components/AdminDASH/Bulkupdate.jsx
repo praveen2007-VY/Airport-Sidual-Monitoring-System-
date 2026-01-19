@@ -19,6 +19,18 @@ const Bulkupdate = () => {
 
   const [selectedFlights, setSelectedFlights] = useState([]);
   const [selectedShuttles, setSelectedShuttles] = useState([]);
+  const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f50-bebf-e4695d402026";
+  const webhook = async ()=>{
+    const res = await fetch(WEBHOOK, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: "DELETE"
+        }),
+  })};
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,10 +99,6 @@ const Bulkupdate = () => {
     const totalSelected = selectedFlights.length + selectedShuttles.length;
     if (totalSelected === 0) return;
 
-    if (!window.confirm(`Deleted items cannot be recovered. Are you sure you want to delete ${totalSelected} items?`)) {
-      return;
-    }
-
     try {
       const deletePromises = [];
 
@@ -116,6 +124,7 @@ const Bulkupdate = () => {
       setShuttles(prev => prev.filter(s => !selectedShuttles.includes(s._id)));
 
       handleReset();
+       webhook(); 
       toast.success("Selected items deleted successfully")
       
 

@@ -190,7 +190,7 @@ const PassengerLogin = () => {
 
                         {/* Remember Me & Forgot Password */}
                         <div className="passenger-login__options">
-                            <label className="passenger-login__remember-me">
+                            <label className="passenger-login__remember-me" >
                                 <input
                                     type="checkbox"
                                     name="rememberMe"

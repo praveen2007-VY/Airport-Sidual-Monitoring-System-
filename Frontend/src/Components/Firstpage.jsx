@@ -30,18 +30,20 @@ const Firstpage = () => {
     <section id="home">
      <div className="main1">
   
-      <nav className="nav">
+      <nav className="nav bar">
         <h2 className="brandhome">
           <i className="fa-solid fa-plane-departure flight"></i>
           Airport Shuttle Monitoring System
         </h2>
+        
         <div className="navc">
           <a href="#home">Home</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </div>
+        
        <a href="#login"> <button className="login-btn">
-          <i className="fa-solid fa-right-to-bracket bb"></i>
+          <i className="fa-solid fa-right-to-bracket bb spa"></i>
           Login
         </button></a>
       </nav>
@@ -65,6 +67,10 @@ const Firstpage = () => {
         <section id="login">
           <div className="main2">
              <div className="main21">
+              <div className="loginmar">
+              <h2>Airport Shuttle Monitoring System</h2> 
+              
+            <h3>Track flight gates, shuttle timings and live airport updates.</h3></div>
               <div className="box1">
                 <div className="img1">
                   <img src={admin} alt="" />
@@ -95,7 +101,7 @@ const Firstpage = () => {
           <section id="about">
           <div className="main3">
             <div className="main33">
-              <h1>About</h1>
+            
               <img src={about} alt="" />
             </div>
             <div className="main31">

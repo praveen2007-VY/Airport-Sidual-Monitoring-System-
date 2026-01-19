@@ -201,12 +201,15 @@
     color: var(--text-secondary);
     cursor: pointer;
     user-select: none;
+    color: white;
 }
 
 .passenger-login__checkbox {
     width: 16px;
     height: 16px;
-    accent-color: var(--airport-teal);
+    /* accent-color: var(--airport-teal); */
+    color: white;
+    display: none;
 }
 
 .passenger-login__forgot-link {

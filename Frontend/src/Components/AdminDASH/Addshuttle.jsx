@@ -25,7 +25,29 @@ const Addshuttle = () => {
   const handleCancel = () => {
     navigate(-1);
   };
+   const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f50-bebf-e4695d402026";
+  const webhook1 = async ()=>{
+    const res = await fetch(WEBHOOK, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: "INTERNAL"
+        }),
+  })};
 
+  
+  const webhook2 = async ()=>{
+    const res = await fetch(WEBHOOK, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: "EXTERNAL"
+        }),
+  })};
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -99,6 +121,9 @@ const Addshuttle = () => {
         await axios.put(`http://localhost:5000/flightdetail/fli/${flightId}`, {
           completed: false,
         });
+        webhook1();
+        toast.success("Internal Shuttle Added successfully");
+
       } catch (err) {
         console.error(
           "Internal Shuttle Error:",
@@ -111,12 +136,14 @@ const Addshuttle = () => {
         "http://localhost:5000/externalshuttle",
         data2
       );
+      webhook2();
+      toast.success("External Shuttle Added successfully");
       console.log(res3.data);
     }
 
     navigate(-1);
   };
-
+ 
   const [filid, setfilid] = useState([]);
 
   const [fetchf, setfetchf] = useState([]);

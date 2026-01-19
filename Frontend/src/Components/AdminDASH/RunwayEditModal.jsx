@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './RunwayEditModal.css';
+import { toast } from 'react-toastify';
 
 const RunwayEditModal = ({ isOpen, onClose, runway, onSave }) => {
     const [selectedStatus, setSelectedStatus] = useState(runway ? runway.status : '');
@@ -12,12 +13,23 @@ const RunwayEditModal = ({ isOpen, onClose, runway, onSave }) => {
         { id: 'In Use', label: 'In Use', icon: '✈️', className: 'in-use' },
         { id: 'Maintenance', label: 'Maintenance', icon: '🛠️', className: 'maintenance' }
     ];
-
+   
+    const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f50-bebf-e4695d402026";
+  const webhook = async ()=>{
+    const res = await fetch(WEBHOOK, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: "RUNWAY"
+        }),
+  })};
     const handleSave = async () => {
         if (!selectedStatus) return;
 
-        const confirmUpdate = window.confirm("Are you sure you want to change the runway status?");
-        if (!confirmUpdate) return;
+        // const confirmUpdate = window.confirm("Are you sure you want to change the runway status?");
+        // if (!confirmUpdate) return;
 
         setIsSaving(true);
         try {
@@ -29,7 +41,11 @@ const RunwayEditModal = ({ isOpen, onClose, runway, onSave }) => {
         } finally {
             setIsSaving(false);
         }
+        webhook();
     };
+    
+
+  
 
     return (
         <div className="runway-modal-backdrop" onClick={onClose}>

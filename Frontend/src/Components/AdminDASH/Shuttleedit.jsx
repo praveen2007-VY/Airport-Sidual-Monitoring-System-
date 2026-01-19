@@ -3,6 +3,7 @@ import "./Shuttleedit.css";
 import "./GlobalForms.css";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 const Shuttleedit = () => {
   const navigate = useNavigate();
   const { type, id } = useParams();
@@ -65,8 +66,29 @@ const Shuttleedit = () => {
   }, [id]);
 
 
+const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f50-bebf-e4695d402026";
+  const webhook1 = async ()=>{
+    const res = await fetch(WEBHOOK, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: "INTERNAL"
+        }),
+  })};
 
-
+  
+  const webhook2 = async ()=>{
+    const res = await fetch(WEBHOOK, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: "EXTERNAL"
+        }),
+  })};
   const handleup = async () => {
     if (shuttleType === "Internal") {
       const data = {
@@ -83,6 +105,8 @@ const Shuttleedit = () => {
         status: status,
       };
       const res = await axios.put(`http://localhost:5000/internalshuttle/${id}`, data)
+      webhook1();
+      toast.success("Shuttle updated successfully");
       console.log(res.data);
       navigate(-1);
     }
@@ -99,6 +123,8 @@ const Shuttleedit = () => {
         status: status,
       };
       const res = await axios.put(`http://localhost:5000/externalshuttle/${id}`, data)
+      webhook2();
+      toast.success("Shuttle updated successfully");
       console.log(res.data);
       navigate(-1);
     }

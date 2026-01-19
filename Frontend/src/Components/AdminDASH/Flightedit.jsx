@@ -52,10 +52,22 @@ const Flightedit = () => {
         gate,
       }
     );
-
+    webhook();
     console.log(res.data);
     usenav(`/adminlog/admin/${id}`);
   };
+  
+  const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f50-bebf-e4695d402026";
+  const webhook = async ()=>{
+    const res = await fetch(WEBHOOK, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: "FLIGHT"
+        }),
+  })};
 
   return (
     <div className="edit-flight-container">

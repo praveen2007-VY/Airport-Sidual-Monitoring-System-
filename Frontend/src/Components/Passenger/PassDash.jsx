@@ -123,7 +123,7 @@ const PassDash = () => {
   };
 
   const WEBHOOK_URL =
-    "https://local.workflow-praveen.xyz/webhook-test/a60281b7-02f7-4db5-a6c2-2b5552a13cdf";
+    "https://local.workflow-praveen.xyz/webhook/a60281b7-02f7-4db5-a6c2-2b5552a13cdf";
 
   // const WEBHOOK_URL =
   //   "https://local.workflow-praveen.xyz/webhook-test/a60281b7-02f7-4db5-a6c2-2b5552a13cdf";
@@ -177,6 +177,29 @@ const PassDash = () => {
         ),
       );
     } catch (error) {
+      // try {
+      //   const res = await fetch(WEBHOOK_URL, {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({
+      //       message: userText,
+      //       sessionId: id,
+      //       username: passname,
+      //       useremail: passemail,
+      //     }),
+      //   });
+
+      //   const data = await res.json(); // ✅ parse JSON
+      //   const botReplyText = data.answer || "No response from bot"; // ✅ safe
+
+      //   setChatMessages((prev) =>
+      //     prev.map((m) =>
+      //       m.id === typingMsgId ? { ...m, text: botReplyText } : m,
+      //     ),
+      //   );
+      // }
       setChatMessages((prev) =>
         prev.map((m) =>
           m.id === typingMsgId
@@ -187,11 +210,19 @@ const PassDash = () => {
     }
   };
 
+  // const handleChatKeyPress = (e) => {
+  //   if (e.key === "Enter") {
+  //     handleChatSend();
+  //   }
+  // };
+
   const handleChatKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
       handleChatSend();
     }
   };
+
   const deletewebhook =
     "https://local.workflow-praveen.xyz/webhook/8fe2f1b9-e117-4281-b40f-219a382f58e7";
 
@@ -209,12 +240,36 @@ const PassDash = () => {
 
       const data = await res.json();
       console.log("✅ Deleted chat memory:", data);
-
     } catch (error) {
       console.error("❌ Delete error:", error);
     }
   };
-  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResult, setSearchResult] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleSearch = () => {
+    const q = searchQuery.trim().toLowerCase();
+
+    if (!q) {
+      setSearchResult({ error: "❌ Please enter flight number" });
+      setShowPopup(true);
+      return;
+    }
+
+    const found = flighttable.find((f) => f.flight?.toLowerCase() === q);
+
+    if (found) {
+      setSearchResult(found);
+    } else {
+      setSearchResult({ error: "❌ Enter valid Flight No" });
+    }
+
+    setShowPopup(true);
+
+    // auto close popup after 4 sec
+    setTimeout(() => setShowPopup(false), 4000);
+  };
 
   return (
     <>
@@ -311,10 +366,13 @@ const PassDash = () => {
               <input
                 type="text"
                 placeholder="Enter Flight Number (ex: AI220)"
-                //   value={searchQuery}
-                //   onChange={(e) => setSearchQuery(e.target.value)}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleSearch();
+                }}
               />
-              <button>Search</button>
+              <button onClick={handleSearch}>Search</button>
             </div>
           </section>
 
@@ -453,8 +511,7 @@ const PassDash = () => {
       {/* 1. Floating Action Button (FAB) */}
       <div
         className={`passchat-fab ${isChatOpen ? "passchat-fab-active" : ""}`}
-        onClick={ () => {
-
+        onClick={() => {
           toggleChat(); // ✅ toggle only once
         }}
       >
@@ -478,7 +535,7 @@ const PassDash = () => {
                   <button
                     className="passchat-reset"
                     onClick={async () => {
-                      await deletepostsql(); // ✅ clear DB when opening chat
+                      // ✅ clear DB when opening chat
                       setChatMessages([
                         {
                           id: 1,
@@ -556,7 +613,38 @@ const PassDash = () => {
           </div>
         </div>
       )}
+      {showPopup && (
+  <div className="flight-popup">
+    <div className="flight-popup-card">
+      <button className="flight-popup-close" onClick={() => setShowPopup(false)}>
+        ✖
+      </button>
+
+      {searchResult?.error ? (
+        <p className="flight-popup-error">{searchResult.error}</p>
+      ) : (
+        <>
+          <h4>Flight Details</h4>
+          <p><b>Flight No:</b> {searchResult.flight}</p>
+          <p><b>Airline:</b> {searchResult.airline}</p>
+          <p><b>From:</b> {searchResult.from}</p>
+          <p><b>To:</b> {searchResult.to}</p>
+          <p><b>Time:</b> {searchResult.time}</p>
+          <p><b>Gate:</b> {searchResult.gate}</p>
+          <p>
+            <b>Status:</b>{" "}
+            <span className={`badge ${searchResult.status.toLowerCase().replace(" ", "-")}`}>
+              {searchResult.status}
+            </span>
+          </p>
+        </>
+      )}
+    </div>
+  </div>
+)}
+
     </>
+      
   );
 };
 
