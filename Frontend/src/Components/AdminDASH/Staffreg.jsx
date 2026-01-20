@@ -15,17 +15,10 @@ const Staffreg = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // UI-only logic: alert and navigate back
-    // alert("Staff member registered successfully!"); // Toast preferred by UX rules, trying inline/alert for simplicity as verified in task
-    // Actually user request said: "Show a simple success feedback (toast or inline text)"
-    // Since I don't have a toast component ready, I'll allow a browser alert or just console log + navigate, but user said "UI-only logic".
-    // Let's use a standard alert for now to fulfill "Success feedback".
-    // Or better: just navigate immediately as if it succeeded.
-    // User said: "Show a simple success feedback (toast or inline text)"
     window.alert("Staff Registered Successfully");
     navigate(-1);
   };
-  // const
+  
   const [cstaff, setcstaff] = useState(1);
 
   const [staffid, setstaffid] = useState("");
@@ -86,7 +79,6 @@ const Staffreg = () => {
         </div>
 
         <form className="staff-form" /*onSubmit={handleRegister}*/>
-          {/* Row 1: ID and Name */}
           <div className="form-row">
             <div className="form-group">
               <label>Staff ID</label>
@@ -122,8 +114,6 @@ const Staffreg = () => {
               </div>
             </div>
           </div>
-
-          {/* Row 2: Email and Password */}
           <div className="form-row">
             <div className="form-group">
               <label>Email Address</label>
@@ -153,8 +143,6 @@ const Staffreg = () => {
               </div>
             </div>
           </div>
-
-          {/* Row 3: Confirm and Role */}
           <div className="form-row">
             <div className="form-group">
               <label>Confirm Password</label>
@@ -189,8 +177,6 @@ const Staffreg = () => {
               </div>
             </div>
           </div>
-
-          {/* Row 4: Department and Shift */}
           <div className="form-row">
             <div className="form-group">
               <label>Department</label>

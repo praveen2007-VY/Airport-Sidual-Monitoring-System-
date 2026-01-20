@@ -55,7 +55,6 @@ const PassengerLogin = () => {
     
     return (
         <div className="passenger-login">
-            {/* Left Section: Illustration */}
             <div className="passenger-login__illustration-container">
                 <img
                     src={passengerLoginImg}
@@ -65,7 +64,6 @@ const PassengerLogin = () => {
                 <div className="passenger-login__overlay"></div>
             </div>
 
-            {/* Right Section: Login Form */}
             <div className="passenger-login__form-container">
                 <button className="passenger-login__back-btn" aria-label="Go back" onClick={handlesignup}>
                     <svg
@@ -91,7 +89,6 @@ const PassengerLogin = () => {
                     </p>
 
                     <form className="passenger-login__form" onSubmit={(e) => e.preventDefault()}>
-                        {/* Email Address */}
                         <div className="passenger-login__input-group">
                             <span className="passenger-login__icon">
                                 <svg
@@ -121,8 +118,6 @@ const PassengerLogin = () => {
                             />
                             <div className="passenger-login__focus-ring"></div>
                         </div>
-
-                        {/* Password */}
                         <div className="passenger-login__input-group">
                             <span className="passenger-login__icon">
                                 <svg
@@ -190,8 +185,6 @@ const PassengerLogin = () => {
                             </button>
                             <div className="passenger-login__focus-ring"></div>
                         </div>
-
-                        {/* Remember Me & Forgot Password */}
                         <div className="passenger-login__options">
                             <label className="passenger-login__remember-me" >
                                 <input

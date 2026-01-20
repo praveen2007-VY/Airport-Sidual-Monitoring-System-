@@ -1,4 +1,3 @@
-/* Reuse variables for consistency, but scope them to this file to ensure modularity as requested */
 :root {
     --airport-teal: #008080;
     --airport-teal-dark: #006666;
@@ -24,7 +23,7 @@
     overflow: hidden;
 }
 
-/* --- Left Section: Illustration --- */
+
 .passenger-login__illustration-container {
     flex: 1;
     position: relative;
@@ -55,7 +54,7 @@
     background: linear-gradient(135deg, rgba(0, 128, 128, 0.2), rgba(0, 0, 0, 0.1));
 }
 
-/* --- Right Section: Form --- */
+
 .passenger-login__form-container {
     flex: 1;
     display: flex;
@@ -89,7 +88,7 @@
     transform: translateX(-3px);
 }
 
-/* --- Login Card --- */
+
 .passenger-login__card {
     width: 100%;
     max-width: 420px;
@@ -118,7 +117,7 @@
     text-align: center;
 }
 
-/* --- Input Groups --- */
+
 .passenger-login__form {
     display: flex;
     flex-direction: column;
@@ -145,7 +144,6 @@
 .passenger-login__input {
     width: 100%;
     padding: 14px 14px 14px 44px;
-    /* Left padding for icon */
     font-size: 1rem;
     color: var(--text-primary);
     background: #ffffff;
@@ -168,7 +166,6 @@
     color: var(--airport-teal);
 }
 
-/* Password Toggle */
 .passenger-login__toggle-password {
     position: absolute;
     right: 1rem;
@@ -185,7 +182,6 @@
     color: var(--text-primary);
 }
 
-/* --- Options Row --- */
 .passenger-login__options {
     display: flex;
     justify-content: space-between;
@@ -226,7 +222,7 @@
     text-decoration: underline;
 }
 
-/* --- Submit Button --- */
+
 .passenger-login__submit-btn {
     margin-top: 1rem;
     padding: 14px;
@@ -260,7 +256,7 @@
     opacity: 0.7;
 }
 
-/* --- Footer --- */
+
 .passenger-login__footer {
     margin-top: 1.5rem;
     text-align: center;
@@ -280,7 +276,7 @@
     text-decoration: underline;
 }
 
-/* --- Mobile Responsiveness --- */
+
 @media (max-width: 900px) {
     .passenger-login {
         flex-direction: column;

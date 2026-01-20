@@ -51,7 +51,6 @@ const PassengerRegister = () => {
 
   return (
     <div className="passenger-register">
-      {/* Left Section: Illustration */}
       <div className="passenger-register__illustration-container">
         <img
           src={passenger}
@@ -60,8 +59,6 @@ const PassengerRegister = () => {
         />
         <div className="passenger-register__overlay"></div>
       </div>
-
-      {/* Right Section: Registration Form */}
       <div className="passenger-register__form-container boxsho">
         <button className="passenger-register__back-btn" aria-label="Go back" onClick={handleho}>
           <svg
@@ -118,8 +115,6 @@ const PassengerRegister = () => {
               />
               <div className="passenger-register__focus-ring"></div>
             </div>
-
-            {/* Email Address */}
             <div className="passenger-register__input-group">
               <span className="passenger-register__icon">
                 <svg
@@ -147,8 +142,6 @@ const PassengerRegister = () => {
               />
               <div className="passenger-register__focus-ring"></div>
             </div>
-
-            {/* Password */}
             <div className="passenger-register__input-group">
               <span className="passenger-register__icon">
                 <svg
@@ -183,8 +176,6 @@ const PassengerRegister = () => {
               />
               <div className="passenger-register__focus-ring"></div>
             </div>
-
-            {/* Confirm Password */}
             <div className="passenger-register__input-group">
               <span className="passenger-register__icon">
                 <svg
@@ -208,7 +199,6 @@ const PassengerRegister = () => {
                   ></rect>
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                   <line x1="12" y1="15" x2="12" y2="17"></line>
-                  {/* Added a small detail to differentiate icon if needed, but lock is standard */}
                 </svg>
               </span>
               <input

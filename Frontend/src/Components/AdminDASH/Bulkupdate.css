@@ -1,4 +1,3 @@
-/* Bulk Update Container */
 .bulk-update-container {
     min-height: 100vh;
     background-color: #f8fafc;
@@ -21,10 +20,8 @@
     display: flex;
     flex-direction: column;
     max-height: 90vh;
-    /* restrict height for scrolling */
 }
 
-/* Header & Controls */
 .bulk-header {
     background: white;
     padding: 24px 30px;
@@ -32,7 +29,6 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    /* changed to flex-start for better alignment with warning */
     flex-wrap: wrap;
     gap: 20px;
     flex-shrink: 0;
@@ -53,9 +49,7 @@
 .warning-text {
     font-size: 13px;
     color: #dc2626;
-    /* Red-600 */
     background: #fef2f2;
-    /* Red-50 */
     padding: 4px 8px;
     border-radius: 4px;
     border: 1px solid #fecaca;
@@ -68,7 +62,6 @@
     align-items: center;
 }
 
-/* Buttons */
 .btn-delete {
     background: #dc2626;
     color: white;
@@ -129,7 +122,7 @@
     background: #eff6ff;
 }
 
-/* Scrollable Content Area */
+
 .bulk-content-scroll {
     overflow-y: auto;
     flex-grow: 1;
@@ -148,7 +141,7 @@
     margin: 0 0 16px 0;
 }
 
-/* Table Styles */
+
 .bulk-table-wrapper {
     overflow-x: auto;
     border: 1px solid #e2e8f0;
@@ -210,7 +203,6 @@ input[type="checkbox"] {
     font-style: italic;
 }
 
-/* Status Badges */
 .status-badge {
     padding: 4px 10px;
     border-radius: 20px;
@@ -245,7 +237,7 @@ input[type="checkbox"] {
     border: 1px solid #e5e7eb;
 }
 
-/* Type Badges */
+
 .type-badge {
     padding: 4px 10px;
     border-radius: 6px;
@@ -265,7 +257,6 @@ input[type="checkbox"] {
     color: #c2410c;
 }
 
-/* Footer */
 .bulk-footer {
     padding: 16px 30px;
     background: #f8fafc;

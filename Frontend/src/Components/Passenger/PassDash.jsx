@@ -90,7 +90,7 @@ const PassDash = () => {
     setdelay(delay);
     setcancel(cancel);
   }, [flighttable]);
-  /* --- Chatbot State & Logic --- */
+  
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatInput, setChatInput] = useState("");
   const [chatFile, setChatFile] = useState(null);
@@ -102,10 +102,10 @@ const PassDash = () => {
     },
   ]);
 
-  // Ref for auto-scroll
+  
   const chatBodyRef = useRef(null);
 
-  // Auto-scroll to bottom when messages change
+
   useEffect(() => {
     if (chatBodyRef.current) {
       chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
@@ -173,7 +173,7 @@ const PassDash = () => {
         }),
       });
 
-      const botReplyText = await res.text(); // ✅ IMPORTANT (text response)
+      const botReplyText = await res.text(); // (text response)
 
       setChatMessages((prev) =>
         prev.map((m) =>
@@ -271,7 +271,6 @@ const PassDash = () => {
 
     setShowPopup(true);
 
-    // auto close popup after 4 sec
     setTimeout(() => setShowPopup(false), 4000);
   };
 
@@ -324,8 +323,6 @@ const PassDash = () => {
             <h1>Welcome, {passname}</h1>
             <p>Track your flight and airport updates in real time</p>
           </section>
-
-          {/* Stats Cards */}
           <section className="stats-grid">
             <div className="stat-card blue">
               <div className="icon-box">
@@ -381,7 +378,7 @@ const PassDash = () => {
           </section>
 
           <section className="pass-content-grid">
-            {/* Flight Table */}
+
             <div className="pass11">
               <div className="pass-flight-section">
                 <h3 className="pass-section-title">Flight Status</h3>
@@ -424,7 +421,6 @@ const PassDash = () => {
               </div>
             </div>
 
-            {/* Shuttle Cards */}
             <div className="pass11">
               <div className="pass-shuttle-section">
                 <h3 className="pass-section-title">Internal Shuttle Service</h3>
@@ -511,12 +507,10 @@ const PassDash = () => {
         <p>© 2025 Airport Schedule Monitoring System</p>
         <span>Built using MERN Stack | Academic Project</span>
       </footer>
-      {/* --- Floating Chatbot UI --- */}
-      {/* 1. Floating Action Button (FAB) */}
       <div
         className={`passchat-fab ${isChatOpen ? "passchat-fab-active" : ""}`}
         onClick={() => {
-          toggleChat(); // ✅ toggle only once
+          toggleChat(); 
         }}
       >
         {isChatOpen ? (
@@ -526,10 +520,10 @@ const PassDash = () => {
         )}
       </div>
 
-      {/* 2. Chat Popup Window */}
+     
       {isChatOpen && (
         <div className="passchat-window">
-          {/* Header */}
+        
           <div className="passchat-header">
             <div className="passchat-header-info">
               <span className="passchat-title">Airport Assistant</span>
@@ -539,14 +533,14 @@ const PassDash = () => {
                   <button
                     className="passchat-reset"
                     onClick={async () => {
-                      // ✅ clear DB when opening chat
+                   
                       setChatMessages([
                         {
                           id: 1,
                           sender: "bot",
                           text: "Hi 👋 I’m Airport Assistant. You can ask about flights, gates, or shuttle services.",
                         },
-                      ]); // ✅ clear frontend messages also
+                      ]); 
                     }}
                   >
                     Reset
@@ -558,8 +552,6 @@ const PassDash = () => {
               <i className="fa-solid fa-xmark"></i>
             </button>
           </div>
-
-          {/* Body (Messages) */}
           <div className="passchat-body" ref={chatBodyRef}>
             {chatMessages.map((msg) => (
               <div
@@ -580,7 +572,7 @@ const PassDash = () => {
             ))}
           </div>
 
-          {/* Input Area */}
+      
           <div className="passchat-input-area">
             {chatFile && (
               <div className="passchat-file-preview">

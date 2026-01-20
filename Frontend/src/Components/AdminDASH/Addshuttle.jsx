@@ -69,7 +69,7 @@ const Addshuttle = () => {
 
   const [fid, setf] = useState([]);
   const handleinter = async () => {
-    // Validation
+    
     if (!shuttleid) {
       toast.error("Shuttle ID is required!");
       return;
@@ -114,10 +114,8 @@ const Addshuttle = () => {
 
     if (shutype === "Internal") {
       try {
-        // Save internal shuttle
+       
         await axios.post("http://localhost:5000/internalshuttle", data1);
-
-        // Update flight using MongoDB _id (already in flightNo)
         await axios.put(`http://localhost:5000/flightdetail/fli/${flightId}`, {
           completed: false,
         });
@@ -172,7 +170,6 @@ const Addshuttle = () => {
         </div>
 
         <form className="shuttle-form">
-          {/* Row 1 */}
           <div className="form-row">
             <div className="form-group">
               <label>Shuttle ID</label>
@@ -202,7 +199,6 @@ const Addshuttle = () => {
             </div>
           </div>
 
-          {/* Conditional Flight & Gate Number Row (Only for Internal) */}
           {shutype === "Internal" && (
             <div className="form-row">
               <div className="form-group">
@@ -250,7 +246,6 @@ const Addshuttle = () => {
             </div>
           )}
 
-          {/* Row 2 */}
           <div className="form-row">
             <div className="form-group">
               <label>Route From</label>
@@ -279,7 +274,6 @@ const Addshuttle = () => {
             </div>
           </div>
 
-          {/* Row 3 */}
           <div className="form-row">
             <div className="form-group">
               <label>Pickup Location</label>
@@ -308,7 +302,6 @@ const Addshuttle = () => {
             </div>
           </div>
 
-          {/* Row 4 */}
           <div className="form-row">
             <div className="form-group">
               <label>Schedule / Frequency</label>
@@ -337,7 +330,6 @@ const Addshuttle = () => {
             </div>
           </div>
 
-          {/* Row 5 */}
           <div className="form-row full-width">
             <div className="form-group">
               <label>Status</label>

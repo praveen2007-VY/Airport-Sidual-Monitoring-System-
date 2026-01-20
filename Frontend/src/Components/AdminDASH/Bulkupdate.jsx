@@ -139,7 +139,6 @@ const Bulkupdate = () => {
   return (
     <div className="bulk-update-container">
       <div className="bulk-card">
-        {/* Header */}
         <div className="bulk-header">
           <div className="header-text">
             <h2>Bulk Management</h2>
@@ -171,7 +170,6 @@ const Bulkupdate = () => {
         </div>
 
         <div className="bulk-content-scroll">
-          {/* Flights Section */}
           <div className="section-container">
             <h3 className="section-title">Flights</h3>
             <div className="bulk-table-wrapper">
@@ -238,8 +236,6 @@ const Bulkupdate = () => {
               </table>
             </div>
           </div>
-
-          {/* Shuttles Section */}
           <div className="section-container">
             <h3 className="section-title">Shuttle Buses</h3>
             <div className="bulk-table-wrapper">
@@ -315,8 +311,6 @@ const Bulkupdate = () => {
             </div>
           </div>
         </div>
-
-        {/* Footer */}
         <div className="bulk-footer">
           <span className="selection-count">
             {totalSelectedCount} items selected

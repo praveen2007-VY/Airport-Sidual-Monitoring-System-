@@ -33,7 +33,6 @@ const Flightedit = () => {
       setTo(res.data.to);
       setStatus(res.data.status);
       setGate(res.data.gate);
-      // TIME
     };
     fetchdata();
   }, [sf]);

@@ -28,9 +28,6 @@ const RunwayEditModal = ({ isOpen, onClose, runway, onSave }) => {
     const handleSave = async () => {
         if (!selectedStatus) return;
 
-        // const confirmUpdate = window.confirm("Are you sure you want to change the runway status?");
-        // if (!confirmUpdate) return;
-
         setIsSaving(true);
         try {
             await onSave(runway._id, selectedStatus);

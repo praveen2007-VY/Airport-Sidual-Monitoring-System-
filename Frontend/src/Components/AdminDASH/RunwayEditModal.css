@@ -1,4 +1,3 @@
-/* RunwayEditModal.css */
 .runway-modal-backdrop {
     position: fixed;
     top: 0;
@@ -57,7 +56,7 @@
     font-weight: 500;
 }
 
-/* Status Selectors */
+
 .status-options-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -88,7 +87,6 @@
     box-shadow: 0 0 0 2px #fff, 0 0 0 4px #e2e8f0;
 }
 
-/* Status Specific Styles */
 .status-option-card.available.selected {
     background-color: #dcfce7;
     color: #166534;
@@ -119,7 +117,7 @@
     font-weight: 600;
 }
 
-/* Footer & Buttons */
+
 .runway-modal-footer {
     padding: 16px 24px;
     background-color: #f8fafc;

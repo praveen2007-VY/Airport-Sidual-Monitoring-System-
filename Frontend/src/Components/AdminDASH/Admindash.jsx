@@ -125,7 +125,6 @@ const Admindash = () => {
 
   return (
     <div className="admin-container">
-      {/* Top Navigation */}
       <header className="topbar">
         <div className="brand1">
           <h2>
@@ -133,7 +132,6 @@ const Admindash = () => {
           </h2>
         </div>
 
-        {/* Profile Section */}
         <div className="profile-container">
           <div className="profile-trigger" tabIndex="0">
             <div className="avatar">
@@ -148,7 +146,6 @@ const Admindash = () => {
             </div>
             <i className="fa-solid fa-chevron-down dropdown-arrow"></i>
 
-            {/* Dropdown Menu */}
             <div className="dropdown-menu">
               <div className="dropdown-header">
                 <span className="dd-name">{adminname}</span>
@@ -169,9 +166,7 @@ const Admindash = () => {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="dashboard-content">
-        {/* Welcome Section */}
         <section className="welcome-section">
           <h1>Welcome, {adminname}</h1>
           <p>
@@ -179,8 +174,6 @@ const Admindash = () => {
             real time.
           </p>
         </section>
-
-        {/* Stats Cards */}
         <section className="stats-grid">
           <div className="stat-card blue">
             <div className="icon-box">
@@ -219,8 +212,6 @@ const Admindash = () => {
             </div>
           </div>
         </section>
-
-        {/* Flight Actions */}
         <section className="actions-section">
           <div className="action-card">
             <div className="action-text">
@@ -240,8 +231,6 @@ const Admindash = () => {
             </div>
           </div>
         </section>
-
-        {/* Flight Status Table */}
         <section className="table-section">
           <div className="section-header">
             <h3>Flight Status Overview</h3>
@@ -290,13 +279,10 @@ const Admindash = () => {
                     </td>
                   </tr>
                 ))}
-                {/* Placeholder for more rows to show scrolling if needed */}
               </tbody>
             </table>
           </div>
         </section>
-
-        {/* Airport Shuttle Management Section */}
         <section className="table-section shuttle-section">
           <div className="section-header shuttle-header">
             <div>
@@ -310,8 +296,6 @@ const Admindash = () => {
               <i className="fa-solid fa-plus"></i> Add Shuttle Bus
             </button>
           </div>
-
-          {/* Internal Shuttles Subsection */}
           <div className="shuttle-subsection">
             <h4 className="subsection-title">
               <i className="fa-solid fa-bus"></i> Internal Airport Shuttle Buses
@@ -372,8 +356,6 @@ const Admindash = () => {
               </table>
             </div>
           </div>
-
-          {/* External Shuttles Subsection */}
           <div className="shuttle-subsection">
             <h4 className="subsection-title">
               <i className="fa-solid fa-city"></i> External Airport Shuttle
@@ -432,8 +414,6 @@ const Admindash = () => {
             </div>
           </div>
         </section>
-
-        {/* Staff Management Section */}
         <section className="staff-section">
           <div className="section-header shuttle-header">
             <div>

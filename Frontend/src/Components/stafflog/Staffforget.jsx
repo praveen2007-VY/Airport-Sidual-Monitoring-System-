@@ -51,8 +51,6 @@ const Adminforget = () => {
       }),
     });
   };
-
-  // Generate secure 4-digit OTP
   const otpgen = () => {
     return Math.floor(1000 + Math.random() * 9000).toString();
   };
@@ -88,7 +86,6 @@ const Adminforget = () => {
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Auto focus next input
     if (value && index < 3) {
       const nextInput = document.getElementById(`otp-${index + 1}`);
       if (nextInput) nextInput.focus();
@@ -101,14 +98,12 @@ const Adminforget = () => {
 
     const enteredOtp = otp.join("");
 
-    // Wrong OTP
+  
     if (enteredOtp.length !== 4 || enteredOtp !== otpsent) {
       setMessage({ type: "error", text: "Invalid OTP. Please try again." });
 
-      // clear OTP boxes
       setOtp(["", "", "", ""]);
 
-      // focus first otp
       setTimeout(() => {
         document.getElementById("otp-0")?.focus();
       }, 100);
@@ -116,7 +111,7 @@ const Adminforget = () => {
       return;
     }
 
-    // Correct OTP
+  
     setMessage({ type: "success", text: "OTP Verified Successfully" });
     setTimeout(() => setStep(3), 800);
   };
@@ -134,7 +129,7 @@ const Adminforget = () => {
       });
       return;
     }
-    // Simulate Update
+  
 
     const res = await axios.put(
       `http://localhost:5000/staffforget/${passid}`,
@@ -143,7 +138,6 @@ const Adminforget = () => {
       },
     );
     setMessage({ type: "success", text: "Password Updated Successfully!" });
-    // Navigate to login or reset logic here
     fetchtodo();
     setOtpsent("");
     setOtp(["", "", "", ""]);
@@ -163,11 +157,6 @@ const Adminforget = () => {
   return (
     <div className="forgot-container">
       <div className="forgot-card">
-        {/* Left Side Illustration */}
-        {/* <div className="forgot-illustration"> */}
-        {/* <div className="illustration-content">
-                        {/* <h2>Secure Your Account</h2>
-                        <p>Follow the steps to reset your password and regain access.</p> */}
         <div className="passenger-register__illustration-container">
           <img
             src={passenger}
@@ -176,10 +165,6 @@ const Adminforget = () => {
           />
           <div className="passenger-register__overlay"></div>
         </div>
-
-        {/* </div> */}
-
-        {/* Right Side Form */}
         <div className="forgot-form-section">
           <button
             className="back-btn"
@@ -245,7 +230,6 @@ const Adminforget = () => {
                   : handleUpdatePassword
             }
           >
-            {/* STEP 1: Email */}
             {step === 1 && (
               <div className="form-step fade-in">
                 <div className="input-group">
@@ -274,7 +258,6 @@ const Adminforget = () => {
               </div>
             )}
 
-            {/* STEP 2: OTP */}
             {step === 2 && (
               <div className="form-step fade-in">
                 <div className="otp-group">
@@ -300,8 +283,6 @@ const Adminforget = () => {
                 </button>
               </div>
             )}
-
-            {/* STEP 3: New Password */}
             {step === 3 && (
               <div className="form-step fade-in">
                 <div className="input-group">

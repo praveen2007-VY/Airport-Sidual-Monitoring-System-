@@ -1,4 +1,3 @@
-/* Add Shuttle Container */
 .add-shuttle-container {
     min-height: 100vh;
     background-color: #f8fafc;
@@ -53,9 +52,7 @@
     grid-template-columns: 1fr;
 }
 
-/* .form-group label styles are now in GlobalForms.css */
 
-/* Input styles moved to GlobalForms.css */
 
 .form-actions {
     display: flex;

@@ -10,7 +10,6 @@
     scroll-behavior: smooth;
   }
   
-  /* --- HOME SECTION (PRESERVED & TWEAKED FOR LAYOUT) --- */
   .main1 {
     width: 100vw;
     min-height: 100vh;
@@ -20,7 +19,6 @@
     position: relative;
   }
   
-  /* Layout Fix: Allow scrolling */
   .home-page {
     width: 100%;
     overflow-x: hidden;
@@ -97,8 +95,7 @@
     transform: scale(1.05);
     text-shadow: none;
   }
-  
-  /* Buttons */
+
   .login-btn{
     margin-right: 10px;
   }
@@ -140,12 +137,11 @@
   }
   .get-btn:hover { transform: translateY(-2px) scale(1.05); background-color: #04227a; }
   
-  
-  /* --- SECTION: LOGIN (.main2) --- */
+
   #login {
     width: 100%;
     min-height: 100vh;
-    background-color: #f0f2f5; /* Light professional background */
+    background-color: #f0f2f5; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -181,7 +177,6 @@
     height: 40px;
     
   }
-  /* Cards */
   .box1, .box2, .box3 {
     margin-top: 50px;
     background: white;
@@ -238,7 +233,6 @@
     line-height: 1.5;
   }
   
-  /* Buttons */
   .rb {
     padding: 12px 30px;
     font-size: 15px;
@@ -250,7 +244,7 @@
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     width: 80%;
-    margin-top: auto; /* Push to bottom */
+    margin-top: auto;
   }
   
   .rb:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
@@ -258,8 +252,6 @@
   .rb.staff { background: linear-gradient(135deg, #f97316, #ea580c); }
   .rb.passenger { background: linear-gradient(135deg, #10b981, #059669); }
   
-  
-  /* --- SECTION: ABOUT (.main3) --- */
   #about {
     width: 100%;
     background-color: #ffffff;
@@ -280,8 +272,8 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: auto; /* Reset */
-    height: auto; /* Reset */
+    width: auto; 
+    height: auto; 
   }
   
   .main33 > img {
@@ -299,9 +291,9 @@
     flex: 1;
     text-align: left;
     padding: 0;
-    width: auto; /* Reset */
-    height: auto; /* Reset */
-    display: block; /* Reset flex */
+    width: auto; 
+    height: auto; 
+    display: block; 
   }
   
   .main31 h1 {
@@ -328,8 +320,7 @@
     text-align: justify;
   }
   
-  
-  /* --- SECTION: CONTACT (.main4) --- */
+ 
   #contact {
     background-color: #f9fbfd;
   }
@@ -343,12 +334,12 @@
     padding: 80px 10%;
     gap: 60px;
     width: 100%;
-    height: auto; /* Reset fixed height */
+    height: auto;
   }
   
   .con {
     flex: 1;
-    width: auto; height: auto; /* Reset */
+    width: auto; height: auto; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -357,7 +348,7 @@
   
   .conimg {
     flex: 1;
-    width: auto; height: auto; /* Reset */
+    width: auto; height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -414,7 +405,6 @@
   }
   
   
-  /* --- FOOTER --- */
   .footer {
     width: 100%;
     padding: 30px 10px;
@@ -422,31 +412,27 @@
     background: #0f172a;
     color: #cbd5e1;
     border-top: 1px solid rgba(255,255,255,0.05);
-    box-shadow: none; /* Reset old shadow */
+    box-shadow: none; 
   }
   
   .footer p { font-size: 16px; font-weight: 500; margin-bottom: 8px; color: white; }
   .footer span { font-size: 13px; opacity: 0.6; }
   
-  
-  /* --- RESPONSIVE DESIGN --- */
+
   @media screen and (max-width: 900px) {
     .nav { padding: 0 20px; }
-    .navc { display: none; } /* Hide menu on tablet/mobile for simplicity */
+    .navc { display: none; } 
     
     .hero h1 { font-size: 32px; }
-    
-    /* Login Stack */
+  
     .main21 { flex-direction: column; align-items: center; }
     .box1, .box2, .box3 { width: 90%; max-width: 400px; }
-    
-    /* About Stack */
+  
     .main3 { flex-direction: column; padding: 60px 20px; gap: 40px; }
     .main33, .main31 { text-align: center; }
     .main33 { order: -1; }
     .main31 h1::after { margin: 10px auto; }
-    
-    /* Contact Stack */
+   
     .main4 { flex-direction: column-reverse; padding: 60px 20px; gap: 40px; }
     .con, .conimg { text-align: center; align-items: center; }
     .con h1::after { margin: 10px auto; }

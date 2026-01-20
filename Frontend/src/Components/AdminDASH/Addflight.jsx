@@ -187,7 +187,6 @@ const Addflight = () => {
             <div className="form-group">
               <label>Departure Time</label>
               <div className="input-wrapper">
-                {/* <i className="fa-regular fa-clock" id="addfs"></i> */}
                 <input
                   type="time"
                   onChange={(e) => settime(e.target.value)}

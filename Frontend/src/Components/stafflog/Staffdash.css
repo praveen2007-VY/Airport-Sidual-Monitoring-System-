@@ -1,8 +1,6 @@
-/* Global Dashboard Layout */
 .admin-container {
   min-height: 100vh;
   background-color: #f8fafc;
-  /* Very light blue-grey background */
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: #1e293b;
 }
@@ -12,19 +10,6 @@
   margin: 0 auto;
   padding: 30px;
 }
-
-/* Top Navigation Bar */
-/* .topbar {
-  background: white;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-} */
 
 .topbar {
   background: linear-gradient(135deg, #1e3a8a, #2563eb);
@@ -41,7 +26,6 @@
   align-items: center;
   gap: 12px;
   color: #1e40af;
-  /* Primary Blue */
 }
 
 .brand i {
@@ -55,7 +39,6 @@
   letter-spacing: -0.5px;
 }
 
-/* Profile Dropdown Section */
 .profile-container {
   position: relative;
 }
@@ -113,7 +96,6 @@
   transform: rotate(180deg);
 }
 
-/* Dropdown Menu */
 .dropdown-menu {
   position: absolute;
   top: 120%;
@@ -191,7 +173,6 @@
   background: #fef2f2;
 }
 
-/* Welcome Section */
 .welcome-section {
   text-align: center;
   margin: 40px 0 50px;
@@ -202,7 +183,6 @@
   font-size: 32px;
   font-weight: 800;
   color: #1e3a8a;
-  /* Darker Blue */
   margin-bottom: 10px;
 }
 
@@ -213,7 +193,6 @@
   margin: 0 auto;
 }
 
-/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -226,7 +205,7 @@
   }
 }
 
-/* Stats Grid */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -278,7 +257,6 @@
   line-height: 1;
 }
 
-/* Stat Card Colors */
 .stat-card.blue {
   border-bottom: 4px solid #3b82f6;
 }
@@ -315,8 +293,6 @@
   color: #ef4444;
 }
 
-
-/* Flight Actions Section */
 .actions-section {
   margin-bottom: 40px;
 }
@@ -396,7 +372,6 @@
   background: #f8fafc;
 }
 
-/* Tables */
 .table-section,
 .staff-section {
   margin-bottom: 40px;
@@ -461,7 +436,6 @@ tr:hover td {
   background: #f8fafc;
 }
 
-/* Badges */
 .badge {
   padding: 6px 12px;
   border-radius: 9999px;
@@ -500,7 +474,6 @@ tr:hover td {
   color: #b91c1c;
 }
 
-/* Table Buttons */
 .table-btn {
   background: white;
   border: 1px solid #cbd5e1;
@@ -545,8 +518,6 @@ tr:hover td {
   background: #16a34a;
 }
 
-
-/* Runway Grid */
 .runway-section {
   background: white;
   border-radius: 16px;
@@ -589,7 +560,6 @@ tr:hover td {
   border-radius: 99px;
 }
 
-/* Runway Colors */
 .runway-card.active {
   background: linear-gradient(135deg, #22c55e, #16a34a);
 }
@@ -602,7 +572,6 @@ tr:hover td {
   background: linear-gradient(135deg, #ef4444, #dc2626);
 }
 
-/* Runway Edit Feature */
 .runway-card {
   position: relative;
   display: flex;
@@ -642,7 +611,6 @@ tr:hover td {
   color: #1e3a8a;
 }
 
-/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -758,7 +726,6 @@ tr:hover td {
   gap: 12px;
 }
 
-/* Shuttle Management Styles */
 .shuttle-section {
   padding-bottom: 20px;
 }
@@ -793,7 +760,7 @@ tr:hover td {
   font-size: 18px;
 }
 
-/* Shuttle Badges */
+
 .badge.running {
   background: #dcfce7;
   color: #166534;
@@ -830,5 +797,3 @@ tr:hover td {
   box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
   min-width: 80px;
 }
-
-/* Hover */

@@ -1,4 +1,3 @@
-/* Edit Shuttle Container - Similar to Add Shuttle */
 .edit-shuttle-container {
     min-height: 100vh;
     background-color: #f8fafc;
@@ -53,11 +52,6 @@
     grid-template-columns: 1fr;
 }
 
-/* .form-group label styles are now in GlobalForms.css */
-
-/* Input styles moved to GlobalForms.css */
-
-/* Disabled Input Styling */
 .disabled-input {
     background-color: #f1f5f9 !important;
     color: #64748b !important;
@@ -122,8 +116,6 @@
         transform: translateY(0);
     }
 }
-
-/* Responsive */
 @media (max-width: 640px) {
     .form-row {
         grid-template-columns: 1fr;

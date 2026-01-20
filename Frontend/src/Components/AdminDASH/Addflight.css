@@ -1,4 +1,4 @@
-/* Add Flight Container */
+
 .add-flight-container {
     min-height: 100vh;
     background-color: #f8fafc;
@@ -49,9 +49,6 @@
     margin-bottom: 24px;
 }
 
-/* .form-group label styles are now in GlobalForms.css */
-
-/* Input styles moved to GlobalForms.css */
 
 .form-actions {
     display: flex;

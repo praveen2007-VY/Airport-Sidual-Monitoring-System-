@@ -48,23 +48,20 @@ const RunwayStatus = () => {
                 throw new Error("Failed to update status");
             }
 
-            // Refresh data
+
             await fetchRunways();
 
-            // Show toast (simple alert for now as per requirements)
-            // console.log("Runway status updated successfully");
         } catch (error) {
             console.error("Error updating status:", error);
-            throw error; // Propagate to modal to handle error state
+            throw error; 
         }
     };
 
     return (
         <div className="runway-container">
             {runways.map((runway) => {
-                // Determine CSS class based on status
-                let statusClass = "runway-status--available"; // pills
-                let cardClass = "runway-card--available"; // card background
+                let statusClass = "runway-status--available"; 
+                let cardClass = "runway-card--available"; 
 
                 if (runway.status === "In Use") {
                     statusClass = "runway-status--in-use";

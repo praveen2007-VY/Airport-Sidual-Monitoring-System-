@@ -1,5 +1,3 @@
-/* PassDash.css - Passenger Dashboard Styles */
-
 :root {
   --pass-primary: #3b82f6;
   --pass-secondary: #6366f1;
@@ -27,7 +25,6 @@
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   overflow-y: auto;
   scrollbar-width: none;
-  /* Firefox */
   -ms-overflow-style: none;
 
 }
@@ -73,7 +70,6 @@ body {
   background-color: var(--pass-bg);
 }
 
-/* --- Header Section --- */
 .pass-header {
   background: white;
   padding: 1rem 2rem;
@@ -97,7 +93,6 @@ body {
   margin-right: 10px;
 }
 
-/* Profile Section */
 .pass-profile-container {
   display: flex;
   align-items: center;
@@ -131,8 +126,6 @@ body {
 .pass-dropdown-arrow {
   color: var(--pass-text-muted);
 }
-
-/* Dropdown (Keeping simple structure from original) */
 .pass-dropdown-menu {
   display: none;
   position: absolute;
@@ -166,14 +159,12 @@ body {
   background-color: #f1f5f9;
 }
 
-/* --- Dashboard Content --- */
 .pass-dashboard-content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-/* Welcome Section */
 .pass-welcome-section {
   margin-bottom: 2rem;
 }
@@ -186,8 +177,7 @@ body {
 .pass-welcome-section p {
   color: var(--pass-text-muted);
 }
-
-/* Stats Grid */
+ 
 .pass-stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -276,7 +266,7 @@ body {
   cursor: pointer;
 }
 
-/* --- Layout Grid (Table + Shuttle) --- */
+
 .pass-content-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -292,7 +282,7 @@ body {
   padding-left: 10px;
 }
 
-/* --- Flight Table Styling --- */
+
 .pass-flight-section {
   background: var(--pass-card-bg);
   border-radius: var(--pass-radius-lg);
@@ -353,10 +343,8 @@ body {
   background-color: #f8fafc;
 }
 
-/* --- Shuttle Cards Section --- */
 .pass-shuttle-section {
   background: #f1f5f9;
-  /* Slightly darker container for contrast */
   border-radius: var(--pass-radius-lg);
   padding: 1.5rem;
 
@@ -372,11 +360,9 @@ body {
   padding-right: 5px;
   overflow-y: auto;
   scrollbar-width: none;
-  /* Firefox */
   -ms-overflow-style: none;
 }
 
-/* Custom Scrollbar for shuttle container */
 .pass-shuttle-container::-webkit-scrollbar {
   width: 6px;
 }
@@ -438,7 +424,6 @@ body {
   align-items: center;
 }
 
-/* --- Status Badges --- */
 .pass-status-badge {
   padding: 4px 12px;
   border-radius: 20px;
@@ -465,18 +450,14 @@ body {
   color: var(--pass-red);
 }
 
-/* Responsive */
+
 @media (max-width: 900px) {
   .pass-content-grid {
     grid-template-columns: 1fr;
   }
 }
 
-/* ========================================= */
-/*       PASSENGER CHATBOT UI STYLES         */
-/* ========================================= */
 
-/* --- 1. Floating Action Button (FAB) --- */
 .passchat-fab {
   position: fixed;
   bottom: 24px;
@@ -505,7 +486,7 @@ body {
   transform: rotate(90deg);
 }
 
-/* --- 2. Chat Window --- */
+
 .passchat-window {
   position: fixed;
   bottom: 100px;
@@ -536,7 +517,7 @@ body {
   }
 }
 
-/* --- 3. Chat Header --- */
+
 .passchat-header {
   background: linear-gradient(135deg, #3b82f6, #6366f1);
   padding: 16px;
@@ -568,7 +549,6 @@ body {
   width: 8px;
   height: 8px;
   background-color: #10b981;
-  /* Green */
   border-radius: 50%;
   box-shadow: 0 0 5px rgba(16, 185, 129, 0.8);
 }
@@ -587,7 +567,7 @@ body {
   opacity: 1;
 }
 
-/* --- 4. Chat Body --- */
+
 .passchat-body {
   flex: 1;
   background-color: #f8fafc;
@@ -598,7 +578,6 @@ body {
   gap: 12px;
 }
 
-/* Scrollbar styles for chat body */
 .passchat-body::-webkit-scrollbar {
   width: 6px;
 }
@@ -608,7 +587,6 @@ body {
   border-radius: 3px;
 }
 
-/* Messages */
 .passchat-message {
   display: flex;
   max-width: 85%;
@@ -632,14 +610,13 @@ body {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* User Bubble Style */
+
 .passchat-user .passchat-bubble {
   background-color: #3b82f6;
   color: white;
   border-top-right-radius: 2px;
 }
 
-/* Bot Bubble Style */
 .passchat-bot .passchat-bubble {
   background-color: white;
   color: #1e293b;
@@ -662,7 +639,6 @@ body {
   background: #f1f5f9;
 }
 
-/* --- 5. Input Area --- */
 .passchat-input-area {
   padding: 12px;
   background-color: white;
@@ -736,14 +712,13 @@ body {
   transition: background 0.2s;
   font-size: 0.9rem;
   padding-left: 3px;
-  /* visual optic adjustment for plane icon */
 }
 
 .passchat-send-btn:hover {
   background-color: #2563eb;
 }
 
-/* --- Mobile Responsiveness --- */
+
 @media (max-width: 480px) {
   .passchat-window {
     width: 92vw;
@@ -765,7 +740,7 @@ body {
   margin-left: 10px;
 } */
 
-/* Reset Button */
+
 .passchat-reset{
   appearance: none;
   border: none;
@@ -790,7 +765,7 @@ body {
               filter .18s ease;
 }
 
-/* Hover effect */
+
 .passchat-reset:hover{
   transform: translateY(-1px) scale(1.03);
   filter: brightness(1.05);
@@ -799,19 +774,19 @@ body {
               0 6px 14px rgba(0, 0, 0, 0.14);
 }
 
-/* Click effect */
+
 .passchat-reset:active{
   transform: translateY(0px) scale(0.98);
   filter: brightness(0.98);
 }
 
-/* Focus (accessibility) */
+
 .passchat-reset:focus-visible{
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.65),
               0 0 0 6px rgba(255, 47, 109, 0.45);
 }
 
-/* Disabled (if ever used) */
+
 .passchat-reset:disabled{
   opacity: .6;
   cursor: not-allowed;

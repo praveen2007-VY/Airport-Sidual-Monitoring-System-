@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 const Shuttleedit = () => {
   const navigate = useNavigate();
   const { type, id } = useParams();
-  // Mock initial state to simulate pre-filled data
   const [shuttleId, setShuttleId] = useState("");
   const [shuttleType, setShuttleType] = useState("");
   const [flightNo, setFlightNo] = useState("");
@@ -139,7 +138,6 @@ const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f5
         </div>
 
         <form className="shuttle-form">
-          {/* Row 1: ID and Type */}
           <div className="form-row">
             <div className="form-group">
               <label>Shuttle ID</label>
@@ -169,8 +167,6 @@ const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f5
               </div>
             </div>
           </div>
-
-          {/* Row 2: Flight & Gate (Internal Only) */}
           {shuttleType === "Internal" && (
             <div className="form-row">
               <div className="form-group">
@@ -201,8 +197,6 @@ const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f5
               </div>
             </div>
           )}
-
-          {/* Row 3: Route */}
           <div className="form-row">
             <div className="form-group">
               <label>Route From</label>
@@ -228,8 +222,6 @@ const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f5
               </div>
             </div>
           </div>
-
-          {/* Row 4: Pickup & Drop */}
           <div className="form-row">
             <div className="form-group">
               <label>Pickup Location</label>
@@ -255,8 +247,6 @@ const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f5
               </div>
             </div>
           </div>
-
-          {/* Row 5: Schedule & Staff */}
           <div className="form-row">
             <div className="form-group">
               <label>Schedule / Frequency</label>
@@ -282,8 +272,6 @@ const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f5
               </div>
             </div>
           </div>
-
-          {/* Row 6: Status */}
           <div className="form-row full-width">
             <div className="form-group">
               <label>Status</label>
@@ -300,8 +288,6 @@ const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f5
               </div>
             </div>
           </div>
-
-          {/* Actions */}
           <div className="form-actions">
             <button type="button" className="btn-cancel" onClick={handleCancel}>
               Cancel

@@ -237,7 +237,6 @@
     box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
 }
 
-/* OTP Styles */
 .otp-group {
     display: flex;
     gap: 12px;
@@ -265,7 +264,6 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
 }
 
-/* Messages */
 .msg-box {
     padding: 12px;
     border-radius: 8px;
@@ -287,7 +285,6 @@
     border: 1px solid #fecaca;
 }
 
-/* Password Match Styles */
 .match-success input {
     border-color: #16a34a;
 }
@@ -320,7 +317,7 @@
     color: #ef4444;
 }
 
-/* Animations */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -337,7 +334,6 @@
     animation: fadeIn 0.4s ease-out;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .forgot-card {
         flex-direction: column;
@@ -347,7 +343,6 @@
 
     .forgot-illustration {
         display: none;
-        /* Hide illustration on mobile to save space, or reduce height */
     }
 
     .forgot-form-section {

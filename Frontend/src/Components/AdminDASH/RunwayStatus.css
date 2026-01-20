@@ -1,13 +1,12 @@
-/* Runway Status Module CSS */
 :root {
-    /* Colors - Easy Configuration */
+    
     --runway-bg: #ffffff;
     --runway-border: #e2e8f0;
     --runway-text-primary: #1e293b;
     --runway-text-secondary: #64748b;
     --runway-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
 
-    /* Status Colors */
+  
     --status-available-bg: #dcfce7;
     --status-available-text: #166534;
 
@@ -17,33 +16,27 @@
     --status-maintenance-bg: #fee2e2;
     --status-maintenance-text: #b91c1c;
 
-    /* Button Colors */
+  
     --btn-hover-bg: #f1f5f9;
 }
 
-/* Container */
+
 .runway-container {
     display: flex;
     gap: 20px;
     width: 100%;
     flex-wrap: wrap;
-    /* Stack on small screens */
     padding: 20px 0;
     box-sizing: border-box;
 }
-
-/* Card Component */
 .runway-card {
     background: var(--runway-bg);
     border: 1px solid var(--runway-border);
     border-radius: 16px;
-    /* 3rd Requirement: Rounded corners */
     padding: 24px;
     box-shadow: var(--runway-shadow);
-    /* 3rd Requirement: Soft shadow */
     flex: 1;
     min-width: 300px;
-    /* Ensure decent width before wrapping */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -54,8 +47,6 @@
     transform: translateY(-2px);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
 }
-
-/* Status-based Card Styles */
 .runway-card--available {
     background-color: #F0FFF4;
     border-left: 4px solid var(--status-available-text);
@@ -71,7 +62,6 @@
     border-left: 4px solid var(--status-maintenance-text);
 }
 
-/* Header Section */
 .runway-card__header {
     display: flex;
     justify-content: space-between;
@@ -87,11 +77,9 @@
     letter-spacing: 0.5px;
 }
 
-/* Status Badges */
 .runway-status {
     padding: 6px 12px;
     border-radius: 9999px;
-    /* Pill shape */
     font-size: 12px;
     font-weight: 700;
     text-transform: capitalize;
@@ -112,7 +100,6 @@
     color: var(--status-maintenance-text);
 }
 
-/* Body Section - Center */
 .runway-card__body {
     text-align: center;
     margin-bottom: 24px;
@@ -120,7 +107,6 @@
 
 .runway-card__id {
     font-size: 48px;
-    /* Large bold identifier */
     font-weight: 800;
     color: var(--runway-text-primary);
     margin: 0;
@@ -133,7 +119,6 @@
     font-weight: 500;
 }
 
-/* Footer Section */
 .runway-card__footer {
     display: flex;
     justify-content: space-between;
@@ -147,7 +132,6 @@
     color: var(--runway-text-secondary);
 }
 
-/* Edit Button */
 .runway-card__edit-btn {
     background: transparent;
     border: 1px solid var(--runway-border);
