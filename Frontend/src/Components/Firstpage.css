@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
   }
   
   html {
@@ -17,8 +18,18 @@
     background-size: cover;
     background-position: center;
     position: relative;
-  }
+    scrollbar-width: none;
+     -ms-overflow-style: none;
+}
   
+.m111{
+    overflow-y: auto;
+    scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;  
+}
+  .m111::-webkit-scrollbar {
+  display: none;
+}
   .home-page {
     width: 100%;
     overflow-x: hidden;

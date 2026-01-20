@@ -26,6 +26,7 @@ const Firstpage = () => {
   };
   return (
     <>
+    <section className="m111">
     <div className="home-page">
     <section id="home">
      <div className="main1">
@@ -129,6 +130,7 @@ const Firstpage = () => {
         <span>Built using MERN Stack | Academic Project</span>
       </footer>
      </div>
+     </section>
     </>
   );
 };
