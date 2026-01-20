@@ -32,7 +32,10 @@ const PassengerLogin = () => {
        
         }
     }
-
+    
+    const forget=()=>{
+        usenav('/passenger/login/forgot');
+    }
     const handleLogin = (e) => {
         e.preventDefault();
         const user = passenger.find((n) => n.email === email);
@@ -200,9 +203,9 @@ const PassengerLogin = () => {
                                 />
                                 Remember Me
                             </label>
-                            <a href="/forgot-password" className="passenger-login__forgot-link">
+                            <button className="passenger-login__forgot-link" onClick={forget}>
                                 Forgot Password?
-                            </a>
+                            </button>
                         </div>
 
                         <button

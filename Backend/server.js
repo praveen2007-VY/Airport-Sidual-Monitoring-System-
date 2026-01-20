@@ -172,6 +172,12 @@ app.get('/staff', async (req, res) => {
     res.status(200).send("Data Fetched Successfully");
 })
 
+app.get('/passengerpass', async (req, res) => {
+    let data = await passenger.find();
+    res.json(data);
+    res.status(200).send("Data Fetched Successfully");
+})
+
 app.get('/staff/:id', async (req, res) => {
     let { id } = req.params;
     let data = await staffmodel.findById(id);
@@ -294,6 +300,22 @@ app.put('/adminpass/updatedetail/:id', async (req, res) => {
     await flight.findByIdAndUpdate(id, data, { new: true });
     res.send("Data Updated Successfully");
 })
+
+app.put('/adminpassforget/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+    console.log(data);
+    await admin.findByIdAndUpdate(id, data, { new: true });
+    res.send("Data Updated Successfully");
+})
+
+app.put('/passengerforget/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+    console.log(data);
+    await passenger.findByIdAndUpdate(id, data, { new: true });
+    res.send("Data Updated Successfully");
+    })
 
 app.put('/internalshuttle/:id', async (req, res) => {
     const id = req.params.id;

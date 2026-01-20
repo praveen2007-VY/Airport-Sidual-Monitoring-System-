@@ -47,18 +47,18 @@
   font-weight: 600;
 }
 
-.input-group {
+.admin-input-group {
   margin-bottom: 18px;
 }
 
-.input-group label {
+.admin-input-group label {
   font-size: 14px;
   color: #555;
   margin-bottom: 6px;
   display: block;
 }
 
-.input-box {
+.admin-input-box {
   display: flex;
   align-items: center;
   background: #f5f8ff;
@@ -68,12 +68,12 @@
   /* border: none; */
 }
 
-.input-box .icon {
+.admin-input-box .icon {
   margin-right: 10px;
   font-size: 16px;
 }
 
-.input-box input {
+.admin-input-box input {
   border: none;
   outline: none;
   background: transparent;

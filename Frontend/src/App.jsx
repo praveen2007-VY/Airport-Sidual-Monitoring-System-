@@ -46,6 +46,8 @@ function App() {
         <Route path='/adminlog/admin/staffreg' element={<Staffreg/>}/>
         <Route path='/stafflog/staff/:id' element={<Staffdash/>}/>
         <Route path='/passenger/dashboard/:id' element={<PassDash/>}/>
+        <Route path='/adminforget/request' element={<Adminforget/>}/>
+        
     </Routes> 
   
   

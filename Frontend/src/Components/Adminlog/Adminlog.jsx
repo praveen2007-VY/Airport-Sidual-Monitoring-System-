@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 const Adminlog = () => {
   const usenav = useNavigate();
   const handleForget = () => {
-    usenav("/adminforget");
+    usenav("/adminforget/request");
   };
 
   const handleho = () => {
@@ -57,9 +57,9 @@ const Adminlog = () => {
               <div class="login-card">
                 <h2>Admin Login</h2>
 
-                <div class="input-group">
+                <div class="admin-input-group">
                   <label>Email Address</label>
-                  <div class="input-box">
+                  <div class="admin-input-box">
                     <span class="icon">📧</span>
                     <input
                       type="email"
@@ -70,9 +70,9 @@ const Adminlog = () => {
                   </div>
                 </div>
 
-                <div class="input-group">
+                <div class="admin-input-group">
                   <label>Password</label>
-                  <div class="input-box">
+                  <div class="admin-input-box">
                     <span class="icon">🔒</span>
                     <input
                       type="password"
