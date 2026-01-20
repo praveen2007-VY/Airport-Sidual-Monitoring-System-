@@ -55,6 +55,7 @@ const Addflight = () => {
       details,
     );
     const newFlightId = res.data._id; 
+    setnewf(newFlightId);
     setair("");
     setairc("");
     setfno("");
@@ -67,8 +68,9 @@ const Addflight = () => {
     webhook();
     toast.success("Flight added successfully");
   };
-
-  const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f50-bebf-e4695d402026";
+  
+  
+  const WEBHOOK="https://local.workflow-praveen.xyz/webhook/ef579df2-ab63-4f50-bebf-e4695d402026";
   const webhook = async ()=>{
     const res = await fetch(WEBHOOK, {
         method: "POST",
@@ -76,9 +78,11 @@ const Addflight = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          message: "FLIGHT"
+          message: "FLIGHT",
         }),
-  })};
+  })
+
+};
 
   return (
     <div className="add-flight-container">

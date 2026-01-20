@@ -309,6 +309,15 @@ app.put('/adminpassforget/:id', async (req, res) => {
     res.send("Data Updated Successfully");
 })
 
+app.put('/staffforget/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+    console.log(data);
+    await staffmodel.findByIdAndUpdate(id, data, { new: true });
+    res.send("Data Updated Successfully");
+})
+
+
 app.put('/passengerforget/:id', async (req, res) => {
     const id = req.params.id;
     const data = req.body;

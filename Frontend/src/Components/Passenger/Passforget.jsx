@@ -37,9 +37,8 @@ const Passforget = () => {
   }, []);
 
   const webhook =
-    "https://local.workflow-praveen.xyz/webhook-test/8af46cc9-1f8d-4292-9874-b0b6f4f72c04";
+    "https://local.workflow-praveen.xyz/webhook/8af46cc9-1f8d-4292-9874-b0b6f4f72c04";
   const otpcall = async (val) => {
-    console.log(val);
     const res = await fetch(webhook, {
       method: "POST",
       headers: {

@@ -25,7 +25,7 @@ const Addshuttle = () => {
   const handleCancel = () => {
     navigate(-1);
   };
-   const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f50-bebf-e4695d402026";
+   const WEBHOOK="https://local.workflow-praveen.xyz/webhook/ef579df2-ab63-4f50-bebf-e4695d402026";
   const webhook1 = async ()=>{
     const res = await fetch(WEBHOOK, {
         method: "POST",

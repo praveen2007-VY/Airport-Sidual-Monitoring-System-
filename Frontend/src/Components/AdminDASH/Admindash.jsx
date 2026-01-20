@@ -103,6 +103,10 @@ const Admindash = () => {
     usenav(`/adminlog`);
   };
 
+  const goadminforget = () => {
+    usenav(`/adminforget/request`);
+  };
+
   const handlestaffedit = async (id, currentAccess) => {
     try {
       const data = {
@@ -151,7 +155,7 @@ const Admindash = () => {
                 <span className="dd-email">{adminemail}</span>
               </div>
               <div className="dropdown-divider"></div>
-              <button className="dropdown-item">
+              <button className="dropdown-item" onClick={goadminforget}>
                 <i className="fa-solid fa-key"></i> Change Password
               </button>
               <button

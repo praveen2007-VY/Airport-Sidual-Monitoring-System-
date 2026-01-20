@@ -13,6 +13,10 @@ const PassDash = () => {
     toast.success("Logout Successfull");
     usenav("/passenger/login");
   };
+
+  const changepass=()=>{
+    usenav(`/passenger/login/forgot`);
+  }
   useEffect(() => {
     const fetchdata = async () => {
       const res = await axios.get(`http://localhost:5000/adminpass/${id}`);
@@ -301,7 +305,7 @@ const PassDash = () => {
                   <span className="dd-email">{passemail}</span>
                 </div>
                 <div className="dropdown-divider"></div>
-                <button className="dropdown-item">
+                <button className="dropdown-item" onClick={changepass}>
                   <i className="fa-solid fa-key"></i> Change Password
                 </button>
                 <button

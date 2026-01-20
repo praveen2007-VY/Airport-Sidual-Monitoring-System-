@@ -19,6 +19,7 @@ import Staffdash from './Components/stafflog/Staffdash.jsx'
 import { toast, ToastContainer } from 'react-toastify'
 import PassengerRegister from './Components/Passenger/PassengerRegister.jsx'
 import PassengerLogin from './Components/Passenger/PassengerLogin.jsx'
+import Staffforget from './Components/stafflog/Staffforget.jsx'
 
 import PassDash from './Components/Passenger/PassDash.jsx'
 
@@ -47,6 +48,7 @@ function App() {
         <Route path='/stafflog/staff/:id' element={<Staffdash/>}/>
         <Route path='/passenger/dashboard/:id' element={<PassDash/>}/>
         <Route path='/adminforget/request' element={<Adminforget/>}/>
+        <Route path='/stafflog/forgot' element={<Staffforget/>}/>
         
     </Routes> 
   

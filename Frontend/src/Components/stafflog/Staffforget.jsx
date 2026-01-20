@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Passenger/Passforget.css";
-import "./Adminforget.css";
-import passenger from "../../assets/admin.png";
+import "./Staffforget.css";
+import passenger from "../../assets/staff.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -20,7 +20,7 @@ const Adminforget = () => {
 
   const fetchtodo = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/adminpass");
+      const res = await axios.get("http://localhost:5000/staff");
       checkpass(res.data);
     } catch (error) {
       console.log(error);
@@ -137,7 +137,7 @@ const Adminforget = () => {
     // Simulate Update
 
     const res = await axios.put(
-      `http://localhost:5000/adminpassforget/${passid}`,
+      `http://localhost:5000/staffforget/${passid}`,
       {
         password: newPassword,
       },
@@ -153,7 +153,7 @@ const Adminforget = () => {
     setConfirmPassword("");
     setEmail("");
     toast.success("Password updated successfully! Please log in.");
-    usenav("/passenger/login");
+    usenav("/stafflog");
   };
 
   const isMatch =
@@ -201,7 +201,7 @@ const Adminforget = () => {
           </button>
 
           <div className="forgot-header">
-            <div className="a-icon-badge">
+            <div className="s-icon-badge">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -221,11 +221,11 @@ const Adminforget = () => {
           </div>
 
           <div className="step-indicator">
-            <div className={`a-step-dot ${step >= 1 ? "active" : ""}`}></div>
+            <div className={`s-step-dot ${step >= 1 ? "active" : ""}`}></div>
             <div className="step-line"></div>
-            <div className={`a-step-dot ${step >= 2 ? "active" : ""}`}></div>
+            <div className={`s-step-dot ${step >= 2 ? "active" : ""}`}></div>
             <div className="step-line"></div>
-            <div className={`a-step-dot ${step >= 3 ? "active" : ""}`}></div>
+            <div className={`s-step-dot ${step >= 3 ? "active" : ""}`}></div>
           </div>
 
           {message.text && (
@@ -268,7 +268,7 @@ const Adminforget = () => {
                     required
                   />
                 </div>
-                <button type="submit" className="a-primary-btn">
+                <button type="submit" className="s-primary-btn">
                   Send OTP
                 </button>
               </div>

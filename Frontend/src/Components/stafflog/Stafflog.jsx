@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import "./Stafflog.css";
+import "../Passenger/Passforget.css";
 import staff from "../../assets/staff.png";
 import axios from 'axios';
 
@@ -36,6 +37,10 @@ const Stafflog = () => {
       })
       
   }
+
+  const forget=()=>{
+    usenav('/stafflog/forgot');
+  }
   return (
     <>
       <section>
@@ -70,7 +75,21 @@ const Stafflog = () => {
                     <i class="fa-solid fa-lock"></i>
                     <input type="password" placeholder="Password" required onChange={(e)=>setpass(e.target.value)} value={pass}/>
                   </div>
-
+                  <div className="passenger-login__options">
+                            <label className="passenger-login__remember-me" >
+                                <input
+                                    type="checkbox"
+                                    name="rememberMe"
+                                    // checked={formData.rememberMe}
+                                    // onChange={handleChange}
+                                    className="passenger-login__checkbox"
+                                />
+                                Remember Me
+                            </label>
+                            <button className="passenger-login__forgot-link" onClick={forget}>
+                                Forgot Password?
+                            </button>
+                        </div>
                   <button type="button" class="staff-login-btn" onClick={handlesub}>
                     Login
                   </button>
