@@ -6,7 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 const PassengerRegister = () => {
   const usenav = useNavigate();
-
+  const API = import.meta.env.VITE_API_URL;
   const gologin = () => {
     usenav("/passenger/login");
   };
@@ -38,7 +38,7 @@ const PassengerRegister = () => {
       email: email,
       password: pass,
     };
-    let res = await axios.post("http://localhost:5000/addpassenger", data);
+    let res = await axios.post(`${API}/addpassenger`, data);
     console.log(res);
     toast.success("Passenger Added Successfully");
     setcpass("");

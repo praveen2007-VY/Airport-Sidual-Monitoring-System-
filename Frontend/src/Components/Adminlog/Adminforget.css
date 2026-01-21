@@ -35,15 +35,32 @@
 }
 
 .forgot-illustration::before {
-    content: '';
+    /* content: '';
     position: absolute;
     top: -50%;
     left: -50%;
     width: 200%;
     height: 200%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
-    transform: rotate(45deg);
+    transform: rotate(45deg); */
+    flex: 1;
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
+.passenger-register__illustration-container {
+  flex: 1;
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
 
 .illustration-content {
     text-align: center;

@@ -4,11 +4,32 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 const app = express();
-app.use(cors({
-  origin: ["https://your-frontend.vercel.app"],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
+
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://singular-semifreddo-1b59c7.netlify.app",
+  "https://glowing-peony-4e4063.netlify.app"
+    
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin (postman, curl)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+;
 
 app.use(express.json());
 
@@ -438,7 +459,7 @@ app.put('/runwaystatus/:id', async (req, res) => {
 });
 
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

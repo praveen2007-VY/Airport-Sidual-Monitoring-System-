@@ -22,13 +22,12 @@ const Shuttleedit = () => {
   const handleCancel = () => {
     navigate(-1);
   };
-
-
+  const API = import.meta.env.VITE_API_URL;
   useEffect(() => {
     const fetchdata = async () => {
 
       if (type === "Internal") {
-        const user = await axios.get(`http://localhost:5000/internalshuttle/${id}`
+        const user = await axios.get(`${API}/internalshuttle/${id}`
         );
         setShuttleId(user.data.shuttleid);
         setShuttleType(user.data.type);
@@ -46,7 +45,7 @@ const Shuttleedit = () => {
 
 
       else {
-        const user = await axios.get(`http://localhost:5000/externalshuttle/${id}`);
+        const user = await axios.get(`${API}/externalshuttle/${id}`);
         setShuttleId(user.data.shuttleid);
         setShuttleType(user.data.type);
         setFlightNo(user.data.flightno);
@@ -103,7 +102,7 @@ const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f5
         staff: staff,
         status: status,
       };
-      const res = await axios.put(`http://localhost:5000/internalshuttle/${id}`, data)
+      const res = await axios.put(`${API}/internalshuttle/${id}`, data)
       webhook1();
       toast.success("Shuttle updated successfully");
       console.log(res.data);
@@ -121,7 +120,7 @@ const WEBHOOK="https://local.workflow-praveen.xyz/webhook-test/ef579df2-ab63-4f5
         staff: staff,
         status: status,
       };
-      const res = await axios.put(`http://localhost:5000/externalshuttle/${id}`, data)
+      const res = await axios.put(`${API}/externalshuttle/${id}`, data)
       webhook2();
       toast.success("Shuttle updated successfully");
       console.log(res.data);

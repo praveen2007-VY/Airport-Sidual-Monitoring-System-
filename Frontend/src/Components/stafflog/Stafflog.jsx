@@ -13,12 +13,12 @@ const Stafflog = () => {
     const handleho = () => {
         usenav('/#login');
     }
-
+    const API = import.meta.env.VITE_API_URL;
     const [staffe,setstaffe]=useState([]);
 
     useEffect(()=>{
         const fetchstaff = async () => {
-            const res4 = await axios.get(`http://localhost:5000/staff`);
+            const res4 = await axios.get(`${API}/staff`);
             setstaffe(res4.data);
           };
           fetchstaff();

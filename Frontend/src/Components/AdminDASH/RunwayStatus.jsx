@@ -6,10 +6,10 @@ const RunwayStatus = () => {
     const [runways, setRunways] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedRunway, setSelectedRunway] = useState(null);
-
+    const API = import.meta.env.VITE_API_URL;
     const fetchRunways = async () => {
         try {
-            const response = await fetch("http://localhost:5000/runwaystatus");
+            const response = await fetch(`${API}/runwaystatus`);
             if (!response.ok) {
                 throw new Error("Failed to fetch runway status");
             }
@@ -36,7 +36,7 @@ const RunwayStatus = () => {
 
     const handleSaveStatus = async (id, newStatus) => {
         try {
-            const response = await fetch(`http://localhost:5000/runwaystatus/${id}`, {
+            const response = await fetch(`${API}/runwaystatus/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

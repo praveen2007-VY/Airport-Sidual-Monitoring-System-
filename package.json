@@ -1,0 +1,20 @@
+{
+  "name": "projects",
+  "version": "1.0.0",
+  "description": "A **Full Stack MERN Project** that helps airports monitor and manage **flight schedules**, **runway operations**, and **internal/external shuttle services** in real time.\r It includes dedicated dashboards for **Admin**, **Staff**, and **Passengers** with an upcoming **AI-powered Airport Assistant Chatbot** using **RAG (Retrieval Augmented Generation) built in n8n**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/praveen2007-VY/Airport-Sidual-Monitoring-System-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/praveen2007-VY/Airport-Sidual-Monitoring-System-/issues"
+  },
+  "homepage": "https://github.com/praveen2007-VY/Airport-Sidual-Monitoring-System-#readme"
+}

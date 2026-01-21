@@ -8,7 +8,7 @@ import axios from 'axios';
 const PassengerLogin = () => {
    
     const [showPassword, setShowPassword] = useState(false);
-
+    const API = import.meta.env.VITE_API_URL;
     const usenav = useNavigate();
     const handlesignup = () => {
         usenav('/passenger/');
@@ -26,7 +26,7 @@ const PassengerLogin = () => {
     },[])
     const getdata = async () => {
         if (passenger.length === 0) {
-        let res = await axios.get("http://localhost:5000/passenger");
+        let res = await axios.get(`${API}/passenger`);
         console.log(res);
         setpassenger(res.data);
        

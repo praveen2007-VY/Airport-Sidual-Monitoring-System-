@@ -19,9 +19,9 @@ const Adminlog = () => {
   const [email, setemail] = useState();
   const [pass, setpass] = useState();
   const [admin, checkadmin] = useState([]);
-
+   const API = import.meta.env.VITE_API_URL;
   const fetchtodo = async () => {
-    const res = await axios.get("http://localhost:5000/adminpass");
+    const res = await axios.get(`${API}/adminpass`);
     checkadmin(res.data);
   };
 

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const Addshuttle = () => {
   const navigate = useNavigate();
-
+  const API = import.meta.env.VITE_API_URL;
   const [shuttleid, setshuid] = useState("");
   const [shutype, setshutype] = useState("Internal");
   const [shurfrom, setshufrom] = useState("");
@@ -114,9 +114,9 @@ const Addshuttle = () => {
 
     if (shutype === "Internal") {
       try {
-       
-        await axios.post("http://localhost:5000/internalshuttle", data1);
-        await axios.put(`http://localhost:5000/flightdetail/fli/${flightId}`, {
+
+        await axios.post(`${API}/internalshuttle`, data1);
+        await axios.put(`${API}/flightdetail/fli/${flightId}`, {
           completed: false,
         });
         webhook1();
@@ -131,7 +131,7 @@ const Addshuttle = () => {
       }
     } else {
       const res3 = await axios.post(
-        "http://localhost:5000/externalshuttle",
+        `${API}/externalshuttle`,
         data2
       );
       webhook2();
@@ -148,7 +148,7 @@ const Addshuttle = () => {
 
   useEffect(() => {
     const fetchflight2 = async () => {
-      const res = await axios.get("http://localhost:5000/flightdetail");
+      const res = await axios.get(`${API}/flightdetail`);
       setfetchf(res.data);
     };
     fetchflight2();

@@ -10,10 +10,10 @@ const Admindash = () => {
   const [adminemail, setemail] = useState("");
 
   const { id } = useParams();
-
+  const API = import.meta.env.VITE_API_URL;
   useEffect(() => {
     const fetchdata = async () => {
-      const res = await axios.get(`http://localhost:5000/adminpass/${id}`);
+      const res = await axios.get(`${API}/adminpass/${id}`);
       const user = res.data.find((n) => n._id == id);
       if (user) {
         setname(user.name);
@@ -31,19 +31,19 @@ const Admindash = () => {
 
   useEffect(() => {
     const fetchflight = async () => {
-      const res1 = await axios.get(`http://localhost:5000/flightdetail`);
+      const res1 = await axios.get(`${API}/flightdetail`);
       setflighttable(res1.data);
     };
     const fetchinternal = async () => {
-      const res2 = await axios.get(`http://localhost:5000/internalshuttle`);
+      const res2 = await axios.get(`${API}/internalshuttle`);
       setinternal(res2.data);
     };
     const fetchexternal = async () => {
-      const res3 = await axios.get(`http://localhost:5000/externalshuttle`);
+      const res3 = await axios.get(`${API}/externalshuttle`);
       setexternal(res3.data);
     };
     const fetchstaff = async () => {
-      const res4 = await axios.get(`http://localhost:5000/staff`);
+      const res4 = await axios.get(`${API}/staff`);
       setstaff(res4.data);
     };
 
@@ -54,7 +54,7 @@ const Admindash = () => {
   }, []);
 
   const fetchstaff = async () => {
-    const res4 = await axios.get(`http://localhost:5000/staff`);
+    const res4 = await axios.get(`${API}/staff`);
     setstaff(res4.data);
   };
 
@@ -114,9 +114,9 @@ const Admindash = () => {
         action: currentAccess === "Allowed" ? "Allow" : "Deny",
       };
 
-      const res = await axios.put(`http://localhost:5000/staff/${id}`, data);
+      const res = await axios.put(`${API}/staff/${id}`, data);
 
-      fetchstaff(); // ✅ refresh AFTER update
+      fetchstaff(); 
       console.log("Updated successfully", res.data);
     } catch (error) {
       console.error("Update failed", error);

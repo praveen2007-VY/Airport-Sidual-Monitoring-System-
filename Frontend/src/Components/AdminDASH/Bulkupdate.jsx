@@ -12,7 +12,7 @@ const Bulkupdate = () => {
     usenav(-1);
   };
 
-  
+  const API = import.meta.env.VITE_API_URL;
   const [flights, setFlights] = useState([]);
   const [shuttles, setShuttles] = useState([]);
 
@@ -36,9 +36,9 @@ const Bulkupdate = () => {
     const fetchData = async () => {
       try {
         const [flightRes, internalRes, externalRes] = await Promise.all([
-          axios.get("http://localhost:5000/flightdetail"),
-          axios.get("http://localhost:5000/internalshuttle"),
-          axios.get("http://localhost:5000/externalshuttle")
+          axios.get(`${API}/flightdetail`),
+          axios.get(`${API}/internalshuttle`),
+          axios.get(`${API}/externalshuttle`)
         ]);
 
         setFlights(flightRes.data);
@@ -104,7 +104,7 @@ const Bulkupdate = () => {
 
       
       selectedFlights.forEach(flightId => {
-        deletePromises.push(axios.delete(`http://localhost:5000/flightdetail/${flightId}`));
+        deletePromises.push(axios.delete(`${API}/flightdetail/${flightId}`));
       });
 
     
@@ -112,7 +112,7 @@ const Bulkupdate = () => {
         const shuttle = shuttles.find(s => s._id === shuttleId);
         if (shuttle) {
           const endpoint = shuttle.shuttleType === "internal" ? "internalshuttle" : "externalshuttle";
-          deletePromises.push(axios.delete(`http://localhost:5000/${endpoint}/${shuttleId}`));
+          deletePromises.push(axios.delete(`${API}/${endpoint}/${shuttleId}`));
         }
       });
 

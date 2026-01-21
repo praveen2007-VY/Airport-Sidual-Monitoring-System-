@@ -17,10 +17,10 @@ const Adminforget = () => {
   const [passdata, checkpass] = useState([]);
 
   const [otpsent, setOtpsent] = useState("");
-
+  const API = import.meta.env.VITE_API_URL;
   const fetchtodo = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/adminpass");
+      const res = await axios.get(`${API}/adminpass`);
       checkpass(res.data);
     } catch (error) {
       console.log(error);
@@ -127,7 +127,7 @@ const Adminforget = () => {
       return;
     }
     const res = await axios.put(
-      `http://localhost:5000/adminpassforget/${passid}`,
+      `${API}/adminpassforget/${passid}`,
       {
         password: newPassword,
       },

@@ -18,7 +18,7 @@ const Staffreg = () => {
     window.alert("Staff Registered Successfully");
     navigate(-1);
   };
-  
+  const API = import.meta.env.VITE_API_URL;
   const [cstaff, setcstaff] = useState(1);
 
   const [staffid, setstaffid] = useState("");
@@ -59,7 +59,7 @@ const Staffreg = () => {
       access: staffaccess,
       action: staffaction
     };
-    const res = await axios.post("http://localhost:5000/staffpost", data)
+    const res = await axios.post(`${API}/staffpost`, data)
       .then((response) => {
         console.log(response);
         navigate(-1);

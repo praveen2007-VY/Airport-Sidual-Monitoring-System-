@@ -6,7 +6,7 @@ import axios from "axios";
 
 const Flightedit = () => {
   const { id, sf } = useParams();
-
+  const API = import.meta.env.VITE_API_URL;
   const usenav = useNavigate();
 
   const returnadmin = () => {
@@ -24,7 +24,7 @@ const Flightedit = () => {
 
   useEffect(() => {
     const fetchdata = async () => {
-      const res = await axios.get(`http://localhost:5000/flightdetail/${sf}`);
+      const res = await axios.get(`${API}/flightdetail/${sf}`);
       console.log(res.data);
       setfno(res.data.flight);
       setAirline(res.data.airline);
@@ -39,7 +39,7 @@ const Flightedit = () => {
 
 
   const handleupdate = async () => {
-    const res = await axios.put(`http://localhost:5000/adminpass/updatedetail/${sf}`,
+    const res = await axios.put(`${API}/adminpass/updatedetail/${sf}`,
       {
         flight: flightno,
         airline,

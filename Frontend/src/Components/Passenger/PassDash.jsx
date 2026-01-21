@@ -13,13 +13,13 @@ const PassDash = () => {
     toast.success("Logout Successfull");
     usenav("/passenger/login");
   };
-
+  const API = import.meta.env.VITE_API_URL;
   const changepass=()=>{
     usenav(`/passenger/login/forgot`);
   }
   useEffect(() => {
     const fetchdata = async () => {
-      const res = await axios.get(`http://localhost:5000/adminpass/${id}`);
+      const res = await axios.get(`${API}/adminpass/${id}`);
       const user = res.data.find((n) => n._id == id);
       if (user) {
         setname(user.name);
@@ -37,23 +37,23 @@ const PassDash = () => {
 
   useEffect(() => {
     const fetchflight = async () => {
-      const res1 = await axios.get(`http://localhost:5000/flightdetail`);
+      const res1 = await axios.get(`${API}/flightdetail`);
       setflighttable(res1.data);
     };
     const fetchinternal = async () => {
-      const res2 = await axios.get(`http://localhost:5000/internalshuttle`);
+      const res2 = await axios.get(`${API}/internalshuttle`);
       setinternal(res2.data);
     };
     const fetchexternal = async () => {
-      const res3 = await axios.get(`http://localhost:5000/externalshuttle`);
+      const res3 = await axios.get(`${API}/externalshuttle`);
       setexternal(res3.data);
     };
     const fetchstaff = async () => {
-      const res4 = await axios.get(`http://localhost:5000/staff`);
+      const res4 = await axios.get(`${API}/staff`);
       setstaff(res4.data);
     };
     const fetchdata = async () => {
-      const res = await axios.get(`http://localhost:5000/passcenger/${id}`);
+      const res = await axios.get(`${API}/passenger/${id}`);
       const user = res.data;
       if (user) {
         setpassname(user.name);
@@ -69,7 +69,7 @@ const PassDash = () => {
   }, []);
 
   const fetchstaff = async () => {
-    const res4 = await axios.get(`http://localhost:5000/staff`);
+    const res4 = await axios.get(`${API}/staff`);
     setstaff(res4.data);
   };
 

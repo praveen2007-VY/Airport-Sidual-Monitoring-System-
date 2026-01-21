@@ -13,6 +13,10 @@ const Addflight = () => {
     usenav(`/adminlog/admin/${id}`);
   };
 
+  const API = import.meta.env.VITE_API_URL;
+
+
+  
   const [flightno, setfno] = useState("");
   const [airline, setair] = useState("");
   const [aircraft, setairc] = useState("");
@@ -51,7 +55,7 @@ const Addflight = () => {
       return;
     }
     const res = await axios.post(
-      "http://localhost:5000/flightdetail/add",
+      `${API}/flightdetail/add`,
       details,
     );
     const newFlightId = res.data._id; 
